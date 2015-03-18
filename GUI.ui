@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>699</width>
-    <height>528</height>
+    <width>740</width>
+    <height>551</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -27,7 +27,7 @@
        </font>
       </property>
       <property name="currentIndex">
-       <number>0</number>
+       <number>1</number>
       </property>
       <widget class="QWidget" name="Inputdata">
        <attribute name="title">
@@ -174,8 +174,8 @@
        <widget class="QWidget" name="layoutWidget">
         <property name="geometry">
          <rect>
-          <x>460</x>
-          <y>390</y>
+          <x>480</x>
+          <y>400</y>
           <width>211</width>
           <height>29</height>
          </rect>
@@ -197,21 +197,162 @@
          </item>
         </layout>
        </widget>
-       <widget class="QTextBrowser" name="sipTemplate">
+       <widget class="QSplitter" name="splitter">
         <property name="geometry">
          <rect>
-          <x>280</x>
-          <y>70</y>
-          <width>351</width>
-          <height>291</height>
+          <x>260</x>
+          <y>40</y>
+          <width>431</width>
+          <height>341</height>
          </rect>
         </property>
+        <property name="orientation">
+         <enum>Qt::Vertical</enum>
+        </property>
+        <widget class="QLabel" name="label_5">
+         <property name="text">
+          <string>SIP Template</string>
+         </property>
+        </widget>
+        <widget class="QTextEdit" name="sipTemplate">
+         <property name="font">
+          <font>
+           <family>Courier New</family>
+           <pointsize>10</pointsize>
+          </font>
+         </property>
+         <property name="readOnly">
+          <bool>true</bool>
+         </property>
+        </widget>
        </widget>
+       <zorder>simulateRadioButton</zorder>
+       <zorder>layoutWidget</zorder>
+       <zorder>layoutWidget</zorder>
+       <zorder>sipTemplate</zorder>
+       <zorder>label_5</zorder>
+       <zorder>acceptButton</zorder>
       </widget>
       <widget class="QWidget" name="Register">
        <attribute name="title">
         <string>Register</string>
        </attribute>
+       <widget class="QPushButton" name="simulateButton">
+        <property name="geometry">
+         <rect>
+          <x>610</x>
+          <y>410</y>
+          <width>98</width>
+          <height>27</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>Simulate</string>
+        </property>
+       </widget>
+       <widget class="QTextEdit" name="flowField">
+        <property name="geometry">
+         <rect>
+          <x>350</x>
+          <y>100</y>
+          <width>213</width>
+          <height>291</height>
+         </rect>
+        </property>
+        <property name="readOnly">
+         <bool>true</bool>
+        </property>
+       </widget>
+       <widget class="QLabel" name="flowLabel">
+        <property name="geometry">
+         <rect>
+          <x>570</x>
+          <y>230</y>
+          <width>112</width>
+          <height>17</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>Connection flow</string>
+        </property>
+       </widget>
+       <widget class="QSplitter" name="splitter_2">
+        <property name="geometry">
+         <rect>
+          <x>30</x>
+          <y>130</y>
+          <width>291</width>
+          <height>271</height>
+         </rect>
+        </property>
+        <property name="orientation">
+         <enum>Qt::Vertical</enum>
+        </property>
+        <widget class="QLabel" name="labelCurrentMessage">
+         <property name="text">
+          <string>Current message</string>
+         </property>
+        </widget>
+        <widget class="QTextEdit" name="currentMessageField">
+         <property name="readOnly">
+          <bool>true</bool>
+         </property>
+        </widget>
+       </widget>
+       <widget class="QWidget" name="">
+        <property name="geometry">
+         <rect>
+          <x>40</x>
+          <y>20</y>
+          <width>611</width>
+          <height>72</height>
+         </rect>
+        </property>
+        <layout class="QHBoxLayout" name="horizontalLayout_3">
+         <item>
+          <widget class="QLabel" name="phone">
+           <property name="text">
+            <string/>
+           </property>
+           <property name="pixmap">
+            <pixmap>img/phone.jpg</pixmap>
+           </property>
+           <property name="scaledContents">
+            <bool>true</bool>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QSlider" name="horizontalSlider">
+           <property name="cursor">
+            <cursorShape>ArrowCursor</cursorShape>
+           </property>
+           <property name="acceptDrops">
+            <bool>false</bool>
+           </property>
+           <property name="autoFillBackground">
+            <bool>false</bool>
+           </property>
+           <property name="orientation">
+            <enum>Qt::Horizontal</enum>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QLabel" name="server">
+           <property name="text">
+            <string/>
+           </property>
+           <property name="pixmap">
+            <pixmap>img/sip proxy server.jpg</pixmap>
+           </property>
+           <property name="scaledContents">
+            <bool>true</bool>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </widget>
       </widget>
      </widget>
     </item>
@@ -222,7 +363,7 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>699</width>
+     <width>740</width>
      <height>25</height>
     </rect>
    </property>
@@ -316,6 +457,22 @@
     <hint type="destinationlabel">
      <x>204</x>
      <y>303</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>clearButton</sender>
+   <signal>clicked()</signal>
+   <receiver>sipTemplate</receiver>
+   <slot>clear()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>483</x>
+     <y>470</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>449</x>
+     <y>391</y>
     </hint>
    </hints>
   </connection>
