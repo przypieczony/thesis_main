@@ -224,8 +224,9 @@ class Ui_MainWindow(object):
         self.actionAdd_template.setText(_translate("MainWindow", "Add template", None))
 
         self.acceptButton.clicked.connect(self.getParameters)
+        self.simulateButton.clicked.connect(self.startRegister)
  
- 
+
     def getParameters(self):
         """This function captures input parameters and shows message template"""
  
@@ -297,10 +298,9 @@ class Ui_MainWindow(object):
         try:
             self.sending_sock = self.open_sock(self.template_vars["source_ip"], self.template_vars["source_port"])
             self.receiving_sock = self.open_sock(self.template_vars["dest_ip"], self.template_vars["dest_port"])
-            print "sockets created"
+            self.statusbar.showMessage('Parameters saved')
         except Exception, e:
-            sys.stderr.write("ERROR: cannot open socket. %s\n" % (e))
-            sys.exit(-1)
+            self.statusbar.showMessage('Error! cannot open socket.', e)
 
     def open_sock(self, ip, port):
         try:
@@ -317,6 +317,36 @@ class Ui_MainWindow(object):
         sock.bind((ip, port))
         sock.settimeout(10)
         return sock
+
+    def startRegister(self, message):
+        """Register case scenario"""
+        #function which sends particular message
+        #function that 
+        #try:
+        #    for req in gen_request(template_vars):
+
+
+    def gen_request(template_vars):
+        """Generates request message"""
+
+        try:
+            f = open(options.request_template)
+            file_request = f.read()
+            f.close()
+            request = render_template(file_request, template_vars)
+        except Exception, e:
+            sys.stderr.write("ERROR: cannot open file %s. %s\n" % (options.request_template, e))
+            sys.exit(-1)    
+        try:
+            req = Request(request)
+        except SipUnpackError, e:
+            sys.stderr.write("ERROR: malformed SIP Request. %s\n" % e)
+            sys.exit(-1)
+        
+        if "cseq" not in req.headers:
+            req.headers["cseq"] = "%d %s" % (i, req.method)
+        yield str(req)
+
 
     def main():
         # usage = """%prog [OPTIONS]"""

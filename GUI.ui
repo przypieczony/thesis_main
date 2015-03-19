@@ -226,12 +226,10 @@
          </property>
         </widget>
        </widget>
+       <zorder>splitter</zorder>
        <zorder>simulateRadioButton</zorder>
        <zorder>layoutWidget</zorder>
        <zorder>layoutWidget</zorder>
-       <zorder>sipTemplate</zorder>
-       <zorder>label_5</zorder>
-       <zorder>acceptButton</zorder>
       </widget>
       <widget class="QWidget" name="Register">
        <attribute name="title">
@@ -299,7 +297,7 @@
          </property>
         </widget>
        </widget>
-       <widget class="QWidget" name="">
+       <widget class="QWidget" name="layoutWidget">
         <property name="geometry">
          <rect>
           <x>40</x>
@@ -352,6 +350,32 @@
           </widget>
          </item>
         </layout>
+       </widget>
+       <widget class="QPushButton" name="nextButton">
+        <property name="geometry">
+         <rect>
+          <x>610</x>
+          <y>370</y>
+          <width>98</width>
+          <height>27</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>Next</string>
+        </property>
+       </widget>
+       <widget class="QPushButton" name="previousButton">
+        <property name="geometry">
+         <rect>
+          <x>610</x>
+          <y>330</y>
+          <width>98</width>
+          <height>27</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>Previous</string>
+        </property>
        </widget>
       </widget>
      </widget>
