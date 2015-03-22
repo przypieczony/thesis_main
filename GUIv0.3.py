@@ -11,7 +11,11 @@ from PyQt4 import QtCore, QtGui
 import socket
 import random
 import sys
+import os
+import string
+import cStringIO
 
+ 
 try:
     _fromUtf8 = QtCore.QString.fromUtf8
 except AttributeError:
@@ -27,6 +31,10 @@ except AttributeError:
         return QtGui.QApplication.translate(context, text, disambig)
 
 class Ui_MainWindow(object):
+    def __init__(self):
+        self.template_vars = {}
+        self.templates = {}
+
     def setupUi(self, MainWindow):
         MainWindow.setObjectName(_fromUtf8("MainWindow"))
         MainWindow.resize(740, 551)
@@ -187,7 +195,6 @@ class Ui_MainWindow(object):
         self.menubar.addAction(self.menuFile.menuAction())
         self.menubar.addAction(self.menuEdit.menuAction())
         self.menubar.addAction(self.menuExit.menuAction())
-        self.template_vars = {}
 
         self.retranslateUi(MainWindow)
         self.tabWidget.setCurrentIndex(0)
@@ -259,16 +266,25 @@ class Ui_MainWindow(object):
         "source_ip": self.sourceAddress,
         "source_port": self.sourcePort,
         "dest_ip": self.destAddress,
-        "dest_port": self.destPort
+        "dest_port": self.destPort,
+        "user": "kamszy", #To replace by value inputed by user
+        "callid": ''.join(random.choice(string.ascii_lowercase + string.digits) for x in range(6)),
+        "seq": 0,
+        "cseq":0, #temp var
+        "from": "kamszy", #temp var
+        "to": "receiver", #temp var
+        "body": "to jest tresc"
         }
 
-        self.sipTemplate.insertPlainText(self.printTemplate(self.template_vars))
-        self.createSockets(self.template_vars) #This is awful, it should be relocated outside this function
+        self.sipTemplate.insertPlainText(self.printSample())
+        self.createSockets() #This is awful, it should be relocated outside this function
+        self.createTemplates()
+        print "Available Templates:", self.templates
 
-    def printTemplate(self, template_vars):
+    def printSample(self):
         """Method to print text into text box"""
 
-        template = """OPTIONS sip:%(dest_ip)s:%(dest_port)s SIP/2.0
+        sample = """OPTIONS sip:%(dest_ip)s:%(dest_port)s SIP/2.0
         Via: SIP/2.0/UDP %(source_ip)s:%(source_port)s
         Max-Forwards: 70
         From: "fake" <sip:fake@%(source_ip)s>
@@ -280,27 +296,17 @@ class Ui_MainWindow(object):
         Allow: INVITE, ACK, CANCEL, OPTIONS, BYE, REFER, SUBSCRIBE, NOTIFY, INFO, PUBLISH
         Supported: replaces, timer"""
 
-        for k in template_vars.keys():
-            if k.startswith("."):
-                template_vars[k[1:]] = eval(template_vars[k])
-        try:
-            ret = template % template_vars #replaces %(<variable>)s by template_vars
-        except KeyError, e:
-            sys.stderr.write("ERROR: missing template variable. %s\n" % e)
-            sys.exit(-1)
-        except Exception, e:
-            sys.stderr.write("ERROR: error in template processing. %s\n" % e)
-            sys.exit(-1)
+        ret = sample % self.template_vars #replaces %(<variable>)s by template_vars
         return ret
      
-    def createSockets(self, template_vars):
+    def createSockets(self):
         #import pdb; pdb.set_trace()
         try:
             self.sending_sock = self.open_sock(self.template_vars["source_ip"], self.template_vars["source_port"])
             self.receiving_sock = self.open_sock(self.template_vars["dest_ip"], self.template_vars["dest_port"])
             self.statusbar.showMessage('Parameters saved')
         except Exception, e:
-            self.statusbar.showMessage('Error! cannot open socket.', e)
+            self.statusbar.showMessage('Error! cannot open socket. {}'.format(e))
 
     def open_sock(self, ip, port):
         try:
@@ -318,35 +324,170 @@ class Ui_MainWindow(object):
         sock.settimeout(10)
         return sock
 
-    def startRegister(self, message):
+    def createTemplates(self):
+        """Stores all templates"""
+        self.templates = {
+        "Register": self.loadTemplate(os.path.join('templates', 'register.txt')),
+        "Message": self.loadTemplate(os.path.join('templates', 'message.txt'))
+        }
+
+    def loadTemplate(self, template_path):
+        """Gets file path to template file, renders it and returns string"""
+        try:
+            with open(template_path, 'r') as template_file:
+                template = template_file.read()
+        except Exception, e:
+            self.statusbar.showMessage('Error! RROR: cannot open file {}, {}'.format(template_path, e))
+        rendered_template = template % self.template_vars #replaces %(<variable>)s by template_vars
+        return rendered_template
+
+    def startRegister(self):
         """Register case scenario"""
+        register_message = self.generateRequest()
+        self.sendMessage(register_message)
         #function which sends particular message
         #function that 
         #try:
         #    for req in gen_request(template_vars):
 
 
-    def gen_request(template_vars):
+    def generateRequest(self):
         """Generates request message"""
-
-        try:
-            f = open(options.request_template)
-            file_request = f.read()
-            f.close()
-            request = render_template(file_request, template_vars)
-        except Exception, e:
-            sys.stderr.write("ERROR: cannot open file %s. %s\n" % (options.request_template, e))
-            sys.exit(-1)    
-        try:
-            req = Request(request)
-        except SipUnpackError, e:
-            sys.stderr.write("ERROR: malformed SIP Request. %s\n" % e)
-            sys.exit(-1)
+        i=0
+        for method, request in self.templates.items():
+            print method
+            i+=1
+            self.template_vars["seq"] = i
+            #print "enter to gen_request fun"
+            try:
+                req = Request(request)
+            except SipUnpackError, e:
+                self.statusbar.showMessage("ERROR: malformed SIP Request. {}".format(e))
+            if "content-length" not in req.headers:
+                req.headers["content-length"] = len(req.body)
         
-        if "cseq" not in req.headers:
-            req.headers["cseq"] = "%d %s" % (i, req.method)
-        yield str(req)
+            return req
 
+    def sendMessage(self, sip_req):
+        """ """
+        #sip_req = Request(req)
+        try:
+            self.sending_sock.sendto(str(sip_req),(self.template_vars["dest_ip"], self.template_vars["dest_port"]))
+        except Exception, e:
+            self.statusbar.showMessage('Error! cannot send packet to {}:{}. {}'.format(self.template_vars["dest_ip"], self.template_vars["dest_port"], e))
+        self.currentMessageField.insertPlainText("sent Request %s to %s:%d cseq=%s len=%d\n" % (sip_req.method, self.template_vars['dest_ip'], self.template_vars["dest_port"], sip_req.headers['cseq'].split()[0], len(str(sip_req))))
+
+        self.currentMessageField.insertPlainText("\n=== Full Request sent ===\n\n")
+        self.currentMessageField.insertPlainText("%s\n" % sip_req)
+
+def canon_header(s):
+    exception    = {'call-id':'Call-ID','cseq':'CSeq','www-authenticate':'WWW-Authenticate'}
+    short        = ['allow-events', 'u', 'call-id', 'i', 'contact', 'm', 'content-encoding', 'e', 'content-length', 'l', 'content-type', 'c', 'event', 'o', 'from', 'f', 'subject', 's', 'supported', 'k', 'to', 't', 'via', 'v']
+    s = s.lower()
+    return ((len(s)==1) and s in short and canon_header(short[short.index(s)-1])) \
+        or (s in exception and exception[s]) or '-'.join([x.capitalize() for x in s.split('-')])
+
+def parse_headers(f):
+    """Return dict of HTTP headers parsed from a file object."""
+    d = {}
+    while 1:
+        line = f.readline()
+        line = line.strip()
+        if not line:
+            break
+        l = line.split(None, 1)
+        if not l[0].endswith(':'):
+            raise SipUnpackError('invalid header: %r' % line)
+        k = l[0][:-1].lower()
+        d[k] = len(l) != 1 and l[1] or ''
+    return d
+
+def parse_body(f, headers):
+    """Return SIP body parsed from a file object, given HTTP header dict."""
+    if 'content-length' in headers:
+        n = int(headers['content-length'])
+        body = f.read(n)
+        if len(body) != n:
+            raise SipNeedData('short body (missing %d bytes)' % (n - len(body)))
+    elif 'content-type' in headers:
+        body = f.read()
+    else:
+        body = ''
+    return body
+
+class Message:
+    """SIP Protocol headers + body."""
+    __metaclass__ = type
+    __hdr_defaults__ = {}
+    headers = None
+    body = None
+    
+    def __init__(self, *args, **kwargs):
+        if args:
+            self.unpack(args[0])
+            print "Message args:", args[0]
+        else:
+            self.headers = {}
+            self.body = ''
+            for k, v in self.__hdr_defaults__.iteritems():
+                setattr(self, k, v)
+            for k, v in kwargs.iteritems():
+                setattr(self, k, v)
+
+    
+    def unpack(self, buf):
+        f = cStringIO.StringIO(buf)
+        # Parse headers
+        self.headers = parse_headers(f)
+        # Parse body
+        self.body = parse_body(f, self.headers)
+        # Save the rest
+        self.data = f.read()
+
+    def pack_hdr(self):
+        return ''.join([ '%s: %s\r\n' % (canon_header(k),v) for k,v in self.headers.iteritems() ])
+    
+    def __len__(self):
+        return len(str(self))
+    
+    def __str__(self):
+        return '%s\r\n%s' % (self.pack_hdr(), self.body)
+
+class SipError(Exception): pass
+class SipUnpackError(SipError): pass
+class SipNeedData(SipUnpackError): pass
+class SipPackError(SipError): pass
+
+class Request(Message):
+    """SIP request."""
+    __hdr_defaults__ = {
+        'method':'INVITE',
+        'uri':'sip:user@example.com',
+        'version':'2.0',
+        'headers':{ 'to':'', 'from':'', 'call-id':'', 'cseq':'', 'contact':'' }
+        }
+    __methods = dict.fromkeys((
+        'ACK', 'BYE', 'CANCEL', 'INFO', 'INVITE', 'MESSAGE', 'NOTIFY',
+        'OPTIONS', 'PRACK', 'PUBLISH', 'REFER', 'REGISTER', 'SUBSCRIBE',
+        'UPDATE'
+        ))
+    __proto = 'SIP'
+
+    def unpack(self, buf):
+        f = cStringIO.StringIO(buf)
+        line = f.readline()
+        l = line.strip().split()
+        if len(l) != 3 or l[0] not in self.__methods or \
+            not l[2].startswith(self.__proto):
+            raise SipUnpackError('invalid request: %r' % line)
+        self.method = l[0]
+        self.uri = l[1]
+        self.version = l[2][len(self.__proto)+1:]
+        Message.unpack(self, f.read())
+    
+    def __str__(self):
+        return '%s %s %s/%s\r\n' % (self.method, self.uri, self.__proto,
+                                    self.version) + Message.__str__(self)
 
     def main():
         # usage = """%prog [OPTIONS]"""
