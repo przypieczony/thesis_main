@@ -231,7 +231,7 @@ class Ui_MainWindow(object):
         self.actionAdd_template.setText(_translate("MainWindow", "Add template", None))
 
         self.acceptButton.clicked.connect(self.getParameters)
-        self.simulateButton.clicked.connect(self.startRegister)
+        self.simulateButton.clicked.connect(self.startScenario)
  
 
     def getParameters(self):
@@ -324,12 +324,13 @@ class Ui_MainWindow(object):
         sock.settimeout(10)
         return sock
 
-    def createTemplates(self):
-        """Stores all templates"""
+    def register(self):
+        """Stores scenario templates"""
         self.templates = {
         "Register": self.loadTemplate(os.path.join('templates', 'register.txt')),
         "Message": self.loadTemplate(os.path.join('templates', 'message.txt'))
         }
+        #return self.templates
 
     def loadTemplate(self, template_path):
         """Gets file path to template file, renders it and returns string"""
@@ -341,36 +342,36 @@ class Ui_MainWindow(object):
         rendered_template = template % self.template_vars #replaces %(<variable>)s by template_vars
         return rendered_template
 
-    def startRegister(self):
+    def startScenario(self, case_scenario):
         """Register case scenario"""
-        register_message = self.generateRequest()
-        self.sendMessage(register_message)
+
+        for message in self.generateRequest(case_scenario):
+            self.send(message)
         #function which sends particular message
         #function that 
         #try:
         #    for req in gen_request(template_vars):
 
 
-    def generateRequest(self):
+    def generateRequest(self, case_scenario):
         """Generates request message"""
         i=0
         for method, request in self.templates.items():
-            print method
+            #print method
             i+=1
             self.template_vars["seq"] = i
-            #print "enter to gen_request fun"
             try:
                 req = Request(request)
             except SipUnpackError, e:
                 self.statusbar.showMessage("ERROR: malformed SIP Request. {}".format(e))
-            if "content-length" not in req.headers:
-                req.headers["content-length"] = len(req.body)
+            
+            req.headers["content-length"] = len(req.body)
+            req.headers["cseq"] = "%d %s" % (i, req.method)
         
-            return req
+            yield req
 
-    def sendMessage(self, sip_req):
+    def send(self, sip_req):
         """ """
-        #sip_req = Request(req)
         try:
             self.sending_sock.sendto(str(sip_req),(self.template_vars["dest_ip"], self.template_vars["dest_port"]))
         except Exception, e:
@@ -425,7 +426,6 @@ class Message:
     def __init__(self, *args, **kwargs):
         if args:
             self.unpack(args[0])
-            print "Message args:", args[0]
         else:
             self.headers = {}
             self.body = ''

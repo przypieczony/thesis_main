@@ -1,3 +1,4 @@
 ToDo:
 - prevent from appearing previous parameters in sipTemplateField after clicking clear button
-- add user to 
+- add user to interface
+- add previous button in scenarios, it's connected with generator object (some replacement should be applied)
