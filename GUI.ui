@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>740</width>
-    <height>551</height>
+    <width>853</width>
+    <height>624</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -18,7 +18,7 @@
   </property>
   <widget class="QWidget" name="centralwidget">
    <layout class="QGridLayout" name="gridLayout">
-    <item row="0" column="0">
+    <item row="0" column="1">
      <widget class="QTabWidget" name="tabWidget">
       <property name="font">
        <font>
@@ -27,7 +27,7 @@
        </font>
       </property>
       <property name="currentIndex">
-       <number>1</number>
+       <number>0</number>
       </property>
       <widget class="QWidget" name="Inputdata">
        <attribute name="title">
@@ -36,7 +36,7 @@
        <widget class="QRadioButton" name="simulateRadioButton">
         <property name="geometry">
          <rect>
-          <x>560</x>
+          <x>690</x>
           <y>10</y>
           <width>116</width>
           <height>22</height>
@@ -58,10 +58,10 @@
        <widget class="QWidget" name="layoutWidget">
         <property name="geometry">
          <rect>
-          <x>20</x>
-          <y>40</y>
-          <width>191</width>
-          <height>220</height>
+          <x>30</x>
+          <y>30</y>
+          <width>181</width>
+          <height>444</height>
          </rect>
         </property>
         <layout class="QVBoxLayout" name="verticalLayout">
@@ -74,17 +74,20 @@
          </item>
          <item>
           <widget class="QLineEdit" name="sourceAddressField">
+           <property name="enabled">
+            <bool>true</bool>
+           </property>
            <property name="statusTip">
             <string/>
            </property>
            <property name="inputMethodHints">
             <set>Qt::ImhPreferNumbers</set>
            </property>
-           <property name="inputMask">
-            <string/>
-           </property>
            <property name="text">
-            <string/>
+            <string>192.168.100.1</string>
+           </property>
+           <property name="frame">
+            <bool>true</bool>
            </property>
            <property name="placeholderText">
             <string>e. g.192.168.100.1</string>
@@ -110,7 +113,7 @@
             <string/>
            </property>
            <property name="text">
-            <string/>
+            <string>5060</string>
            </property>
            <property name="placeholderText">
             <string>e.g. 5060</string>
@@ -136,7 +139,7 @@
             <string/>
            </property>
            <property name="text">
-            <string/>
+            <string>192.168.100.2</string>
            </property>
            <property name="placeholderText">
             <string>e. g.192.168.100.2</string>
@@ -162,7 +165,111 @@
             <string/>
            </property>
            <property name="text">
+            <string>5060</string>
+           </property>
+           <property name="placeholderText">
+            <string>e.g. 5060</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QLabel" name="label_6">
+           <property name="text">
+            <string>Proxy 1 address:</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QLineEdit" name="proxyOneAddresField">
+           <property name="statusTip">
             <string/>
+           </property>
+           <property name="inputMethodHints">
+            <set>Qt::ImhPreferNumbers</set>
+           </property>
+           <property name="inputMask">
+            <string/>
+           </property>
+           <property name="text">
+            <string>192.168.100.3</string>
+           </property>
+           <property name="placeholderText">
+            <string>e. g.192.168.100.3</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QLabel" name="label_7">
+           <property name="text">
+            <string>Proxy 1 port:</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QLineEdit" name="proxyOnePortField">
+           <property name="statusTip">
+            <string/>
+           </property>
+           <property name="inputMethodHints">
+            <set>Qt::ImhPreferNumbers</set>
+           </property>
+           <property name="inputMask">
+            <string/>
+           </property>
+           <property name="text">
+            <string>5060</string>
+           </property>
+           <property name="placeholderText">
+            <string>e.g. 5060</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QLabel" name="label_8">
+           <property name="text">
+            <string>Proxy 2 address:</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QLineEdit" name="proxyTwoAddresField">
+           <property name="statusTip">
+            <string/>
+           </property>
+           <property name="inputMethodHints">
+            <set>Qt::ImhPreferNumbers</set>
+           </property>
+           <property name="inputMask">
+            <string/>
+           </property>
+           <property name="text">
+            <string>192.168.100.4</string>
+           </property>
+           <property name="placeholderText">
+            <string>e. g.192.168.100.4</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QLabel" name="label_9">
+           <property name="text">
+            <string>Proxy 2 port:</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QLineEdit" name="proxyTwoPortField">
+           <property name="statusTip">
+            <string/>
+           </property>
+           <property name="inputMethodHints">
+            <set>Qt::ImhPreferNumbers</set>
+           </property>
+           <property name="inputMask">
+            <string/>
+           </property>
+           <property name="text">
+            <string>5060</string>
            </property>
            <property name="placeholderText">
             <string>e.g. 5060</string>
@@ -174,8 +281,8 @@
        <widget class="QWidget" name="layoutWidget">
         <property name="geometry">
          <rect>
-          <x>480</x>
-          <y>400</y>
+          <x>590</x>
+          <y>470</y>
           <width>211</width>
           <height>29</height>
          </rect>
@@ -200,10 +307,10 @@
        <widget class="QSplitter" name="splitter">
         <property name="geometry">
          <rect>
-          <x>260</x>
-          <y>40</y>
-          <width>431</width>
-          <height>341</height>
+          <x>320</x>
+          <y>50</y>
+          <width>441</width>
+          <height>291</height>
          </rect>
         </property>
         <property name="orientation">
@@ -226,16 +333,63 @@
          </property>
         </widget>
        </widget>
+       <widget class="QWidget" name="">
+        <property name="geometry">
+         <rect>
+          <x>260</x>
+          <y>410</y>
+          <width>221</width>
+          <height>62</height>
+         </rect>
+        </property>
+        <layout class="QGridLayout" name="gridLayout_2">
+         <item row="0" column="0">
+          <widget class="QLineEdit" name="senderField">
+           <property name="statusTip">
+            <string/>
+           </property>
+           <property name="inputMask">
+            <string/>
+           </property>
+           <property name="text">
+            <string>kamszy</string>
+           </property>
+           <property name="placeholderText">
+            <string>Enter sender name</string>
+           </property>
+          </widget>
+         </item>
+         <item row="1" column="0">
+          <widget class="QLineEdit" name="receiverField">
+           <property name="statusTip">
+            <string/>
+           </property>
+           <property name="inputMask">
+            <string/>
+           </property>
+           <property name="text">
+            <string>revszy</string>
+           </property>
+           <property name="placeholderText">
+            <string>Enter receiver name</string>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </widget>
        <zorder>splitter</zorder>
        <zorder>simulateRadioButton</zorder>
        <zorder>layoutWidget</zorder>
        <zorder>layoutWidget</zorder>
+       <zorder>label</zorder>
+       <zorder>senderField</zorder>
+       <zorder>receiverField</zorder>
       </widget>
       <widget class="QWidget" name="Register">
        <attribute name="title">
         <string>Register</string>
        </attribute>
-       <widget class="QPushButton" name="simulateButton">
+       <widget class="QPushButton" name="registerButton">
         <property name="geometry">
          <rect>
           <x>610</x>
@@ -256,6 +410,14 @@
           <width>213</width>
           <height>291</height>
          </rect>
+        </property>
+        <property name="font">
+         <font>
+          <family>Courier New</family>
+          <pointsize>10</pointsize>
+          <weight>50</weight>
+          <bold>false</bold>
+         </font>
         </property>
         <property name="readOnly">
          <bool>true</bool>
@@ -292,6 +454,12 @@
          </property>
         </widget>
         <widget class="QTextEdit" name="currentMessageField">
+         <property name="font">
+          <font>
+           <family>Courier New</family>
+           <pointsize>10</pointsize>
+          </font>
+         </property>
          <property name="readOnly">
           <bool>true</bool>
          </property>
@@ -377,6 +545,195 @@
          <string>Previous</string>
         </property>
        </widget>
+       <widget class="QPushButton" name="clearRegisterButton">
+        <property name="geometry">
+         <rect>
+          <x>610</x>
+          <y>460</y>
+          <width>98</width>
+          <height>27</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>Clear</string>
+        </property>
+       </widget>
+      </widget>
+      <widget class="QWidget" name="tab">
+       <attribute name="title">
+        <string>Create Scenario</string>
+       </attribute>
+       <widget class="QListView" name="scenarioView">
+        <property name="geometry">
+         <rect>
+          <x>30</x>
+          <y>20</y>
+          <width>671</width>
+          <height>281</height>
+         </rect>
+        </property>
+       </widget>
+       <widget class="QFrame" name="frame">
+        <property name="geometry">
+         <rect>
+          <x>30</x>
+          <y>310</y>
+          <width>401</width>
+          <height>191</height>
+         </rect>
+        </property>
+        <property name="frameShape">
+         <enum>QFrame::StyledPanel</enum>
+        </property>
+        <property name="frameShadow">
+         <enum>QFrame::Raised</enum>
+        </property>
+        <widget class="QLabel" name="label_10">
+         <property name="geometry">
+          <rect>
+           <x>10</x>
+           <y>20</y>
+           <width>66</width>
+           <height>17</height>
+          </rect>
+         </property>
+         <property name="text">
+          <string>From:</string>
+         </property>
+        </widget>
+        <widget class="QLineEdit" name="toAddressField">
+         <property name="enabled">
+          <bool>true</bool>
+         </property>
+         <property name="geometry">
+          <rect>
+           <x>10</x>
+           <y>90</y>
+           <width>179</width>
+           <height>27</height>
+          </rect>
+         </property>
+         <property name="statusTip">
+          <string/>
+         </property>
+         <property name="inputMethodHints">
+          <set>Qt::ImhPreferNumbers</set>
+         </property>
+         <property name="inputMask">
+          <string/>
+         </property>
+         <property name="text">
+          <string/>
+         </property>
+         <property name="frame">
+          <bool>true</bool>
+         </property>
+         <property name="placeholderText">
+          <string>e. g.192.168.100.2</string>
+         </property>
+        </widget>
+        <widget class="QLabel" name="label_11">
+         <property name="geometry">
+          <rect>
+           <x>10</x>
+           <y>70</y>
+           <width>66</width>
+           <height>17</height>
+          </rect>
+         </property>
+         <property name="text">
+          <string>To</string>
+         </property>
+        </widget>
+        <widget class="QPushButton" name="chooseTemplateButton">
+         <property name="geometry">
+          <rect>
+           <x>210</x>
+           <y>140</y>
+           <width>151</width>
+           <height>27</height>
+          </rect>
+         </property>
+         <property name="text">
+          <string>Choose template</string>
+         </property>
+        </widget>
+        <widget class="QLineEdit" name="fromAddressField">
+         <property name="enabled">
+          <bool>true</bool>
+         </property>
+         <property name="geometry">
+          <rect>
+           <x>10</x>
+           <y>40</y>
+           <width>179</width>
+           <height>27</height>
+          </rect>
+         </property>
+         <property name="statusTip">
+          <string/>
+         </property>
+         <property name="inputMethodHints">
+          <set>Qt::ImhPreferNumbers</set>
+         </property>
+         <property name="inputMask">
+          <string/>
+         </property>
+         <property name="text">
+          <string/>
+         </property>
+         <property name="frame">
+          <bool>true</bool>
+         </property>
+         <property name="placeholderText">
+          <string>e. g.192.168.100.1</string>
+         </property>
+        </widget>
+        <widget class="QLineEdit" name="chooseTemplateField">
+         <property name="enabled">
+          <bool>true</bool>
+         </property>
+         <property name="geometry">
+          <rect>
+           <x>10</x>
+           <y>140</y>
+           <width>179</width>
+           <height>27</height>
+          </rect>
+         </property>
+         <property name="statusTip">
+          <string/>
+         </property>
+         <property name="inputMask">
+          <string/>
+         </property>
+         <property name="text">
+          <string/>
+         </property>
+         <property name="frame">
+          <bool>true</bool>
+         </property>
+         <property name="placeholderText">
+          <string/>
+         </property>
+        </widget>
+       </widget>
+       <widget class="QPushButton" name="addCaseButton">
+        <property name="geometry">
+         <rect>
+          <x>450</x>
+          <y>390</y>
+          <width>98</width>
+          <height>27</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>Add</string>
+        </property>
+       </widget>
+       <zorder>frame</zorder>
+       <zorder>scenarioView</zorder>
+       <zorder>addCaseButton</zorder>
       </widget>
      </widget>
     </item>
@@ -387,7 +744,7 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>740</width>
+     <width>853</width>
      <height>25</height>
     </rect>
    </property>
@@ -427,8 +784,8 @@
    <slot>clear()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>553</x>
-     <y>467</y>
+     <x>675</x>
+     <y>562</y>
     </hint>
     <hint type="destinationlabel">
      <x>211</x>
@@ -443,8 +800,8 @@
    <slot>clear()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>524</x>
-     <y>464</y>
+     <x>646</x>
+     <y>562</y>
     </hint>
     <hint type="destinationlabel">
      <x>215</x>
@@ -459,8 +816,8 @@
    <slot>clear()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>527</x>
-     <y>465</y>
+     <x>649</x>
+     <y>562</y>
     </hint>
     <hint type="destinationlabel">
      <x>216</x>
@@ -475,8 +832,8 @@
    <slot>clear()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>503</x>
-     <y>467</y>
+     <x>625</x>
+     <y>562</y>
     </hint>
     <hint type="destinationlabel">
      <x>204</x>
@@ -491,12 +848,140 @@
    <slot>clear()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>483</x>
-     <y>470</y>
+     <x>605</x>
+     <y>562</y>
     </hint>
     <hint type="destinationlabel">
      <x>449</x>
      <y>391</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>clearRegisterButton</sender>
+   <signal>clicked()</signal>
+   <receiver>currentMessageField</receiver>
+   <slot>clear()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>649</x>
+     <y>540</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>217</x>
+     <y>413</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>clearRegisterButton</sender>
+   <signal>clicked()</signal>
+   <receiver>flowField</receiver>
+   <slot>clear()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>635</x>
+     <y>528</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>449</x>
+     <y>403</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>clearButton</sender>
+   <signal>clicked()</signal>
+   <receiver>proxyOneAddresField</receiver>
+   <slot>clear()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>692</x>
+     <y>549</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>209</x>
+     <y>354</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>clearButton</sender>
+   <signal>clicked()</signal>
+   <receiver>proxyOnePortField</receiver>
+   <slot>clear()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>611</x>
+     <y>546</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>214</x>
+     <y>415</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>clearButton</sender>
+   <signal>clicked()</signal>
+   <receiver>proxyTwoAddresField</receiver>
+   <slot>clear()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>616</x>
+     <y>541</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>205</x>
+     <y>467</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>clearButton</sender>
+   <signal>clicked()</signal>
+   <receiver>proxyTwoPortField</receiver>
+   <slot>clear()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>607</x>
+     <y>550</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>203</x>
+     <y>522</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>clearButton</sender>
+   <signal>clicked()</signal>
+   <receiver>senderField</receiver>
+   <slot>clear()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>627</x>
+     <y>545</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>478</x>
+     <y>488</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>clearButton</sender>
+   <signal>clicked()</signal>
+   <receiver>receiverField</receiver>
+   <slot>clear()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>631</x>
+     <y>552</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>473</x>
+     <y>520</y>
     </hint>
    </hints>
   </connection>
