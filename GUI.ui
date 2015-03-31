@@ -18,7 +18,7 @@
   </property>
   <widget class="QWidget" name="centralwidget">
    <layout class="QGridLayout" name="gridLayout">
-    <item row="0" column="1">
+    <item row="0" column="0">
      <widget class="QTabWidget" name="tabWidget">
       <property name="font">
        <font>
@@ -34,6 +34,9 @@
         <string>Input data</string>
        </attribute>
        <widget class="QRadioButton" name="simulateRadioButton">
+        <property name="enabled">
+         <bool>true</bool>
+        </property>
         <property name="geometry">
          <rect>
           <x>690</x>
@@ -52,7 +55,7 @@
          <bool>true</bool>
         </property>
         <property name="checked">
-         <bool>true</bool>
+         <bool>false</bool>
         </property>
        </widget>
        <widget class="QWidget" name="layoutWidget">
@@ -333,7 +336,7 @@
          </property>
         </widget>
        </widget>
-       <widget class="QWidget" name="">
+       <widget class="QWidget" name="layoutWidget">
         <property name="geometry">
          <rect>
           <x>260</x>
@@ -377,13 +380,11 @@
          </item>
         </layout>
        </widget>
+       <zorder>layoutWidget</zorder>
        <zorder>splitter</zorder>
        <zorder>simulateRadioButton</zorder>
        <zorder>layoutWidget</zorder>
        <zorder>layoutWidget</zorder>
-       <zorder>label</zorder>
-       <zorder>senderField</zorder>
-       <zorder>receiverField</zorder>
       </widget>
       <widget class="QWidget" name="Register">
        <attribute name="title">
@@ -392,8 +393,8 @@
        <widget class="QPushButton" name="registerButton">
         <property name="geometry">
          <rect>
-          <x>610</x>
-          <y>410</y>
+          <x>710</x>
+          <y>440</y>
           <width>98</width>
           <height>27</height>
          </rect>
@@ -405,10 +406,10 @@
        <widget class="QTextEdit" name="flowField">
         <property name="geometry">
          <rect>
-          <x>350</x>
+          <x>32</x>
           <y>100</y>
-          <width>213</width>
-          <height>291</height>
+          <width>771</width>
+          <height>151</height>
          </rect>
         </property>
         <property name="font">
@@ -426,8 +427,8 @@
        <widget class="QLabel" name="flowLabel">
         <property name="geometry">
          <rect>
-          <x>570</x>
-          <y>230</y>
+          <x>510</x>
+          <y>250</y>
           <width>112</width>
           <height>17</height>
          </rect>
@@ -440,9 +441,9 @@
         <property name="geometry">
          <rect>
           <x>30</x>
-          <y>130</y>
-          <width>291</width>
-          <height>271</height>
+          <y>260</y>
+          <width>381</width>
+          <height>241</height>
          </rect>
         </property>
         <property name="orientation">
@@ -468,10 +469,10 @@
        <widget class="QWidget" name="layoutWidget">
         <property name="geometry">
          <rect>
-          <x>40</x>
-          <y>20</y>
-          <width>611</width>
-          <height>72</height>
+          <x>20</x>
+          <y>21</y>
+          <width>791</width>
+          <height>61</height>
          </rect>
         </property>
         <layout class="QHBoxLayout" name="horizontalLayout_3">
@@ -517,13 +518,71 @@
            </property>
           </widget>
          </item>
+         <item>
+          <widget class="QSlider" name="horizontalSlider_2">
+           <property name="cursor">
+            <cursorShape>ArrowCursor</cursorShape>
+           </property>
+           <property name="acceptDrops">
+            <bool>false</bool>
+           </property>
+           <property name="autoFillBackground">
+            <bool>false</bool>
+           </property>
+           <property name="orientation">
+            <enum>Qt::Horizontal</enum>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QLabel" name="server_2">
+           <property name="text">
+            <string/>
+           </property>
+           <property name="pixmap">
+            <pixmap>img/sip proxy server.jpg</pixmap>
+           </property>
+           <property name="scaledContents">
+            <bool>true</bool>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QSlider" name="horizontalSlider_3">
+           <property name="cursor">
+            <cursorShape>ArrowCursor</cursorShape>
+           </property>
+           <property name="acceptDrops">
+            <bool>false</bool>
+           </property>
+           <property name="autoFillBackground">
+            <bool>false</bool>
+           </property>
+           <property name="orientation">
+            <enum>Qt::Horizontal</enum>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QLabel" name="phone_2">
+           <property name="text">
+            <string/>
+           </property>
+           <property name="pixmap">
+            <pixmap>img/phone.jpg</pixmap>
+           </property>
+           <property name="scaledContents">
+            <bool>true</bool>
+           </property>
+          </widget>
+         </item>
         </layout>
        </widget>
        <widget class="QPushButton" name="nextButton">
         <property name="geometry">
          <rect>
-          <x>610</x>
-          <y>370</y>
+          <x>710</x>
+          <y>400</y>
           <width>98</width>
           <height>27</height>
          </rect>
@@ -535,8 +594,8 @@
        <widget class="QPushButton" name="previousButton">
         <property name="geometry">
          <rect>
-          <x>610</x>
-          <y>330</y>
+          <x>710</x>
+          <y>360</y>
           <width>98</width>
           <height>27</height>
          </rect>
@@ -548,8 +607,8 @@
        <widget class="QPushButton" name="clearRegisterButton">
         <property name="geometry">
          <rect>
-          <x>610</x>
-          <y>460</y>
+          <x>710</x>
+          <y>490</y>
           <width>98</width>
           <height>27</height>
          </rect>
@@ -563,7 +622,7 @@
        <attribute name="title">
         <string>Create Scenario</string>
        </attribute>
-       <widget class="QListView" name="scenarioView">
+       <widget class="QTableView" name="scenarioView">
         <property name="geometry">
          <rect>
           <x>30</x>

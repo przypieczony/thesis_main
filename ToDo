@@ -1,3 +1,6 @@
 ToDo:
-- Increment next message with next button and viceversa with previous button
 - add possibility to create scenario by user
+- adjust variable names and conventions
+- make possible to create sniffing_socket without root permissions
+- make window freeze (cannot change size)
+- work on reset functionality (clear button)
