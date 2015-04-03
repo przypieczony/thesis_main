@@ -3,6 +3,7 @@ from struct import *
 import re
 from math import fabs
 import select
+import random
 
 class transmission():
     def __init__(self, ip_dict):
@@ -13,6 +14,14 @@ class transmission():
         self.ip_dict=ip_dict
         self.package=[]
         self.graph=''
+
+
+
+    def randomLoopback(self):
+        """Return ip address 127.{}.{}.{} """
+        return "127.{}.{}.{}".format(random.randint(1,255), \
+                random.randint(1,255), random.randint(1,255))
+
     def analyse(self, packet):
         self.package_number+=1
         self.package.append(packet)
@@ -24,12 +33,16 @@ class transmission():
         destination_port=self.package[self.package_number]['destination_port']
 
         if cseq:
-            # for ip in self.ip_dict.values():
-            #     if ip not in self.ips:             #prepare list with all ips in transmission and print these ips
-            #         self.ip_list+=ip.center(28, ' ')
-            #         graph=self.ip_list+'\n'
-            #         self.ips.append(ip)
-            graph = "{0[sourceAddress]:15s}             {0[proxyOneAddress]:15s}             {0[proxyTwoAddress]:15s}             {0[destAddress]:15s}\n".format(self.ip_dict)
+            #for key, value in self.ip_dict.items():
+            #    self.ip_dict[key]=self.randomLoopback()
+
+            full_length=len(self.ip_dict["sourceAddress"])+len(self.ip_dict["proxyOneAddress"])+len(self.ip_dict["proxyTwoAddress"])+len(self.ip_dict["destAddress"])
+            max_length = 120
+            spacer = (max_length - full_length)/2
+            #graph = "{}{}{}{}\n".format(self.ip_dict["sourceAddress"]+spacer*" ", self.ip_dict["proxyOneAddress"]+spacer*" ", self.ip_dict["proxyTwoAddress"]+spacer*" ", self.ip_dict["destAddress"])
+            graph = "{}{}{}{}\n".format(self.ip_dict["sourceAddress"].ljust(26), self.ip_dict["proxyOneAddress"].ljust(26), self.ip_dict["proxyTwoAddress"].ljust(15), self.ip_dict["destAddress"].rjust(27))
+            #test_ip_addr = "255.255.255.255"
+            #graph = "{}{}{}{}\n".format(test_ip_addr, test_ip_addr.center(32), test_ip_addr.center(32), test_ip_addr)
             request=str(cseq.group(1).strip() + ' ' + cseq.group(2).strip())
             source_ip_id=self.ip_dict.values().index(source_ip)
             destination_ip_id=self.ip_dict.values().index(destination_ip)
@@ -45,13 +58,12 @@ class transmission():
             distance=int(fabs(int(destination_ip_id-source_ip_id)))
             if source_ip == self.ip_dict["sourceAddress"]:
                 graph+=delimeter_first + request.center(16*distance,'-') + delimeter_second + '\n'
-            elif source_ip == self.ip_dict["proxyOneAddress"]:
+            elif source_ip == self.ip_dict["destAddress"]:
                 graph+=6*""+ delimeter_first + request.center(16*distance,'-') + delimeter_second + '\n'
             else:
                 graph+=delimeter_first + request.center(16*distance,'-') + delimeter_second + '\n'
             message=str(self.package_number).center(8,'-')+'\n'+str(self.package[self.package_number]['data'])
             return {'graph':graph, 'message': message}
-            #print graph
             
 def sniff(transmission_protocol, ip_dict):
     global sip_transmission

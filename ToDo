@@ -4,3 +4,5 @@ ToDo:
 - make possible to create sniffing_socket without root permissions
 - make window freeze (cannot change size)
 - work on reset functionality (clear button)
+- Replace ip addresses in flowField by 4 separated fields above harware
+- Why it doesn't work outsie simulation??
