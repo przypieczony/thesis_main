@@ -1,0 +1,10 @@
+INVITE sip:%(dest_ip)s SIP/2.0
+Via: SIP/2.0/UDP %(source_ip)s:%(source_port)s;branch=z9hG4bK-p985iy
+Max-Forwards: 70
+To: <sip:%(user)s@%(dest_ip)s:%(dest_port)s>
+From: "fake" <sip:fake@%(source_ip)s>;tag=as2e95fad1
+Call-ID: %(callid)s@fake
+CSeq: %(seq)d INVITE
+Contact: <sip:fake@%(source_ip)s:%(source_port)s>
+Content-Type: application/sdp
+Content-Length: 0

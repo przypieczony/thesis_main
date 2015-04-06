@@ -27,20 +27,24 @@ class transmission():
         self.package.append(packet)
         graph=''
         cseq=re.search(r'^CSeq: ([0-9]*) (.*)', self.package[self.package_number]['data'], re.MULTILINE)
+        via_ip_addr = self.package[self.package_number]['Via']
         source_ip=self.package[self.package_number]['source_ip']
         source_port=self.package[self.package_number]['source_port']
         destination_ip=self.package[self.package_number]['destination_ip']
         destination_port=self.package[self.package_number]['destination_port']
 
         if cseq:
+            for ip in self.ip_dict.values():
+                if ip not in self.ips:
+                    self.ips.append(ip)
+                    graph = "{}{}{}{}\n".format(self.ip_dict["sourceAddress"].ljust(26), self.ip_dict["proxyOneAddress"].ljust(26), self.ip_dict["proxyTwoAddress"].ljust(15), self.ip_dict["destAddress"].rjust(24))
             #for key, value in self.ip_dict.items():
             #    self.ip_dict[key]=self.randomLoopback()
 
-            full_length=len(self.ip_dict["sourceAddress"])+len(self.ip_dict["proxyOneAddress"])+len(self.ip_dict["proxyTwoAddress"])+len(self.ip_dict["destAddress"])
-            max_length = 120
-            spacer = (max_length - full_length)/2
+            #full_length=len(self.ip_dict["sourceAddress"])+len(self.ip_dict["proxyOneAddress"])+len(self.ip_dict["proxyTwoAddress"])+len(self.ip_dict["destAddress"])
+            #max_length = 120
+            #spacer = (max_length - full_length)/2
             #graph = "{}{}{}{}\n".format(self.ip_dict["sourceAddress"]+spacer*" ", self.ip_dict["proxyOneAddress"]+spacer*" ", self.ip_dict["proxyTwoAddress"]+spacer*" ", self.ip_dict["destAddress"])
-            graph = "{}{}{}{}\n".format(self.ip_dict["sourceAddress"].ljust(26), self.ip_dict["proxyOneAddress"].ljust(26), self.ip_dict["proxyTwoAddress"].ljust(15), self.ip_dict["destAddress"].rjust(27))
             #test_ip_addr = "255.255.255.255"
             #graph = "{}{}{}{}\n".format(test_ip_addr, test_ip_addr.center(32), test_ip_addr.center(32), test_ip_addr)
             request=str(cseq.group(1).strip() + ' ' + cseq.group(2).strip())
@@ -55,13 +59,27 @@ class transmission():
             else:
                 delimeter_first = '|<'
                 delimeter_second = '|'
-            distance=int(fabs(int(destination_ip_id-source_ip_id)))
-            if source_ip == self.ip_dict["sourceAddress"]:
-                graph+=delimeter_first + request.center(16*distance,'-') + delimeter_second + '\n'
-            elif source_ip == self.ip_dict["destAddress"]:
-                graph+=6*""+ delimeter_first + request.center(16*distance,'-') + delimeter_second + '\n'
+            message_length=int(fabs(int(destination_ip_id-source_ip_id))) #to set message range
+            distance = 26
+            if not via_ip_addr:
+                if source_ip == self.ip_dict["sourceAddress"]:
+                    graph+="{}{}{}{}".format(delimeter_first, request.center(22,'-'), delimeter_second, '\n')
+                elif source_ip == self.ip_dict["proxyOneAddress"]:
+                    graph+="{}{}{}{}".format(delimeter_first.rjust(distance*2), request.center(22,'-'), delimeter_second, '\n')
+                elif source_ip == self.ip_dict["proxyTwoAddress"]:
+                    graph+="{}{}{}{}".format(delimeter_first.rjust(distance*3), request.center(22,'-'), delimeter_second, '\n')
+                elif source_ip == self.ip_dict["destAddress"]:
+                    graph+="{}{}{}{}".format(delimeter_first.rjust(distance*3), request.center(22,'-'), delimeter_second, '\n')
             else:
-                graph+=delimeter_first + request.center(16*distance,'-') + delimeter_second + '\n'
+                print "Via: ", via_ip_addr
+                if via_ip_addr == self.ip_dict["sourceAddress"]:
+                    graph+="{}{}{}{}".format(delimeter_first, request.center(22,'-'), delimeter_second, '\n')
+                elif via_ip_addr == self.ip_dict["proxyOneAddress"]:
+                    graph+="{}{}{}{}".format(delimeter_first.rjust(distance*2), request.center(22,'-'), delimeter_second, '\n')
+                elif source_ip == self.ip_dict["proxyOneAddress"]:
+                    graph+="{}{}{}{}".format(delimeter_first.rjust(distance*3), request.center(22,'-'), delimeter_second, '\n')
+                elif via_ip_addr == self.ip_dict["destAddress"]:
+                    graph+="{}{}{}{}".format(delimeter_first.rjust(distance*3), request.center(22,'-'), delimeter_second, '\n')
             message=str(self.package_number).center(8,'-')+'\n'+str(self.package[self.package_number]['data'])
             return {'graph':graph, 'message': message}
             
@@ -117,12 +135,17 @@ def sniff(transmission_protocol, ip_dict):
     data = packet[header_size:]
 
     protocol=re.search(r'^Via: (.*?)/', data, re.MULTILINE)
+    try:
+        via_ip_addr = re.search('Via: (.*) (.*):([0-9]+)', data, re.MULTILINE).group(2)
+    except AttributeError:
+        via_ip_addr = ""
     if protocol:
         packet={
             'source_ip': str(source_address),
             'source_port': str(source_port),
             'destination_ip': str(destination_address),
             'destination_port': str(destination_port),
+            'Via': via_ip_addr,
             'version': str(version),
             'ihl': str(ihl),
             'ttl': str(ttl),

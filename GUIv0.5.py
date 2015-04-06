@@ -495,6 +495,10 @@ class Ui_MainWindow(object):
         "source_port": self.sourcePort,
         "dest_ip": self.destAddress,
         "dest_port": self.destPort,
+        "proxy_one_address": self.proxyOneAddress,
+        "proxy_one_port": self.proxyOnePort,
+        "proxy_two_address": self.proxyTwoAddress,
+        "proxy_two_port": self.proxyTwoPort,
         "user": "kamszy", #To replace by value inputed by user
         "callid": ''.join(random.choice(string.ascii_lowercase + string.digits) for x in range(6)),
         "seq": 0,
@@ -530,42 +534,17 @@ class Ui_MainWindow(object):
         ret = sample % self.template_vars #replaces %(<variable>)s by template_vars
         self.statusbar.showMessage('Parameters saved')
         return ret
-     
-    # def createSockets(self):
-    #     try:
-    #         self.sending_sock = self.open_sock(self.template_vars["source_ip"], self.template_vars["source_port"])
-    #         self.receiving_sock = self.open_sock(self.template_vars["dest_ip"], self.template_vars["dest_port"])
-    #         self.statusbar.showMessage('Parameters saved')
-    #     except Exception, e:
-    #         self.statusbar.showMessage('Error! cannot open socket. {}'.format(e))
-
-    def open_sock(self, ip, port):
-        try:
-            sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM, socket.IPPROTO_UDP)
-            sock.setblocking(0)
-        except Exception, e:
-            sys.stderr.write("ERROR: cannot create socket. %s\n" % e)
-            sys.exit(-1)
-        try:
-            sock.seckopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
-            sock.seckopt(socket.SOL_SOCKET, socket.SO_REUSEPORT, 1)
-        except AttributeError:
-            pass
-        sock.bind((ip, port))
-        sock.settimeout(10)
-        return sock
 
     def register(self):
         """Stores register scenario templates"""
         self.templates = [
-        {"source_ip": self.template_vars["source_ip"], "source_port": self.template_vars["source_port"], "dest_ip": self.template_vars["dest_ip"], "dest_port": self.template_vars["dest_port"], "path": os.path.join('templates', 'register.txt')},
-        {"source_ip": self.template_vars["dest_ip"], "source_port": self.template_vars["dest_port"], "dest_ip": self.template_vars["source_ip"], "dest_port": self.template_vars["source_port"], "path": os.path.join('templates', 'message.txt')},
-        {"source_ip": self.template_vars["source_ip"], "source_port": self.template_vars["source_port"], "dest_ip": self.template_vars["dest_ip"], "dest_port": self.template_vars["dest_port"], "path": os.path.join('templates', 'message.txt')},
-        {"source_ip": self.template_vars["dest_ip"], "source_port": self.template_vars["dest_port"], "dest_ip": self.proxyOneAddress, "dest_port": self.proxyOnePort, "path": os.path.join('templates', 'sip-options.txt')},
+        {"source_ip": self.template_vars["source_ip"], "source_port": self.template_vars["source_port"], "dest_ip": self.template_vars["dest_ip"], "dest_port": self.template_vars["dest_port"], "path": os.path.join('templates', 'invite_1.txt')},
+        {"source_ip": self.template_vars["source_ip"], "source_port": self.template_vars["source_port"], "dest_ip": self.template_vars["dest_ip"], "dest_port": self.template_vars["dest_port"], "path": os.path.join('templates', 'invite_2.txt')},
+        {"source_ip": self.template_vars["source_ip"], "source_port": self.template_vars["source_port"], "dest_ip": self.template_vars["dest_ip"], "dest_port": self.template_vars["dest_port"], "path": os.path.join('templates', 'invite_3.txt')},
+        {"source_ip": self.template_vars["source_ip"], "source_port": self.template_vars["source_port"], "dest_ip": self.template_vars["dest_ip"], "dest_port": self.template_vars["dest_port"], "path": os.path.join('templates', 'ack_4.txt')},
+        {"source_ip": self.template_vars["source_ip"], "source_port": self.template_vars["source_port"], "dest_ip": self.template_vars["dest_ip"], "dest_port": self.template_vars["dest_port"], "path": os.path.join('templates', 'bye_5.txt')},
         ]
         self.loadTemplate()
-        #self.startScenario()
-
 
     def loadTemplate(self):
         """Gets file path to template file, renders it and returns string"""
@@ -577,21 +556,20 @@ class Ui_MainWindow(object):
             except Exception, e:
                 self.statusbar.showMessage('Error! RROR: cannot open file {}, {}'.format(template_path, e))
 
-            mapped_template = {}
-            for key_template, value_template in template.items():
-                for key_template_vars, value_template_vars in self.template_vars.items():
-                    if key_template_vars == key_template:
-                        mapped_template[key_template_vars] = value_template
-                    else:
-                        mapped_template[key_template_vars] = value_template_vars
+            # mapped_template = {}
+            # for key_template, value_template in template.items():
+            #     for key_template_vars, value_template_vars in self.template_vars.items():
+            #         if key_template_vars == key_template:
+            #             mapped_template[key_template_vars] = value_template
+            #         else:
+            #             mapped_template[key_template_vars] = value_template_vars
 
-            template["message"] = clean_template % mapped_template #replaces %(<variable>)s by template_vars
+            template["message"] = clean_template % self.template_vars #replaces %(<variable>)s by template_vars
 
             self.templates.pop(i)
             i+=1
             self.templates.insert(0, template)
         self.templates.reverse()
-
 
     def startScenario(self):
         """Start scenario according to messages in current templates"""
@@ -659,6 +637,25 @@ class Ui_MainWindow(object):
         self.currentMessageField.insertPlainText("\n=== Full Request sent ===\n\n")
         self.currentMessageField.insertPlainText("%s\n" % sip_req)
 
+    def open_sock(self, ip, port):
+        try:
+            sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM, socket.IPPROTO_UDP)
+            sock.setblocking(0)
+        except Exception, e:
+            sys.stderr.write("ERROR: cannot create socket. %s\n" % e)
+            sys.exit(-1)
+        try:
+            sock.seckopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
+            sock.seckopt(socket.SOL_SOCKET, socket.SO_REUSEPORT, 1)
+        except AttributeError:
+            pass
+        try:
+            sock.bind((ip, port))
+        except Exception:
+            print "to jednak przy bindowaniu"
+        sock.settimeout(10)
+        return sock
+
     def reset(self):
         self.message_counter = -1
 
@@ -678,7 +675,6 @@ class Ui_MainWindow(object):
         while doSniff:
             sniff_results=sniff('UDP', {"sourceAddress": self.sourceAddress, "destAddress": self.destAddress, "proxyOneAddress": self.proxyOneAddress, "proxyTwoAddress": self.proxyTwoAddress})
             if sniff_results:
-                print sniff_results['graph']
                 #window.main_widget.printText('left', sniff_results['message'])
                 self.flowField.insertPlainText(sniff_results['graph'])
 

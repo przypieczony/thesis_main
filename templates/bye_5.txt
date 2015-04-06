@@ -1,0 +1,8 @@
+BYE sip:%(source_ip)s SIP/2.0
+Via: SIP/2.0/UDP %(dest_ip)s:%(dest_port)s;branch=z9hG4bK-p985iy
+Max-Forwards: 70
+From: "fake" <sip:fake@%(dest_ip)s>;tag=as2e95fad1
+To: <sip:%(user)s@%(source_ip)s:%(source_port)s>
+Call-ID: %(callid)s@fake
+CSeq: %(seq)d BYE
+Content-Length: 0

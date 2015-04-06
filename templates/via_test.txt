@@ -1,0 +1,12 @@
+OPTIONS sip:127.0.0.1:65449 SIP/2.0
+        Via: SIP/2.0/UDP 127.158.173.116:36498
+        Via: SIP/2.0/UDP 127.148.163.106:36498
+        Max-Forwards: 70
+        From: "fake" <sip:fake@127.158.173.116>
+        To: <sip:127.0.0.1:65449>
+        Contact: <sip:fake@127.158.173.116:36498>
+        Call-ID: fake-id@127.158.173.116
+        User-Agent: SIPPing
+        Date: Wed, 24 Apr 2013 20:35:23 GMT
+        Allow: INVITE, ACK, CANCEL, OPTIONS, BYE, REFER, SUBSCRIBE, NOTIFY, INFO, PUBLISH
+        Supported: replaces, timer
