@@ -345,6 +345,7 @@ class Ui_MainWindow(object):
         self.menubar.addAction(self.menuFile.menuAction())
         self.menubar.addAction(self.menuEdit.menuAction())
         self.menubar.addAction(self.menuExit.menuAction())
+        self.fileDialog = QtGui.QFileDialog(MainWindow)
 
         self.retranslateUi(MainWindow)
         self.tabWidget.setCurrentIndex(0)
@@ -449,6 +450,7 @@ class Ui_MainWindow(object):
         self.registerButton.clicked.connect(self.startLongSniff)
         self.nextButton.clicked.connect(self.next)
         self.previousButton.clicked.connect(self.previous)
+        self.chooseTemplateButton.clicked.connect(self.selectFile)
  
 
     def getParameters(self):
@@ -536,13 +538,15 @@ class Ui_MainWindow(object):
         return ret
 
     def register(self):
-        """Stores register scenario templates"""
+        """Stores register scenario templates also source and destination
+        addresses used to sent via socket"""
         self.templates = [
-        {"source_ip": self.template_vars["source_ip"], "source_port": self.template_vars["source_port"], "dest_ip": self.template_vars["dest_ip"], "dest_port": self.template_vars["dest_port"], "path": os.path.join('templates', 'invite_1.txt')},
-        {"source_ip": self.template_vars["source_ip"], "source_port": self.template_vars["source_port"], "dest_ip": self.template_vars["dest_ip"], "dest_port": self.template_vars["dest_port"], "path": os.path.join('templates', 'invite_2.txt')},
-        {"source_ip": self.template_vars["source_ip"], "source_port": self.template_vars["source_port"], "dest_ip": self.template_vars["dest_ip"], "dest_port": self.template_vars["dest_port"], "path": os.path.join('templates', 'invite_3.txt')},
+        {"source_ip": self.template_vars["source_ip"], "source_port": self.template_vars["source_port"], "dest_ip": self.template_vars["proxy_one_address"], "dest_port": self.template_vars["proxy_one_port"], "path": os.path.join('templates', 'invite_1.txt')},
+        {"source_ip": self.template_vars["proxy_one_address"], "source_port": self.template_vars["proxy_one_port"], "dest_ip": self.template_vars["proxy_two_address"], "dest_port": self.template_vars["proxy_two_port"], "path": os.path.join('templates', 'invite_2.txt')},
+        {"source_ip": self.template_vars["proxy_two_address"], "source_port": self.template_vars["proxy_two_port"], "dest_ip": self.template_vars["dest_ip"], "dest_port": self.template_vars["dest_port"], "path": os.path.join('templates', 'invite_3.txt')},
         {"source_ip": self.template_vars["source_ip"], "source_port": self.template_vars["source_port"], "dest_ip": self.template_vars["dest_ip"], "dest_port": self.template_vars["dest_port"], "path": os.path.join('templates', 'ack_4.txt')},
-        {"source_ip": self.template_vars["source_ip"], "source_port": self.template_vars["source_port"], "dest_ip": self.template_vars["dest_ip"], "dest_port": self.template_vars["dest_port"], "path": os.path.join('templates', 'bye_5.txt')},
+        {"source_ip": self.template_vars["source_ip"], "source_port": self.template_vars["source_port"], "dest_ip": self.template_vars["proxy_two_address"], "dest_port": self.template_vars["proxy_two_port"], "path": os.path.join('templates', 'ack_4.txt')},
+        {"source_ip": self.template_vars["dest_ip"], "source_port": self.template_vars["dest_port"], "dest_ip": self.template_vars["source_ip"], "dest_port": self.template_vars["source_port"], "path": os.path.join('templates', 'bye_5.txt')},
         ]
         self.loadTemplate()
 
@@ -632,9 +636,9 @@ class Ui_MainWindow(object):
             self.sending_sock.sendto(str(sip_req),(request["dest_ip"], request["dest_port"]))
         except Exception, e:
             self.statusbar.showMessage('Error! cannot send packet to {}:{}. {}'.format(request["dest_ip"], request["dest_port"], e))
-        self.currentMessageField.insertPlainText("sent Request %s to %s:%d cseq=%s len=%d\n" % (sip_req.method, request['dest_ip'], request["dest_port"], sip_req.headers['cseq'].split()[0], len(str(sip_req))))
+        self.currentMessageField.insertPlainText("sent Request %s from: \"%s\" to: \"%s:%d\" cseq=%s len=%d\n" % (sip_req.method, request["source_ip"], request['dest_ip'], request["dest_port"], sip_req.headers['cseq'].split()[0], len(str(sip_req))))
 
-        self.currentMessageField.insertPlainText("\n=== Full Request sent ===\n\n")
+        self.currentMessageField.insertPlainText("\n=== Full Request sent ===\n")
         self.currentMessageField.insertPlainText("%s\n" % sip_req)
 
     def open_sock(self, ip, port):
@@ -645,25 +649,17 @@ class Ui_MainWindow(object):
             sys.stderr.write("ERROR: cannot create socket. %s\n" % e)
             sys.exit(-1)
         try:
-            sock.seckopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
-            sock.seckopt(socket.SOL_SOCKET, socket.SO_REUSEPORT, 1)
-        except AttributeError:
+            sock.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
+            sock.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEPORT, 1)
+        except AttributeError, e:
             pass
-        try:
-            sock.bind((ip, port))
-        except Exception:
-            print "to jednak przy bindowaniu"
+
+        sock.bind((ip, port))
         sock.settimeout(10)
         return sock
 
     def reset(self):
         self.message_counter = -1
-
-    # def printText(self, textEdit, textToPrint):
-    #     if textEdit == 'left':
-    #         self.textLeft.append(textToPrint)
-    #     elif textEdit == 'right':
-    #         self.textRight.append(textToPrint)
 
     def startLongSniff(self):
         #infoStartStop('starting')
@@ -673,10 +669,20 @@ class Ui_MainWindow(object):
         global doSniff
         doSniff = 1
         while doSniff:
-            sniff_results=sniff('UDP', {"sourceAddress": self.sourceAddress, "destAddress": self.destAddress, "proxyOneAddress": self.proxyOneAddress, "proxyTwoAddress": self.proxyTwoAddress})
+            sniff_results=sniff('UDP', (self.sourceAddress, self.proxyOneAddress, self.proxyTwoAddress, self.destAddress))
             if sniff_results:
                 #window.main_widget.printText('left', sniff_results['message'])
                 self.flowField.insertPlainText(sniff_results['graph'])
+
+    def selectFile(self):
+        """ """
+        #self.fileDialog.show()
+        filename = QtGui.QFileDialog.getOpenFileName(self.fileDialog, 'Open File', '.')
+        self.chooseTemplateField.insertPlainText(filename)
+        with open(filename) as fname:
+            data = fname.read()
+        print data
+
 
 def canon_header(s):
     exception    = {'call-id':'Call-ID','cseq':'CSeq','www-authenticate':'WWW-Authenticate'}

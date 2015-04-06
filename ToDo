@@ -8,3 +8,5 @@ ToDo:
 - Why it doesn't work outsie simulation??
 - decrement max forwards per one by each hop
 - add via address per each hop
+- create function which set delimeters position according to source and destination ip
+- Morph QLineEdit to QTextEdit (chooseTemplateField)
