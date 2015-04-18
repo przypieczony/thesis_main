@@ -8,3 +8,8 @@ ToDo:
 - add via address per each hop
 - Show pop-up window after clear button with information of shutting down sockets (user shouldn't be able to do anything)
 - Invest wht's wrong with popup
+- Format output in templatePathField
+- Rename pushButton to createScenarioButton
+- rename scenarios to scenario
+- Add loadScenario functionality
+- Create class with inpupt fields (to secure, preserve double adresses, clarity etc.)
