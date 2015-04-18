@@ -3,10 +3,8 @@ ToDo:
 - adjust variable names and conventions
 - make possible to create sniffing_socket without root permissions
 - make window freeze (cannot change size)
-- work on reset functionality (clear button)
-- Replace ip addresses in flowField by 4 separated fields above harware
 - Why it doesn't work outsie simulation??
 - decrement max forwards per one by each hop
 - add via address per each hop
-- create function which set delimeters position according to source and destination ip
-- Morph QLineEdit to QTextEdit (chooseTemplateField)
+- Show pop-up window after clear button with information of shutting down sockets (user shouldn't be able to do anything)
+- Invest wht's wrong with popup

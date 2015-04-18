@@ -4,8 +4,9 @@ import re
 from math import fabs
 import select
 import random
+import threading
 
-class transmission():
+class transmission(threading.Thread):
     def __init__(self, ip_list):
         self.package_number=-1
         self.first_in_transmission=0
@@ -13,7 +14,14 @@ class transmission():
         self.ip_list = ip_list
         self.package=[]
         self.graph=''
+        super(transmission, self).__init__()
+        self._stop = threading.Event()
 
+    def stop(self):
+        self._stop.set()
+
+    def stopped(self):
+        return self._stop.isSet()
 
 
     def randomLoopback(self):
@@ -32,51 +40,55 @@ class transmission():
         destination_ip=self.package[self.package_number]['destination_ip']
         destination_port=self.package[self.package_number]['destination_port']
         print "sending ip: {} \ndestination ip: {}\nVia: {}".format(source_ip, destination_ip, via_ip)
-
         if cseq:
-            distance = 25
-            for ip in self.ip_list:
-                if ip not in self.ips:
-                    self.ips.append(ip)
-                    graph = "{}{}{}{}\n".format(self.ip_list[0].ljust(distance), self.ip_list[1].ljust(distance), self.ip_list[2].ljust(15), self.ip_list[3].rjust(24))
-            #for key, value in self.ip_list.items():
-            #    self.ip_list[key]=self.randomLoopback()
+            return self.printGraph(source_ip, destination_ip, cseq)
 
-            #full_length=len(self.ip_list["sourceAddress"])+len(self.ip_list["proxyOneAddress"])+len(self.ip_list["proxyTwoAddress"])+len(self.ip_list["destAddress"])
-            #max_length = 120
-            #spacer = (max_length - full_length)/2
-            #graph = "{}{}{}{}\n".format(self.ip_list["sourceAddress"]+spacer*" ", self.ip_list["proxyOneAddress"]+spacer*" ", self.ip_list["proxyTwoAddress"]+spacer*" ", self.ip_list["destAddress"])
-            #test_ip_addr = "255.255.255.255"
-            #graph = "{}{}{}{}\n".format(test_ip_addr, test_ip_addr.center(32), test_ip_addr.center(32), test_ip_addr)
-            request=str(cseq.group(1).strip() + ' ' + cseq.group(2).strip())
-            source_ip_id=self.ips.index(source_ip)
-            destination_ip_id=self.ips.index(destination_ip)
-            if source_ip_id < destination_ip_id:
-                delimeter_first = '|'
-                delimeter_second = '>|'
-            elif source_ip_id == destination_ip_id: #when destination and source ip are the same print confusing message
-                delimeter_first = '?'
-                delimeter_second = '?|'
-            else:
-                delimeter_first = '|<'
-                delimeter_second = '|'
-            message_length=int(fabs(int(destination_ip_id-source_ip_id))) #to set message range
-            if message_length == 1:
-                correction=0
-            elif message_length == 2:
-                correction = 2
-            elif message_length == 3:
-                correction = 4
-            if source_ip == self.ip_list[0]:
-                graph+="{}{}{}{}".format(delimeter_first, request.center(distance*message_length+correction,'-'), delimeter_second, '\n')
-            elif source_ip == self.ip_list[1]:
-                graph+="{}{}{}{}".format(delimeter_first.rjust(distance+3), request.center(distance*message_length+correction,'-'), delimeter_second, '\n')
-            elif source_ip == self.ip_list[2]:
-                graph+="{}{}{}{}".format(delimeter_first.rjust((distance*2)+5), request.center(distance*message_length+correction,'-'), delimeter_second, '\n')
-            elif source_ip == self.ip_list[3]:
-                graph+="{}{}{}{}".format(delimeter_first.rjust((distance*3)+8), request.center(distance*message_length+correction,'-'), delimeter_second, '\n')
-            message=str(self.package_number).center(8,'-')+'\n'+str(self.package[self.package_number]['data'])
-            return {'graph':graph, 'message': message}
+    def printGraph(self, source_ip, destination_ip, cseq):
+        """Return formatted SIP message flow and message"""
+        distance = 25
+        for ip in self.ip_list:
+            if ip not in self.ips:
+                self.ips.append(ip)
+                graph = "{}{}{}{}\n".format(self.ip_list[0].ljust(distance), self.ip_list[1].ljust(distance), self.ip_list[2].ljust(15), self.ip_list[3].rjust(24))
+        request=str(cseq.group(1).strip() + ' ' + cseq.group(2).strip())
+
+        if source_ip == self.ips[0]:
+            delimeter_first_pos = 0
+        elif source_ip == self.ips[1]:
+            delimeter_first_pos = 29
+        elif source_ip == self.ips[2]:
+            delimeter_first_pos = 58
+        elif source_ip == self.ips[3]:
+            delimeter_first_pos = 87
+
+        if destination_ip == self.ips[0]:
+            delimeter_second_pos = 0
+        elif destination_ip == self.ips[1]:
+            delimeter_second_pos = 29
+        elif destination_ip == self.ips[2]:
+            delimeter_second_pos = 58
+        elif destination_ip == self.ips[3]:
+            delimeter_second_pos = 87
+
+        source_ip_id=self.ips.index(source_ip)
+        destination_ip_id=self.ips.index(destination_ip)
+        if source_ip_id < destination_ip_id:
+            delimeter_first = '|'
+            delimeter_second = '>|'
+            left_indention = delimeter_first_pos
+        elif source_ip_id == destination_ip_id: #when destination and source ip are the same print confusing message
+            delimeter_first = '?'
+            delimeter_second = '?|'
+            left_indention = delimeter_first_pos
+        else:
+            delimeter_first = '|<'
+            delimeter_second = '|'
+            left_indention = delimeter_second_pos
+
+        message_length=abs(delimeter_second_pos - delimeter_first_pos)-2 #to set message range
+        graph = "{}{}{}{}\n".format(" "*(left_indention), delimeter_first, request.center(message_length, "-"), delimeter_second)
+        message=str(self.package_number).center(8,'-')+'\n'+str(self.package[self.package_number]['data'])
+        return {'graph':graph, 'message': message}
             
 def sniff(transmission_protocol, ip_list):
     global sip_transmission

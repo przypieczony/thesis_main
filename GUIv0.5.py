@@ -15,8 +15,9 @@ import os
 import string
 import cStringIO
 import time
-import thread
+import thread, threading
 from sniff import *
+import pickle
 
 
 try:
@@ -33,11 +34,14 @@ except AttributeError:
     def _translate(context, text, disambig):
         return QtGui.QApplication.translate(context, text, disambig)
 
-class Ui_MainWindow(object):
+class Ui_MainWindow(QtGui.QMainWindow):
     def __init__(self):
         self.template_vars = {}
         self.templates = {}
         self.message_counter = -1
+        self.thread = None
+        self.thread_popup = None
+        self.scenario = []
 
     def setupUi(self, MainWindow):
         MainWindow.setObjectName(_fromUtf8("MainWindow"))
@@ -447,10 +451,11 @@ class Ui_MainWindow(object):
 
         self.acceptButton.clicked.connect(self.getParameters)
         self.registerButton.clicked.connect(self.register)
-        self.registerButton.clicked.connect(self.startLongSniff)
+        self.registerButton.clicked.connect(self.startSniff)
         self.nextButton.clicked.connect(self.next)
         self.previousButton.clicked.connect(self.previous)
         self.chooseTemplateButton.clicked.connect(self.selectFile)
+        self.addCaseButton.clicked.connect(self.addTemplateToScenario)
  
 
     def getParameters(self):
@@ -659,29 +664,91 @@ class Ui_MainWindow(object):
         return sock
 
     def reset(self):
+        print "CLEARED"
+        self.templates = []
         self.message_counter = -1
-
-    def startLongSniff(self):
-        #infoStartStop('starting')
-        thread.start_new_thread(self.startSniff,())
+        #self.thread_popup = PopupDialog()
+        #self.thread_popup.start()
+        print "popup should show up"
+        try:
+            self.thread.stop()
+            self.thread.join()
+            #self.thread_popup.join()
+        except Exception as e:
+            print "Exception", e
+        print "Closed all threads"
 
     def startSniff(self):
-        global doSniff
-        doSniff = 1
-        while doSniff:
-            sniff_results=sniff('UDP', (self.sourceAddress, self.proxyOneAddress, self.proxyTwoAddress, self.destAddress))
-            if sniff_results:
-                #window.main_widget.printText('left', sniff_results['message'])
-                self.flowField.insertPlainText(sniff_results['graph'])
+        self.thread = Sniff(self.sourceAddress, self.proxyOneAddress, self.proxyTwoAddress, self.destAddress, self.flowField)
+        self.thread.start()
 
     def selectFile(self):
         """ """
-        #self.fileDialog.show()
         filename = QtGui.QFileDialog.getOpenFileName(self.fileDialog, 'Open File', '.')
         self.chooseTemplateField.insertPlainText(filename)
         with open(filename) as fname:
             data = fname.read()
         print data
+
+    def createScenario(self):
+        """ """
+
+    def addTemplateToScenario(self):
+        """ """
+        fromAddress = str(fromAddressField.text())
+        sourcePort = str(fromPortField.text())
+        toAddress = str(toAddressField.text())
+        destPort = str(toPortField.text())
+        template_path = str(chooseTemplateField.text())
+        self.scenario.append({"source_ip": fromAddress, "source_port": sourcePort, "dest_ip": toAddress, "dest_port": destPort, "path": template_path})
+        self.scenariosField.clear()
+        self.scenariosField.insertPlainText(self.scenario)
+
+
+class CreateScenario():
+
+    def __init__(self):
+
+    def
+
+
+class PopupDialog(QtGui.QDialog, threading.Thread):
+    def __init__(self):
+        QtGui.QDialog.__init__(self)
+        threading.Thread.__init__(self)
+
+    def run(self):
+        popup = PopupDialog()
+        popup.exec_()  
+
+class Sniff(threading.Thread):
+
+    def __init__(self, sourceAddress, proxyOneAddress, proxyTwoAddress, destAddress, flowField):
+        threading.Thread.__init__(self)
+        self.process = None
+        self.sourceAddress = sourceAddress
+        self.proxyOneAddress = proxyOneAddress
+        self.proxyTwoAddress = proxyTwoAddress
+        self.destAddress = destAddress
+        self.flowField = flowField
+        self.doSniff = True
+
+    def run(self):
+        print "Starting..."
+        while self.doSniff == True:
+            sniff_results=sniff('UDP', (self.sourceAddress, self.proxyOneAddress, self.proxyTwoAddress, self.destAddress))
+            if sniff_results:
+                self.flowField.insertPlainText(sniff_results['graph'])
+
+    def stop(self):
+        self.doSniff = False
+
+    #def startSniff(self):
+    #    self.doSniff = 1
+    #    while self.doSniff:
+    #        sniff_results=sniff('UDP', (self.sourceAddress, self.proxyOneAddress, self.proxyTwoAddress, self.destAddress))
+    #        if sniff_results:
+    #            self.flowField.insertPlainText(sniff_results['graph'])
 
 
 def canon_header(s):
@@ -718,6 +785,7 @@ def parse_body(f, headers):
     else:
         body = ''
     return body
+
 
 class Message:
     """SIP Protocol headers + body."""

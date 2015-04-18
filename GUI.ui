@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>853</width>
-    <height>624</height>
+    <width>850</width>
+    <height>635</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -427,8 +427,8 @@
        <widget class="QLabel" name="flowLabel">
         <property name="geometry">
          <rect>
-          <x>510</x>
-          <y>250</y>
+          <x>350</x>
+          <y>260</y>
           <width>112</width>
           <height>17</height>
          </rect>
@@ -458,7 +458,7 @@
          <property name="font">
           <font>
            <family>Courier New</family>
-           <pointsize>10</pointsize>
+           <pointsize>9</pointsize>
           </font>
          </property>
          <property name="readOnly">
@@ -469,9 +469,9 @@
        <widget class="QWidget" name="layoutWidget">
         <property name="geometry">
          <rect>
-          <x>20</x>
-          <y>21</y>
-          <width>791</width>
+          <x>10</x>
+          <y>32</y>
+          <width>811</width>
           <height>61</height>
          </rect>
         </property>
@@ -499,6 +499,9 @@
            </property>
            <property name="autoFillBackground">
             <bool>false</bool>
+           </property>
+           <property name="styleSheet">
+            <string notr="true">selection-color: rgb(255, 0, 0);</string>
            </property>
            <property name="orientation">
             <enum>Qt::Horizontal</enum>
@@ -617,21 +620,175 @@
          <string>Clear</string>
         </property>
        </widget>
+       <widget class="QLineEdit" name="sourceHW">
+        <property name="enabled">
+         <bool>true</bool>
+        </property>
+        <property name="geometry">
+         <rect>
+          <x>0</x>
+          <y>10</y>
+          <width>101</width>
+          <height>21</height>
+         </rect>
+        </property>
+        <property name="font">
+         <font>
+          <pointsize>9</pointsize>
+          <weight>75</weight>
+          <bold>true</bold>
+         </font>
+        </property>
+        <property name="statusTip">
+         <string/>
+        </property>
+        <property name="inputMethodHints">
+         <set>Qt::ImhNone</set>
+        </property>
+        <property name="inputMask">
+         <string/>
+        </property>
+        <property name="text">
+         <string/>
+        </property>
+        <property name="frame">
+         <bool>true</bool>
+        </property>
+        <property name="readOnly">
+         <bool>false</bool>
+        </property>
+        <property name="placeholderText">
+         <string/>
+        </property>
+       </widget>
+       <widget class="QLineEdit" name="proxyOneHW">
+        <property name="enabled">
+         <bool>true</bool>
+        </property>
+        <property name="geometry">
+         <rect>
+          <x>250</x>
+          <y>10</y>
+          <width>101</width>
+          <height>21</height>
+         </rect>
+        </property>
+        <property name="font">
+         <font>
+          <pointsize>9</pointsize>
+          <weight>75</weight>
+          <bold>true</bold>
+         </font>
+        </property>
+        <property name="statusTip">
+         <string/>
+        </property>
+        <property name="inputMethodHints">
+         <set>Qt::ImhNone</set>
+        </property>
+        <property name="inputMask">
+         <string/>
+        </property>
+        <property name="text">
+         <string/>
+        </property>
+        <property name="frame">
+         <bool>true</bool>
+        </property>
+        <property name="readOnly">
+         <bool>false</bool>
+        </property>
+        <property name="placeholderText">
+         <string/>
+        </property>
+       </widget>
+       <widget class="QLineEdit" name="proxyTwoHW">
+        <property name="enabled">
+         <bool>true</bool>
+        </property>
+        <property name="geometry">
+         <rect>
+          <x>490</x>
+          <y>10</y>
+          <width>101</width>
+          <height>21</height>
+         </rect>
+        </property>
+        <property name="font">
+         <font>
+          <pointsize>9</pointsize>
+          <weight>75</weight>
+          <bold>true</bold>
+         </font>
+        </property>
+        <property name="statusTip">
+         <string/>
+        </property>
+        <property name="inputMethodHints">
+         <set>Qt::ImhNone</set>
+        </property>
+        <property name="inputMask">
+         <string/>
+        </property>
+        <property name="text">
+         <string/>
+        </property>
+        <property name="frame">
+         <bool>true</bool>
+        </property>
+        <property name="readOnly">
+         <bool>false</bool>
+        </property>
+        <property name="placeholderText">
+         <string/>
+        </property>
+       </widget>
+       <widget class="QLineEdit" name="destHW">
+        <property name="enabled">
+         <bool>true</bool>
+        </property>
+        <property name="geometry">
+         <rect>
+          <x>720</x>
+          <y>10</y>
+          <width>101</width>
+          <height>21</height>
+         </rect>
+        </property>
+        <property name="font">
+         <font>
+          <pointsize>9</pointsize>
+          <weight>75</weight>
+          <bold>true</bold>
+         </font>
+        </property>
+        <property name="statusTip">
+         <string/>
+        </property>
+        <property name="inputMethodHints">
+         <set>Qt::ImhNone</set>
+        </property>
+        <property name="inputMask">
+         <string/>
+        </property>
+        <property name="text">
+         <string/>
+        </property>
+        <property name="frame">
+         <bool>true</bool>
+        </property>
+        <property name="readOnly">
+         <bool>false</bool>
+        </property>
+        <property name="placeholderText">
+         <string/>
+        </property>
+       </widget>
       </widget>
       <widget class="QWidget" name="tab">
        <attribute name="title">
         <string>Create Scenario</string>
        </attribute>
-       <widget class="QTableView" name="scenarioView">
-        <property name="geometry">
-         <rect>
-          <x>30</x>
-          <y>20</y>
-          <width>671</width>
-          <height>281</height>
-         </rect>
-        </property>
-       </widget>
        <widget class="QFrame" name="frame">
         <property name="geometry">
          <rect>
@@ -647,134 +804,168 @@
         <property name="frameShadow">
          <enum>QFrame::Raised</enum>
         </property>
-        <widget class="QLabel" name="label_10">
+        <widget class="QWidget" name="">
          <property name="geometry">
           <rect>
            <x>10</x>
            <y>20</y>
-           <width>66</width>
-           <height>17</height>
+           <width>381</width>
+           <height>151</height>
           </rect>
          </property>
-         <property name="text">
-          <string>From:</string>
-         </property>
-        </widget>
-        <widget class="QLineEdit" name="toAddressField">
-         <property name="enabled">
-          <bool>true</bool>
-         </property>
-         <property name="geometry">
-          <rect>
-           <x>10</x>
-           <y>90</y>
-           <width>179</width>
-           <height>27</height>
-          </rect>
-         </property>
-         <property name="statusTip">
-          <string/>
-         </property>
-         <property name="inputMethodHints">
-          <set>Qt::ImhPreferNumbers</set>
-         </property>
-         <property name="inputMask">
-          <string/>
-         </property>
-         <property name="text">
-          <string/>
-         </property>
-         <property name="frame">
-          <bool>true</bool>
-         </property>
-         <property name="placeholderText">
-          <string>e. g.192.168.100.2</string>
-         </property>
-        </widget>
-        <widget class="QLabel" name="label_11">
-         <property name="geometry">
-          <rect>
-           <x>10</x>
-           <y>70</y>
-           <width>66</width>
-           <height>17</height>
-          </rect>
-         </property>
-         <property name="text">
-          <string>To</string>
-         </property>
-        </widget>
-        <widget class="QPushButton" name="chooseTemplateButton">
-         <property name="geometry">
-          <rect>
-           <x>210</x>
-           <y>140</y>
-           <width>151</width>
-           <height>27</height>
-          </rect>
-         </property>
-         <property name="text">
-          <string>Choose template</string>
-         </property>
-        </widget>
-        <widget class="QLineEdit" name="fromAddressField">
-         <property name="enabled">
-          <bool>true</bool>
-         </property>
-         <property name="geometry">
-          <rect>
-           <x>10</x>
-           <y>40</y>
-           <width>179</width>
-           <height>27</height>
-          </rect>
-         </property>
-         <property name="statusTip">
-          <string/>
-         </property>
-         <property name="inputMethodHints">
-          <set>Qt::ImhPreferNumbers</set>
-         </property>
-         <property name="inputMask">
-          <string/>
-         </property>
-         <property name="text">
-          <string/>
-         </property>
-         <property name="frame">
-          <bool>true</bool>
-         </property>
-         <property name="placeholderText">
-          <string>e. g.192.168.100.1</string>
-         </property>
-        </widget>
-        <widget class="QLineEdit" name="chooseTemplateField">
-         <property name="enabled">
-          <bool>true</bool>
-         </property>
-         <property name="geometry">
-          <rect>
-           <x>10</x>
-           <y>140</y>
-           <width>179</width>
-           <height>27</height>
-          </rect>
-         </property>
-         <property name="statusTip">
-          <string/>
-         </property>
-         <property name="inputMask">
-          <string/>
-         </property>
-         <property name="text">
-          <string/>
-         </property>
-         <property name="frame">
-          <bool>true</bool>
-         </property>
-         <property name="placeholderText">
-          <string/>
-         </property>
+         <layout class="QGridLayout" name="gridLayout_3">
+          <item row="0" column="0">
+           <widget class="QLabel" name="label_10">
+            <property name="text">
+             <string>From:</string>
+            </property>
+           </widget>
+          </item>
+          <item row="1" column="0">
+           <widget class="QLineEdit" name="fromAddressField">
+            <property name="enabled">
+             <bool>true</bool>
+            </property>
+            <property name="statusTip">
+             <string/>
+            </property>
+            <property name="inputMethodHints">
+             <set>Qt::ImhPreferNumbers</set>
+            </property>
+            <property name="inputMask">
+             <string/>
+            </property>
+            <property name="text">
+             <string/>
+            </property>
+            <property name="frame">
+             <bool>true</bool>
+            </property>
+            <property name="placeholderText">
+             <string>e. g.192.168.100.1</string>
+            </property>
+           </widget>
+          </item>
+          <item row="1" column="1">
+           <widget class="QLineEdit" name="fromPortField">
+            <property name="statusTip">
+             <string/>
+            </property>
+            <property name="inputMethodHints">
+             <set>Qt::ImhPreferNumbers</set>
+            </property>
+            <property name="inputMask">
+             <string/>
+            </property>
+            <property name="text">
+             <string>5060</string>
+            </property>
+            <property name="placeholderText">
+             <string>e.g. 5060</string>
+            </property>
+           </widget>
+          </item>
+          <item row="2" column="0">
+           <widget class="QLabel" name="label_11">
+            <property name="text">
+             <string>To</string>
+            </property>
+           </widget>
+          </item>
+          <item row="3" column="0">
+           <widget class="QLineEdit" name="toAddressField">
+            <property name="enabled">
+             <bool>true</bool>
+            </property>
+            <property name="statusTip">
+             <string/>
+            </property>
+            <property name="inputMethodHints">
+             <set>Qt::ImhPreferNumbers</set>
+            </property>
+            <property name="inputMask">
+             <string/>
+            </property>
+            <property name="text">
+             <string/>
+            </property>
+            <property name="frame">
+             <bool>true</bool>
+            </property>
+            <property name="placeholderText">
+             <string>e. g.192.168.100.2</string>
+            </property>
+           </widget>
+          </item>
+          <item row="3" column="1">
+           <widget class="QLineEdit" name="toPortField">
+            <property name="statusTip">
+             <string/>
+            </property>
+            <property name="inputMethodHints">
+             <set>Qt::ImhPreferNumbers</set>
+            </property>
+            <property name="inputMask">
+             <string/>
+            </property>
+            <property name="text">
+             <string>5060</string>
+            </property>
+            <property name="placeholderText">
+             <string>e.g. 5060</string>
+            </property>
+           </widget>
+          </item>
+          <item row="4" column="1">
+           <widget class="QPushButton" name="chooseTemplateButton">
+            <property name="text">
+             <string>Choose template</string>
+            </property>
+           </widget>
+          </item>
+          <item row="0" column="1">
+           <widget class="QLabel" name="label_12">
+            <property name="text">
+             <string>Source port:</string>
+            </property>
+           </widget>
+          </item>
+          <item row="2" column="1">
+           <widget class="QLabel" name="label_13">
+            <property name="text">
+             <string>Destination port:</string>
+            </property>
+           </widget>
+          </item>
+          <item row="4" column="0">
+           <widget class="QLineEdit" name="templatePathField">
+            <property name="enabled">
+             <bool>true</bool>
+            </property>
+            <property name="statusTip">
+             <string/>
+            </property>
+            <property name="inputMethodHints">
+             <set>Qt::ImhNone</set>
+            </property>
+            <property name="inputMask">
+             <string/>
+            </property>
+            <property name="text">
+             <string/>
+            </property>
+            <property name="frame">
+             <bool>true</bool>
+            </property>
+            <property name="readOnly">
+             <bool>true</bool>
+            </property>
+            <property name="placeholderText">
+             <string/>
+            </property>
+           </widget>
+          </item>
+         </layout>
         </widget>
        </widget>
        <widget class="QPushButton" name="addCaseButton">
@@ -782,17 +973,46 @@
          <rect>
           <x>450</x>
           <y>390</y>
-          <width>98</width>
+          <width>111</width>
           <height>27</height>
          </rect>
         </property>
         <property name="text">
-         <string>Add</string>
+         <string>Add template</string>
         </property>
        </widget>
-       <zorder>frame</zorder>
-       <zorder>scenarioView</zorder>
-       <zorder>addCaseButton</zorder>
+       <widget class="QTextEdit" name="scenariosField">
+        <property name="geometry">
+         <rect>
+          <x>70</x>
+          <y>30</y>
+          <width>691</width>
+          <height>262</height>
+         </rect>
+        </property>
+        <property name="font">
+         <font>
+          <family>Courier New</family>
+          <pointsize>10</pointsize>
+         </font>
+        </property>
+        <property name="readOnly">
+         <bool>true</bool>
+        </property>
+       </widget>
+       <widget class="QPushButton" name="pushButton">
+        <property name="geometry">
+         <rect>
+          <x>690</x>
+          <y>480</y>
+          <width>121</width>
+          <height>27</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>Create scenario</string>
+        </property>
+       </widget>
       </widget>
      </widget>
     </item>
@@ -803,7 +1023,7 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>853</width>
+     <width>850</width>
      <height>25</height>
     </rect>
    </property>
@@ -811,7 +1031,7 @@
     <property name="title">
      <string>File</string>
     </property>
-    <addaction name="actionAdd_template"/>
+    <addaction name="actionAdd_scenario"/>
    </widget>
    <widget class="QMenu" name="menuEdit">
     <property name="title">
@@ -831,6 +1051,11 @@
   <action name="actionAdd_template">
    <property name="text">
     <string>Add template</string>
+   </property>
+  </action>
+  <action name="actionAdd_scenario">
+   <property name="text">
+    <string>Add scenario</string>
    </property>
   </action>
  </widget>
