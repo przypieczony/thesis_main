@@ -6,7 +6,7 @@ import select
 import random
 import threading
 
-class transmission(threading.Thread):
+class transmission():
     def __init__(self, ip_list):
         self.package_number=-1
         self.first_in_transmission=0
@@ -14,20 +14,10 @@ class transmission(threading.Thread):
         self.ip_list = ip_list
         self.package=[]
         self.graph=''
-        super(transmission, self).__init__()
-        self._stop = threading.Event()
+        print "ips w inicie: ", self.ips
 
-    def stop(self):
-        self._stop.set()
-
-    def stopped(self):
-        return self._stop.isSet()
-
-
-    def randomLoopback(self):
-        """Return ip address 127.{}.{}.{} """
-        return "127.{}.{}.{}".format(random.randint(1,255), \
-                random.randint(1,255), random.randint(1,255))
+    def __del__(self):
+        print "died"
 
     def analyse(self, packet):
         self.package_number+=1
@@ -70,6 +60,7 @@ class transmission(threading.Thread):
         elif destination_ip == self.ips[3]:
             delimeter_second_pos = 87
 
+        print "ips w getParameters: ", self.ips
         source_ip_id=self.ips.index(source_ip)
         destination_ip_id=self.ips.index(destination_ip)
         if source_ip_id < destination_ip_id:
@@ -100,11 +91,16 @@ def sniff(transmission_protocol, ip_list):
     if transmission_protocol not in transmission_protocols.keys():
         sys.exit()
     try: #open a socket
+        global sniff_socket
         sniff_socket = socket.socket(socket.AF_INET, socket.SOCK_RAW, transmission_protocols[transmission_protocol])
+
+        #sniff_socket.settimeout(3)
     except socket.error, msg:
         print 'Socket could not be created. Error code: ' + str(msg[0]) + ' Message ' + msg[1]
         sys.exit()
-    packet = sniff_socket.recvfrom(66746) #get a packet from socket
+    print "before receive"
+    packet = getData(sniff_socket) #get a packet from socket
+    print "after receive"
     packet = packet[0]
     ip_header_packed = packet[0:20] #first 20 characters = ip header
     try:
@@ -169,6 +165,21 @@ def sniff(transmission_protocol, ip_list):
             return sip_transmission.analyse(packet)
         else:
             print 'protocol not reckognized' + str(protocol.group())
+
+def getData(socket):
+    global packet
+    packet = None
+    while not packet:
+        socket.setblocking(0)
+        try:
+            packet = socket.recvfrom(66746)
+        except Exception:
+            pass
+    return packet
+
+def closeConnection():
+    """ """
+    packet = 1
 
 if __name__ == "__main__":
     while(1):
