@@ -876,13 +876,13 @@ class Ui_MainWindow(QtGui.QMainWindow):
             "path": template_path}
             )
         self.scenarioField.clear()
-        self.scenarioField.insertPlainText(self.formatScenario())
+        self.scenarioField.insertPlainText(self.formatedScenario())
 
     def removeTemplateFromScenario(self):
         """ """
         self.scenario.pop(-1)
         self.scenarioField.clear()
-        self.scenarioField.insertPlainText(self.formatScenario())
+        self.scenarioField.insertPlainText(self.formatedScenario())
 
     def getTemplate(self):
         """ """
@@ -908,12 +908,14 @@ class Ui_MainWindow(QtGui.QMainWindow):
         self.loadParameters()
         self.scenarioField.clear()
         self.scenarioField.insertPlainText(str(self.scenario))
-        PopupDialog("Scenario \"{}\" loaded properly. Go to the Simulation tab now.".format(os.path.basename(filename)), "Success :)" )
+        PopupDialog("Scenario \"{0}\" loaded properly. Go to the {0} tab now.".format(os.path.basename(filename)), "Success :)" )
+        self.tabWidget.setTabText(self.tabWidget.indexOf(self.Simulation), _translate("MainWindow", os.path.basename(filename), None))
 
-    def formatScenario(self):
+    def formatedScenario(self):
         formated = ""
         for template in self.scenario:
             formated += "{source_ip:s} : {source_port:s}  ------->  {dest_ip:s} : {dest_port:s}\nContent: {path:s}\n".format(**template)
+            formated += "{:-^80}\n".format("")
         return formated
 
 
