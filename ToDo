@@ -5,11 +5,6 @@ ToDo:
 - Why it doesn't work outsie simulation??
 - decrement max forwards per one by each hop
 - add via address per each hop
-- Show pop-up window after clear button with information of shutting down sockets (user shouldn't be able to do anything)
-- Format output in templatePathField
-- Create class with inpupt fields (to secure, preserve double adresses, clarity etc.)
-- Change name of tab "scenario" depends on scenario filename
-- set started tab as input data
 - sort out how to launch multiple scenarios in one instance of program (destroy object?)
-- add remove template button
 - connect reset functionality to "cross" icon
+- Add "sIP" icon to taskbar and in GUI

@@ -14,7 +14,6 @@ class transmission():
         self.ip_list = ip_list
         self.package=[]
         self.graph=''
-        print "ips w inicie: ", self.ips
 
     def __del__(self):
         print "died"
@@ -29,7 +28,6 @@ class transmission():
         source_port=self.package[self.package_number]['source_port']
         destination_ip=self.package[self.package_number]['destination_ip']
         destination_port=self.package[self.package_number]['destination_port']
-        print "sending ip: {} \ndestination ip: {}\nVia: {}".format(source_ip, destination_ip, via_ip)
         if cseq:
             return self.printGraph(source_ip, destination_ip, cseq)
 
@@ -60,7 +58,6 @@ class transmission():
         elif destination_ip == self.ips[3]:
             delimeter_second_pos = 87
 
-        print "ips w getParameters: ", self.ips
         source_ip_id=self.ips.index(source_ip)
         destination_ip_id=self.ips.index(destination_ip)
         if source_ip_id < destination_ip_id:
