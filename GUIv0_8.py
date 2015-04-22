@@ -36,20 +36,20 @@ except AttributeError:
         return QtGui.QApplication.translate(context, text, disambig)
 
 class Ui_MainWindow(QtGui.QMainWindow):
-    def __init__(self):
+    def __init__(self, *args, **kwargs):
+        super(Ui_MainWindow, self).__init__(*args, **kwargs)
         self.template_vars = {}
-        self.templates = {}
         self.message_counter = -1
-        self.thread = None
-        self.thread_popup = None
+        self.sniff_thread = None
         self.scenario = []
         self.ip_addresses = []
         self.ports = []
+        self.setupUi()
 
-    def setupUi(self, MainWindow):
-        MainWindow.setObjectName(_fromUtf8("MainWindow"))
-        MainWindow.resize(850, 635)
-        self.centralwidget = QtGui.QWidget(MainWindow)
+    def setupUi(self):
+        self.setObjectName(_fromUtf8("MainWindow"))
+        self.resize(850, 635)
+        self.centralwidget = QtGui.QWidget()
         self.centralwidget.setObjectName(_fromUtf8("centralwidget"))
         self.gridLayout = QtGui.QGridLayout(self.centralwidget)
         self.gridLayout.setObjectName(_fromUtf8("gridLayout"))
@@ -345,9 +345,11 @@ class Ui_MainWindow(QtGui.QMainWindow):
         self.gridLayout_5.setMargin(0)
         self.gridLayout_5.setObjectName(_fromUtf8("gridLayout_5"))
         self.previousButton = QtGui.QPushButton(self.layoutWidget5)
+        self.previousButton.setEnabled(False)
         self.previousButton.setObjectName(_fromUtf8("previousButton"))
         self.gridLayout_5.addWidget(self.previousButton, 0, 0, 1, 1)
         self.nextButton = QtGui.QPushButton(self.layoutWidget5)
+        self.nextButton.setEnabled(False)
         self.nextButton.setObjectName(_fromUtf8("nextButton"))
         self.gridLayout_5.addWidget(self.nextButton, 1, 0, 1, 1)
         self.simulateButton = QtGui.QPushButton(self.layoutWidget5)
@@ -497,8 +499,8 @@ class Ui_MainWindow(QtGui.QMainWindow):
         self.flowLabel.setObjectName(_fromUtf8("flowLabel"))
         self.tabWidget.addTab(self.Simulation, _fromUtf8(""))
         self.gridLayout.addWidget(self.tabWidget, 0, 0, 1, 1)
-        MainWindow.setCentralWidget(self.centralwidget)
-        self.menubar = QtGui.QMenuBar(MainWindow)
+        self.setCentralWidget(self.centralwidget)
+        self.menubar = QtGui.QMenuBar()
         self.menubar.setGeometry(QtCore.QRect(0, 0, 850, 25))
         self.menubar.setObjectName(_fromUtf8("menubar"))
         self.menuFile = QtGui.QMenu(self.menubar)
@@ -507,21 +509,21 @@ class Ui_MainWindow(QtGui.QMainWindow):
         self.menuEdit.setObjectName(_fromUtf8("menuEdit"))
         self.menuExit = QtGui.QMenu(self.menubar)
         self.menuExit.setObjectName(_fromUtf8("menuExit"))
-        MainWindow.setMenuBar(self.menubar)
-        self.statusbar = QtGui.QStatusBar(MainWindow)
+        self.setMenuBar(self.menubar)
+        self.statusbar = QtGui.QStatusBar()
         self.statusbar.setObjectName(_fromUtf8("statusbar"))
-        MainWindow.setStatusBar(self.statusbar)
-        self.actionAdd_template = QtGui.QAction(MainWindow)
+        self.setStatusBar(self.statusbar)
+        self.actionAdd_template = QtGui.QAction(self)
         self.actionAdd_template.setObjectName(_fromUtf8("actionAdd_template"))
-        self.actionAdd_scenario = QtGui.QAction(MainWindow)
+        self.actionAdd_scenario = QtGui.QAction(self)
         self.actionAdd_scenario.setObjectName(_fromUtf8("actionAdd_scenario"))
         self.menuFile.addAction(self.actionAdd_scenario)
         self.menubar.addAction(self.menuFile.menuAction())
         self.menubar.addAction(self.menuEdit.menuAction())
         self.menubar.addAction(self.menuExit.menuAction())
-        self.fileDialog = QtGui.QFileDialog(MainWindow)
+        self.fileDialog = QtGui.QFileDialog()
 
-        self.retranslateUi(MainWindow)
+        self.retranslateUi()
         self.tabWidget.setCurrentIndex(0)
         QtCore.QObject.connect(self.clearButton, QtCore.SIGNAL(_fromUtf8("clicked()")), self.sourceAddressField.clear)
         QtCore.QObject.connect(self.clearButton, QtCore.SIGNAL(_fromUtf8("clicked()")), self.sourcePortField.clear)
@@ -530,6 +532,8 @@ class Ui_MainWindow(QtGui.QMainWindow):
         QtCore.QObject.connect(self.clearButton, QtCore.SIGNAL(_fromUtf8("clicked()")), self.sipTemplate.clear)
         QtCore.QObject.connect(self.clearSimulationButton, QtCore.SIGNAL(_fromUtf8("clicked()")), self.currentMessageField.clear)
         QtCore.QObject.connect(self.clearSimulationButton, QtCore.SIGNAL(_fromUtf8("clicked()")), self.flowField.clear)
+        QtCore.QObject.connect(self.loadScenarioButton, QtCore.SIGNAL(_fromUtf8("clicked()")), self.currentMessageField.clear)
+        QtCore.QObject.connect(self.loadScenarioButton, QtCore.SIGNAL(_fromUtf8("clicked()")), self.flowField.clear)
         QtCore.QObject.connect(self.clearButton, QtCore.SIGNAL(_fromUtf8("clicked()")), self.proxyOneAddresField.clear)
         QtCore.QObject.connect(self.clearButton, QtCore.SIGNAL(_fromUtf8("clicked()")), self.proxyOnePortField.clear)
         QtCore.QObject.connect(self.clearButton, QtCore.SIGNAL(_fromUtf8("clicked()")), self.proxyTwoAddresField.clear)
@@ -541,11 +545,24 @@ class Ui_MainWindow(QtGui.QMainWindow):
         QtCore.QObject.connect(self.clearSimulationButton, QtCore.SIGNAL(_fromUtf8("clicked()")), self.proxyTwoHW.clear)
         QtCore.QObject.connect(self.clearSimulationButton, QtCore.SIGNAL(_fromUtf8("clicked()")), self.destHW.clear)
         QtCore.QObject.connect(self.clearCreateScenarioButton, QtCore.SIGNAL(_fromUtf8("clicked()")), self.templatePathField.clear)
+        QtCore.QObject.connect(self.clearCreateScenarioButton, QtCore.SIGNAL(_fromUtf8("clicked()")), self.sipTemplate.clear)
         QtCore.QObject.connect(self.clearCreateScenarioButton, QtCore.SIGNAL(_fromUtf8("clicked()")), self.scenarioField.clear)
         self.simulateRadioButton.toggled.connect(self.simulateRadioClicked)
         self.templatePathField.textChanged.connect(self.enableAddCaseButton)
-        QtCore.QMetaObject.connectSlotsByName(MainWindow)
+        QtCore.QMetaObject.connectSlotsByName(self)
 
+    def closeEvent(self, event):
+        
+        result = QtGui.QMessageBox.question(self,
+                      "Confirm Exit...",
+                      "Are you sure you want to exit ?",
+                      QtGui.QMessageBox.Yes| QtGui.QMessageBox.No)
+        event.ignore()
+
+        if result == QtGui.QMessageBox.Yes:
+            self.reset()
+            event.accept()
+       
     def enableAddCaseButton(self):
         if os.path.exists(self.templatePathField.text()):
             self.addCaseButton.setEnabled(True)
@@ -578,9 +595,9 @@ class Ui_MainWindow(QtGui.QMainWindow):
 
 
 
-    def retranslateUi(self, MainWindow):
-        MainWindow.setWindowTitle(_translate("MainWindow", "MainWindow", None))
-        MainWindow.setStatusTip(_translate("MainWindow", "Ready", None))
+    def retranslateUi(self):
+        self.setWindowTitle(_translate("MainWindow", "MainWindow", None))
+        self.setStatusTip(_translate("MainWindow", "Ready", None))
         self.simulateRadioButton.setText(_translate("MainWindow", "Simulation", None))
         self.label.setText(_translate("MainWindow", "Enter source address:", None))
         self.sourceAddressField.setText(_translate("MainWindow", "192.168.100.1", None))
@@ -646,6 +663,7 @@ class Ui_MainWindow(QtGui.QMainWindow):
 
         self.acceptButton.clicked.connect(self.getParameters)
         self.simulateButton.clicked.connect(self.loadTemplate)
+        self.simulateButton.clicked.connect(self.loadParameters)
         self.simulateButton.clicked.connect(self.startSniff)
         self.nextButton.clicked.connect(self.next)
         self.previousButton.clicked.connect(self.previous)
@@ -655,6 +673,7 @@ class Ui_MainWindow(QtGui.QMainWindow):
         self.removeCaseButton.clicked.connect(self.removeTemplateFromScenario)
         self.CreateScenarioButton.clicked.connect(self.createScenario)
         self.loadScenarioButton.clicked.connect(self.loadScenario)
+        self.loadScenarioButton.clicked.connect(self.reset)
 
 
     def getParameters(self):
@@ -674,17 +693,17 @@ class Ui_MainWindow(QtGui.QMainWindow):
                 socket.inet_aton(self.sourceAddress)
                 socket.inet_aton(self.destAddress)
             except socket.error:
-                self.statusbar.showMessage('Error! Wrong ip address')
+                self.statusbar.showMessage('WARNING: Wrong ip address')
         else:
-            self.statusbar.showMessage('Error! ip addresses are the same')
+            self.statusbar.showMessage('WARNING: ip addresses are the same')
         try:
             self.sourcePort = int(self.sourcePortField.text())
             self.destPort = int(self.destPortField.text())
         except ValueError:
-            self.statusbar.showMessage('Error! Empty port number, choose between 1024-65535')
+            self.statusbar.showMessage('WARNING: Empty port number, choose between 1024-65535')
         if (self.sourcePort < 1024 or self.sourcePort > 65535) or \
             (self.destPort < 1024 or self.destPort > 65535):
-            self.statusbar.showMessage('Error! Wrong port number, choose between 1024-65535')
+            self.statusbar.showMessage('WARNING: Wrong port number, choose between 1024-65535')
  
         if self.simulateRadioButton.isChecked():
             self.sourceAddress = self.randomLoopback()
@@ -731,7 +750,11 @@ class Ui_MainWindow(QtGui.QMainWindow):
         except Exception, e:
             PopupDialog("Some of the paramters are missing in template: {}".format(e), "Whopsie..")
             raise Exception, e
-
+        self.sourceAddresBox.clear()
+        self.destAddressBox.clear()
+        self.sourcePortBox.clear()
+        self.destPortBox.clear()
+        self.sipTemplate.clear()
         self.sourceAddresBox.addItems(self.ip_addresses)
         self.destAddressBox.addItems(self.ip_addresses)
         self.sourcePortBox.addItems(self.ports)
@@ -745,7 +768,7 @@ class Ui_MainWindow(QtGui.QMainWindow):
     def printSample(self):
         """Method to print text into text box"""
 
-        sample = """Source Address %(source_ip)s:%(source_port)s
+        parameters_info = """Source Address %(source_ip)s:%(source_port)s
 Proxy one Address: %(proxy_one_address)s:%(proxy_one_port)s
 Proxy two address: %(proxy_two_address)s:%(proxy_two_port)s
 Destiantion address: %(dest_ip)s:%(dest_port)s
@@ -753,12 +776,12 @@ Sender: %(from)s
 Receiver: %(to)s
         """
         try:
-            ret = sample % self.template_vars #replaces %(<variable>)s by template_vars
+            parameters_info = parameters_info % self.template_vars #replaces %(<variable>)s by template_vars
         except Exception, e:
             PopupDialog("Some paramters are missing in template: {}".format(e), "Whopsie..")
             raise Exception, e
-        PopupDialog("Parameters Saved", "All good")
-        return ret
+        self.statusbar.showMessage("OK: All good, parameters Saved")
+        return parameters_info
 
 
     def loadTemplate(self):
@@ -769,7 +792,7 @@ Receiver: %(to)s
                 with open(template["path"], 'r') as template_file:
                     clean_template = template_file.read()
             except Exception, e:
-                self.statusbar.showMessage('Error! RROR: cannot open file {}, {}'.format(template_path, e))
+                self.statusbar.showMessage('ERROR: Cannot open file {}, {}'.format(template_path, e))
 
             template["message"] = clean_template % self.template_vars #replaces %(<variable>)s by template_vars
 
@@ -778,32 +801,25 @@ Receiver: %(to)s
             self.scenario.insert(0, template)
         self.scenario.reverse()
 
-    def startScenario(self):
-        """Start scenario according to messages in current scenario"""
-        for req, request in self.generateRequest():
-            self.send(req, request)
-
     def previous(self):
         """ """
         if self.message_counter > 0:
             self.currentMessageField.clear()
             self.message_counter -= 1
-            print "message counter: {}\nlength: {}".format(self.message_counter, len(self.scenario))
             req, request = self.generateRequest(self.scenario[self.message_counter])
             self.send(req, request)
         else:
-            self.statusbar.showMessage('It is first message to display')
+            self.statusbar.showMessage('WARNING: There is no more messages to send')
 
     def next(self):
         """ """
         if self.message_counter < len(self.scenario)-1:
             self.currentMessageField.clear()
             self.message_counter += 1
-            print "message counter: {}\nlength: {}".format(self.message_counter, len(self.scenario))
             req, request = self.generateRequest(self.scenario[self.message_counter])
             self.send(req, request)
         else:
-            self.statusbar.showMessage('There is no more messages to send')
+            self.statusbar.showMessage('WARNING: There is no more messages to send')
 
     def generateRequest(self, request):
         """Generates request message"""
@@ -825,8 +841,14 @@ Receiver: %(to)s
             self.sending_sock = self.open_sock(request["source_ip"], int(request["source_port"]))
             self.sending_sock.sendto(str(sip_req),(request["dest_ip"], int(request["dest_port"])))
         except Exception, e:
-            self.statusbar.showMessage('Error! cannot send packet to {}:{}. {}'.format(request["dest_ip"], request["dest_port"], e))
-        self.currentMessageField.insertPlainText("sent Request %s from: \"%s\" to: \"%s:%s\" cseq=%s len=%s\n" % (sip_req.method, request["source_ip"], request['dest_ip'], request["dest_port"], sip_req.headers['cseq'].split()[0], len(str(sip_req))))
+            self.statusbar.showMessage('ERROR: Cannot send packet to {}:{}. {}'.format(request["dest_ip"], request["dest_port"], e))
+        try:
+            self.currentMessageField.insertPlainText("sent Request %s from: \"%s\" to: \"%s:%s\" cseq=%s" \
+            "len=%s\n" % (sip_req.method, request["source_ip"], request['dest_ip'], \
+            request["dest_port"], sip_req.headers['cseq'].split()[0], len(str(sip_req))))
+        except AttributeError:
+            pass
+
 
         self.currentMessageField.insertPlainText("\n=== Full Request sent ===\n")
         self.currentMessageField.insertPlainText("%s\n" % sip_req)
@@ -849,21 +871,27 @@ Receiver: %(to)s
         return sock
 
     def reset(self):
-        print "CLEARED"
-        self.scenario = []
+        self.nextButton.setEnabled(False)
+        self.previousButton.setEnabled(False)
         self.message_counter = -1
         try:
-            closeConnection()
-        except Exception as e:
-            print "Exception", e
-        self.thread.stop()
-        self.thread.join()
+            killTransmission()
+        except NameError:
+            return
+        self.sniff_thread.stop()
+        self.send("END TRANSMISSION", {'source_ip': '127.0.0.1', 'source_port': '6666', \
+        'dest_port': '6666', 'dest_ip': '127.0.0.1'})
 
-        print "Closed all threads"
+        self.statusbar.showMessage("OK: Cleared")
 
     def startSniff(self):
-        self.thread = Sniff(self.ip_addresses, self.flowField)
-        self.thread.start()
+        if self.scenario:
+            self.nextButton.setEnabled(True)
+            self.previousButton.setEnabled(True)
+            self.sniff_thread = Sniff(self.ip_addresses, self.flowField)
+            self.sniff_thread.start()
+        else:
+            PopupDialog("There are no messages to send, please load a scenario", "Whopsie..")
 
     def addTemplateToScenario(self):
         """ """
@@ -894,16 +922,17 @@ Receiver: %(to)s
         self.scenario.insert(0, self.template_vars)
         scenario = Scenario(self.scenario)
         filename = scenario.create()
-        self.statusbar.showMessage("Saved scenario to: {}".format(str(filename)))
+        self.statusbar.showMessage("OK: Saved scenario to: {}".format(str(filename)))
 
     def loadScenario(self):
         """ """
         scenario = Scenario()
         try:
             self.scenario, filename = scenario.load()
-            self.template_vars = self.scenario.pop(0)
+            self.template_vars = self.scenario.pop(0) #removes first dict in list with startup parameters
         except Exception, e:
-            PopupDialog("Something went wrong during scenario importing, propably file is corrupted.", "Whopsie.." )
+            PopupDialog("Something went wrong during scenario importing, propably file is " \
+                "corrupted or you didn't choose any file.", "Whopsie.." )
             return
         self.loadParameters()
         self.scenarioField.clear()
@@ -1010,7 +1039,8 @@ class Sniff(threading.Thread):
 
 def canon_header(s):
     exception    = {'call-id':'Call-ID','cseq':'CSeq','www-authenticate':'WWW-Authenticate'}
-    short        = ['allow-events', 'u', 'call-id', 'i', 'contact', 'm', 'content-encoding', 'e', 'content-length', 'l', 'content-type', 'c', 'event', 'o', 'from', 'f', 'subject', 's', 'supported', 'k', 'to', 't', 'via', 'v']
+    short        = ['allow-events', 'u', 'call-id', 'i', 'contact', 'm', 'content-encoding', 'e', \
+    'content-length', 'l', 'content-type', 'c', 'event', 'o', 'from', 'f', 'subject', 's', 'supported', 'k', 'to', 't', 'via', 'v']
     s = s.lower()
     return ((len(s)==1) and s in short and canon_header(short[short.index(s)-1])) \
         or (s in exception and exception[s]) or '-'.join([x.capitalize() for x in s.split('-')])
@@ -1119,9 +1149,7 @@ class Request(Message):
 
 if __name__ == "__main__":
     app = QtGui.QApplication(sys.argv)
-    MainWindow = QtGui.QMainWindow()
-    ui = Ui_MainWindow()
-    ui.setupUi(MainWindow)
-    MainWindow.show()
+    mainWindow = Ui_MainWindow()
+    mainWindow.show()
     sys.exit(app.exec_())
 

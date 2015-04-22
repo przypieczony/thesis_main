@@ -15,9 +15,6 @@ class transmission():
         self.package=[]
         self.graph=''
 
-    def __del__(self):
-        print "died"
-
     def analyse(self, packet):
         self.package_number+=1
         self.package.append(packet)
@@ -96,7 +93,7 @@ def sniff(transmission_protocol, ip_list):
         print 'Socket could not be created. Error code: ' + str(msg[0]) + ' Message ' + msg[1]
         sys.exit()
     print "before receive"
-    packet = getData(sniff_socket) #get a packet from socket
+    packet = _getData(sniff_socket) #get a packet from socket
     print "after receive"
     packet = packet[0]
     ip_header_packed = packet[0:20] #first 20 characters = ip header
@@ -163,7 +160,7 @@ def sniff(transmission_protocol, ip_list):
         else:
             print 'protocol not reckognized' + str(protocol.group())
 
-def getData(socket):
+def _getData(socket):
     global packet
     packet = None
     while not packet:
@@ -172,11 +169,13 @@ def getData(socket):
             packet = socket.recvfrom(66746)
         except Exception:
             pass
+    print packet
     return packet
 
-def closeConnection():
+def killTransmission():
     """ """
-    packet = 1
+    global sip_transmission
+    del sip_transmission
 
 if __name__ == "__main__":
     while(1):

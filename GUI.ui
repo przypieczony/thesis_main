@@ -10,15 +10,37 @@
     <height>635</height>
    </rect>
   </property>
+  <property name="sizePolicy">
+   <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+    <horstretch>100</horstretch>
+    <verstretch>100</verstretch>
+   </sizepolicy>
+  </property>
+  <property name="minimumSize">
+   <size>
+    <width>850</width>
+    <height>635</height>
+   </size>
+  </property>
+  <property name="maximumSize">
+   <size>
+    <width>850</width>
+    <height>635</height>
+   </size>
+  </property>
   <property name="windowTitle">
    <string>MainWindow</string>
+  </property>
+  <property name="windowIcon">
+   <iconset>
+    <normaloff>img/icon.png</normaloff>img/icon.png</iconset>
   </property>
   <property name="statusTip">
    <string>Ready</string>
   </property>
   <widget class="QWidget" name="centralwidget">
    <layout class="QGridLayout" name="gridLayout">
-    <item row="0" column="1">
+    <item row="0" column="0">
      <widget class="QTabWidget" name="tabWidget">
       <property name="font">
        <font>
@@ -430,7 +452,7 @@
       </widget>
       <widget class="QWidget" name="tab">
        <attribute name="title">
-        <string>Create Scenario</string>
+        <string>Create/Load Scenario</string>
        </attribute>
        <widget class="QFrame" name="frame">
         <property name="geometry">
@@ -631,7 +653,7 @@
          <string>Scenario stack</string>
         </property>
        </widget>
-       <widget class="QWidget" name="">
+       <widget class="QWidget" name="layoutWidget">
         <property name="geometry">
          <rect>
           <x>450</x>
@@ -668,10 +690,10 @@
        <widget class="QTextEdit" name="flowField">
         <property name="geometry">
          <rect>
-          <x>10</x>
-          <y>120</y>
-          <width>811</width>
-          <height>151</height>
+          <x>30</x>
+          <y>130</y>
+          <width>771</width>
+          <height>171</height>
          </rect>
         </property>
         <property name="font">
@@ -689,10 +711,10 @@
        <widget class="QSplitter" name="splitter_2">
         <property name="geometry">
          <rect>
-          <x>20</x>
-          <y>280</y>
+          <x>10</x>
+          <y>320</y>
           <width>381</width>
-          <height>241</height>
+          <height>231</height>
          </rect>
         </property>
         <property name="orientation">
@@ -763,62 +785,14 @@
        <widget class="QWidget" name="layoutWidget">
         <property name="geometry">
          <rect>
-          <x>0</x>
+          <x>10</x>
           <y>10</y>
-          <width>821</width>
-          <height>105</height>
+          <width>801</width>
+          <height>52</height>
          </rect>
         </property>
         <layout class="QGridLayout" name="gridLayout_6">
-         <item row="0" column="3">
-          <spacer name="horizontalSpacer_2">
-           <property name="orientation">
-            <enum>Qt::Horizontal</enum>
-           </property>
-           <property name="sizeHint" stdset="0">
-            <size>
-             <width>40</width>
-             <height>20</height>
-            </size>
-           </property>
-          </spacer>
-         </item>
-         <item row="0" column="6">
-          <widget class="QLineEdit" name="destHW">
-           <property name="enabled">
-            <bool>true</bool>
-           </property>
-           <property name="font">
-            <font>
-             <pointsize>9</pointsize>
-             <weight>75</weight>
-             <bold>true</bold>
-            </font>
-           </property>
-           <property name="statusTip">
-            <string/>
-           </property>
-           <property name="inputMethodHints">
-            <set>Qt::ImhNone</set>
-           </property>
-           <property name="inputMask">
-            <string/>
-           </property>
-           <property name="text">
-            <string/>
-           </property>
-           <property name="frame">
-            <bool>true</bool>
-           </property>
-           <property name="readOnly">
-            <bool>false</bool>
-           </property>
-           <property name="placeholderText">
-            <string/>
-           </property>
-          </widget>
-         </item>
-         <item row="0" column="0">
+         <item row="1" column="0">
           <widget class="QLineEdit" name="sourceHW">
            <property name="enabled">
             <bool>true</bool>
@@ -853,7 +827,7 @@
            </property>
           </widget>
          </item>
-         <item row="0" column="1">
+         <item row="1" column="1">
           <spacer name="horizontalSpacer">
            <property name="orientation">
             <enum>Qt::Horizontal</enum>
@@ -866,7 +840,55 @@
            </property>
           </spacer>
          </item>
-         <item row="0" column="2">
+         <item row="1" column="3">
+          <spacer name="horizontalSpacer_2">
+           <property name="orientation">
+            <enum>Qt::Horizontal</enum>
+           </property>
+           <property name="sizeHint" stdset="0">
+            <size>
+             <width>40</width>
+             <height>20</height>
+            </size>
+           </property>
+          </spacer>
+         </item>
+         <item row="1" column="6">
+          <widget class="QLineEdit" name="destHW">
+           <property name="enabled">
+            <bool>true</bool>
+           </property>
+           <property name="font">
+            <font>
+             <pointsize>9</pointsize>
+             <weight>75</weight>
+             <bold>true</bold>
+            </font>
+           </property>
+           <property name="statusTip">
+            <string/>
+           </property>
+           <property name="inputMethodHints">
+            <set>Qt::ImhNone</set>
+           </property>
+           <property name="inputMask">
+            <string/>
+           </property>
+           <property name="text">
+            <string/>
+           </property>
+           <property name="frame">
+            <bool>true</bool>
+           </property>
+           <property name="readOnly">
+            <bool>false</bool>
+           </property>
+           <property name="placeholderText">
+            <string/>
+           </property>
+          </widget>
+         </item>
+         <item row="1" column="2">
           <widget class="QLineEdit" name="proxyOneHW">
            <property name="enabled">
             <bool>true</bool>
@@ -901,7 +923,7 @@
            </property>
           </widget>
          </item>
-         <item row="0" column="4">
+         <item row="1" column="4">
           <widget class="QLineEdit" name="proxyTwoHW">
            <property name="enabled">
             <bool>true</bool>
@@ -936,7 +958,7 @@
            </property>
           </widget>
          </item>
-         <item row="0" column="5">
+         <item row="1" column="5">
           <spacer name="horizontalSpacer_3">
            <property name="orientation">
             <enum>Qt::Horizontal</enum>
@@ -949,108 +971,41 @@
            </property>
           </spacer>
          </item>
-         <item row="1" column="0" colspan="7">
-          <layout class="QHBoxLayout" name="horizontalLayout_3">
-           <item>
-            <widget class="QLabel" name="phone">
-             <property name="text">
-              <string/>
-             </property>
-             <property name="pixmap">
-              <pixmap>img/phone.jpg</pixmap>
-             </property>
-             <property name="scaledContents">
-              <bool>true</bool>
-             </property>
-            </widget>
-           </item>
-           <item>
-            <widget class="Line" name="line_2">
-             <property name="sizePolicy">
-              <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
-               <horstretch>0</horstretch>
-               <verstretch>0</verstretch>
-              </sizepolicy>
-             </property>
-             <property name="orientation">
-              <enum>Qt::Horizontal</enum>
-             </property>
-            </widget>
-           </item>
-           <item>
-            <widget class="QLabel" name="server">
-             <property name="text">
-              <string/>
-             </property>
-             <property name="pixmap">
-              <pixmap>img/sip proxy server.jpg</pixmap>
-             </property>
-             <property name="scaledContents">
-              <bool>true</bool>
-             </property>
-            </widget>
-           </item>
-           <item>
-            <widget class="Line" name="line">
-             <property name="sizePolicy">
-              <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
-               <horstretch>0</horstretch>
-               <verstretch>0</verstretch>
-              </sizepolicy>
-             </property>
-             <property name="orientation">
-              <enum>Qt::Horizontal</enum>
-             </property>
-            </widget>
-           </item>
-           <item>
-            <widget class="QLabel" name="server_2">
-             <property name="text">
-              <string/>
-             </property>
-             <property name="pixmap">
-              <pixmap>img/sip proxy server.jpg</pixmap>
-             </property>
-             <property name="scaledContents">
-              <bool>true</bool>
-             </property>
-            </widget>
-           </item>
-           <item>
-            <widget class="Line" name="line_3">
-             <property name="sizePolicy">
-              <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
-               <horstretch>0</horstretch>
-               <verstretch>0</verstretch>
-              </sizepolicy>
-             </property>
-             <property name="orientation">
-              <enum>Qt::Horizontal</enum>
-             </property>
-            </widget>
-           </item>
-           <item>
-            <widget class="QLabel" name="phone_2">
-             <property name="text">
-              <string/>
-             </property>
-             <property name="pixmap">
-              <pixmap>img/phone.jpg</pixmap>
-             </property>
-             <property name="scaledContents">
-              <bool>true</bool>
-             </property>
-            </widget>
-           </item>
-          </layout>
+         <item row="0" column="0">
+          <widget class="QLabel" name="label_21">
+           <property name="text">
+            <string>Source address</string>
+           </property>
+          </widget>
+         </item>
+         <item row="0" column="2">
+          <widget class="QLabel" name="label_20">
+           <property name="text">
+            <string>Proxy 1 address</string>
+           </property>
+          </widget>
+         </item>
+         <item row="0" column="4">
+          <widget class="QLabel" name="label_23">
+           <property name="text">
+            <string>Proxy 2 address</string>
+           </property>
+          </widget>
+         </item>
+         <item row="0" column="6">
+          <widget class="QLabel" name="label_22">
+           <property name="text">
+            <string>Destination address</string>
+           </property>
+          </widget>
          </item>
         </layout>
        </widget>
        <widget class="QLabel" name="flowLabel">
         <property name="geometry">
          <rect>
-          <x>348</x>
-          <y>280</y>
+          <x>350</x>
+          <y>310</y>
           <width>112</width>
           <height>17</height>
          </rect>
@@ -1064,11 +1019,158 @@
          <string>Connection flow</string>
         </property>
        </widget>
+       <widget class="QWidget" name="">
+        <property name="geometry">
+         <rect>
+          <x>50</x>
+          <y>70</y>
+          <width>731</width>
+          <height>50</height>
+         </rect>
+        </property>
+        <layout class="QHBoxLayout" name="horizontalLayout_3">
+         <item>
+          <widget class="QLabel" name="phone">
+           <property name="text">
+            <string/>
+           </property>
+           <property name="pixmap">
+            <pixmap>img/Phone.png</pixmap>
+           </property>
+           <property name="scaledContents">
+            <bool>true</bool>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="Line" name="line_2">
+           <property name="sizePolicy">
+            <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+             <horstretch>0</horstretch>
+             <verstretch>0</verstretch>
+            </sizepolicy>
+           </property>
+           <property name="orientation">
+            <enum>Qt::Horizontal</enum>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QLabel" name="server">
+           <property name="text">
+            <string/>
+           </property>
+           <property name="pixmap">
+            <pixmap>img/Computer.png</pixmap>
+           </property>
+           <property name="scaledContents">
+            <bool>true</bool>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="Line" name="line">
+           <property name="sizePolicy">
+            <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+             <horstretch>0</horstretch>
+             <verstretch>0</verstretch>
+            </sizepolicy>
+           </property>
+           <property name="orientation">
+            <enum>Qt::Horizontal</enum>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QLabel" name="server_2">
+           <property name="text">
+            <string/>
+           </property>
+           <property name="pixmap">
+            <pixmap>img/Computer.png</pixmap>
+           </property>
+           <property name="scaledContents">
+            <bool>true</bool>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="Line" name="line_3">
+           <property name="sizePolicy">
+            <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+             <horstretch>0</horstretch>
+             <verstretch>0</verstretch>
+            </sizepolicy>
+           </property>
+           <property name="orientation">
+            <enum>Qt::Horizontal</enum>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QLabel" name="phone_2">
+           <property name="text">
+            <string/>
+           </property>
+           <property name="pixmap">
+            <pixmap>img/Phone.png</pixmap>
+           </property>
+           <property name="scaledContents">
+            <bool>true</bool>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </widget>
+       <widget class="QWidget" name="">
+        <property name="geometry">
+         <rect>
+          <x>470</x>
+          <y>490</y>
+          <width>161</width>
+          <height>31</height>
+         </rect>
+        </property>
+        <layout class="QGridLayout" name="gridLayout_8">
+         <item row="0" column="0">
+          <widget class="QLabel" name="flowLabel_2">
+           <property name="font">
+            <font>
+             <weight>75</weight>
+             <italic>false</italic>
+             <bold>true</bold>
+            </font>
+           </property>
+           <property name="text">
+            <string>Simulation is OFF</string>
+           </property>
+          </widget>
+         </item>
+         <item row="0" column="1">
+          <widget class="KLed" name="kled">
+           <property name="color">
+            <color>
+             <red>255</red>
+             <green>0</green>
+             <blue>0</blue>
+            </color>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </widget>
        <zorder>layoutWidget</zorder>
        <zorder>flowField</zorder>
        <zorder>splitter_2</zorder>
        <zorder>layoutWidget</zorder>
        <zorder>flowLabel</zorder>
+       <zorder>kled</zorder>
+       <zorder>flowLabel_2</zorder>
+       <zorder></zorder>
+       <zorder>label_20</zorder>
+       <zorder>label_21</zorder>
+       <zorder>label_22</zorder>
+       <zorder>label_23</zorder>
       </widget>
      </widget>
     </item>
@@ -1115,6 +1217,13 @@
    </property>
   </action>
  </widget>
+ <customwidgets>
+  <customwidget>
+   <class>KLed</class>
+   <extends>QWidget</extends>
+   <header>kled.h</header>
+  </customwidget>
+ </customwidgets>
  <resources/>
  <connections>
   <connection>
@@ -1204,12 +1313,12 @@
    <slot>clear()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>721</x>
-     <y>581</y>
+     <x>732</x>
+     <y>474</y>
     </hint>
     <hint type="destinationlabel">
-     <x>217</x>
-     <y>413</y>
+     <x>130</x>
+     <y>374</y>
     </hint>
    </hints>
   </connection>
@@ -1220,8 +1329,8 @@
    <slot>clear()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>721</x>
-     <y>581</y>
+     <x>732</x>
+     <y>474</y>
     </hint>
     <hint type="destinationlabel">
      <x>460</x>
@@ -1304,8 +1413,8 @@
      <y>545</y>
     </hint>
     <hint type="destinationlabel">
-     <x>478</x>
-     <y>488</y>
+     <x>490</x>
+     <y>475</y>
     </hint>
    </hints>
   </connection>
@@ -1332,12 +1441,12 @@
    <slot>clear()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>750</x>
-     <y>573</y>
+     <x>761</x>
+     <y>474</y>
     </hint>
     <hint type="destinationlabel">
-     <x>126</x>
-     <y>88</y>
+     <x>110</x>
+     <y>104</y>
     </hint>
    </hints>
   </connection>
@@ -1348,12 +1457,12 @@
    <slot>clear()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>770</x>
-     <y>571</y>
+     <x>781</x>
+     <y>474</y>
     </hint>
     <hint type="destinationlabel">
-     <x>358</x>
-     <y>94</y>
+     <x>110</x>
+     <y>104</y>
     </hint>
    </hints>
   </connection>
@@ -1364,12 +1473,12 @@
    <slot>clear()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>731</x>
-     <y>563</y>
+     <x>742</x>
+     <y>474</y>
     </hint>
     <hint type="destinationlabel">
-     <x>582</x>
-     <y>88</y>
+     <x>110</x>
+     <y>104</y>
     </hint>
    </hints>
   </connection>
@@ -1380,12 +1489,12 @@
    <slot>clear()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>721</x>
-     <y>572</y>
+     <x>732</x>
+     <y>474</y>
     </hint>
     <hint type="destinationlabel">
-     <x>748</x>
-     <y>88</y>
+     <x>110</x>
+     <y>104</y>
     </hint>
    </hints>
   </connection>

@@ -1,10 +1,6 @@
 ToDo:
 - adjust variable names and conventions
-- make possible to create sniffing_socket without root permissions
-- make window freeze (cannot change size)
-- Why it doesn't work outsie simulation??
+- fit messages legnth in flowfield
+- ??Why it doesn't work outsie simulation??
 - decrement max forwards per one by each hop
 - add via address per each hop
-- sort out how to launch multiple scenarios in one instance of program (destroy object?)
-- connect reset functionality to "cross" icon
-- Add "sIP" icon to taskbar and in GUI
