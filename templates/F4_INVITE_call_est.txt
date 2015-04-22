@@ -1,0 +1,20 @@
+INVITE sip:%(receiver)s@%(dest_ip)s:%(dest_port)s SIP/2.0
+Via: SIP/2.0/TCP %(source_ip)s:%(source_port)s;branch=z9hG4bK74bf9
+Max-Forwards: 70
+Route: <sip:%(proxy_one_ip)s:%(proxy_one_port)s;lr>
+From: %(sender)s <sip:%(sender)s@%(source_ip)s:%(source_port)s>;tag=9fxced76sl
+To: %(receiver)s <sip:%(receiver)s@%(dest_ip)s:%(dest_port)s>
+Call-ID: 3848276298220188511@atlanta.example.com
+CSeq: 2 INVITE
+Contact: <sip:%(sender)s@%(source_ip)s:%(source_port)s;transport=tcp>
+Proxy-Authorization: Digest username="%(sender)s",realm="atlanta.example.com",nonce="wf84f1ceczx41ae6cbe5aea9c8e88d359", opaque="",uri="sip:%(receiver)s@%(dest_ip)s:%(dest_port)s",response="42ce3cef44b22f50c6a6071bc8"
+Content-Type: application/sdp
+Content-Length: 151
+
+v=0
+o=alice 2890844526 2890844526 IN IP4 %(source_ip)s
+s=-
+c=IN IP4 %(source_ip)s
+t=0 0
+m=audio 49172 RTP/AVP 0
+a=rtpmap:0 PCMU/8000

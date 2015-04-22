@@ -1,0 +1,14 @@
+INVITE sip:%(dest_ip)s SIP/2.0
+From: %(user)s <sip:%(sender)s@%(source_ip)s>;tag=as2e95fad1
+To: <sip:%(receiver)s@%(dest_ip)s:%(dest_port)s>
+Call-ID: %(callid)s@%(user)s
+CSeq: %(seq)d INVITE
+Contact: <sip:%(sender)s@%(source_ip)s:%(source_port)s>
+
+v=0
+o=%(sender)s 2890844526 2890844526 IN IP4 %(source_ip)s
+s=
+c=IN IP4 %(source_ip)s
+t=0 0
+m=auido 49179 RTP/AVP 0
+a=rtpmap:0 PCMU/8000

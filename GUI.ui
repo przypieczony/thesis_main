@@ -2,6 +2,9 @@
 <ui version="4.0">
  <class>MainWindow</class>
  <widget class="QMainWindow" name="MainWindow">
+  <property name="windowModality">
+   <enum>Qt::NonModal</enum>
+  </property>
   <property name="geometry">
    <rect>
     <x>0</x>
@@ -40,7 +43,7 @@
   </property>
   <widget class="QWidget" name="centralwidget">
    <layout class="QGridLayout" name="gridLayout">
-    <item row="0" column="0">
+    <item row="0" column="1">
      <widget class="QTabWidget" name="tabWidget">
       <property name="font">
        <font>
@@ -424,31 +427,11 @@
          </item>
         </layout>
        </widget>
-       <widget class="QLabel" name="label_18">
-        <property name="geometry">
-         <rect>
-          <x>10</x>
-          <y>500</y>
-          <width>240</width>
-          <height>19</height>
-         </rect>
-        </property>
-        <property name="font">
-         <font>
-          <weight>75</weight>
-          <bold>true</bold>
-         </font>
-        </property>
-        <property name="text">
-         <string>All fields should be filled!</string>
-        </property>
-       </widget>
        <zorder>layoutWidget</zorder>
        <zorder>splitter</zorder>
        <zorder>simulateRadioButton</zorder>
        <zorder>layoutWidget</zorder>
        <zorder>layoutWidget</zorder>
-       <zorder>label_18</zorder>
       </widget>
       <widget class="QWidget" name="tab">
        <attribute name="title">
@@ -712,8 +695,8 @@
         <property name="geometry">
          <rect>
           <x>10</x>
-          <y>320</y>
-          <width>381</width>
+          <y>300</y>
+          <width>491</width>
           <height>231</height>
          </rect>
         </property>
@@ -734,7 +717,7 @@
          <property name="font">
           <font>
            <family>Courier New</family>
-           <pointsize>9</pointsize>
+           <pointsize>10</pointsize>
           </font>
          </property>
          <property name="readOnly">
@@ -754,6 +737,9 @@
         <layout class="QGridLayout" name="gridLayout_5">
          <item row="0" column="0">
           <widget class="QPushButton" name="previousButton">
+           <property name="enabled">
+            <bool>false</bool>
+           </property>
            <property name="text">
             <string>Previous</string>
            </property>
@@ -761,6 +747,9 @@
          </item>
          <item row="1" column="0">
           <widget class="QPushButton" name="nextButton">
+           <property name="enabled">
+            <bool>false</bool>
+           </property>
            <property name="text">
             <string>Next</string>
            </property>
@@ -776,7 +765,7 @@
          <item row="3" column="0">
           <widget class="QPushButton" name="clearSimulationButton">
            <property name="text">
-            <string>Clear</string>
+            <string>Stop</string>
            </property>
           </widget>
          </item>
@@ -820,7 +809,7 @@
             <bool>true</bool>
            </property>
            <property name="readOnly">
-            <bool>false</bool>
+            <bool>true</bool>
            </property>
            <property name="placeholderText">
             <string/>
@@ -881,7 +870,7 @@
             <bool>true</bool>
            </property>
            <property name="readOnly">
-            <bool>false</bool>
+            <bool>true</bool>
            </property>
            <property name="placeholderText">
             <string/>
@@ -916,7 +905,7 @@
             <bool>true</bool>
            </property>
            <property name="readOnly">
-            <bool>false</bool>
+            <bool>true</bool>
            </property>
            <property name="placeholderText">
             <string/>
@@ -951,7 +940,7 @@
             <bool>true</bool>
            </property>
            <property name="readOnly">
-            <bool>false</bool>
+            <bool>true</bool>
            </property>
            <property name="placeholderText">
             <string/>
@@ -1004,8 +993,8 @@
        <widget class="QLabel" name="flowLabel">
         <property name="geometry">
          <rect>
-          <x>350</x>
-          <y>310</y>
+          <x>390</x>
+          <y>300</y>
           <width>112</width>
           <height>17</height>
          </rect>
@@ -1019,7 +1008,7 @@
          <string>Connection flow</string>
         </property>
        </widget>
-       <widget class="QWidget" name="">
+       <widget class="QWidget" name="layoutWidget">
         <property name="geometry">
          <rect>
           <x>50</x>
@@ -1122,13 +1111,13 @@
          </item>
         </layout>
        </widget>
-       <widget class="QWidget" name="">
+       <widget class="QWidget" name="layoutWidget">
         <property name="geometry">
          <rect>
-          <x>470</x>
+          <x>520</x>
           <y>490</y>
-          <width>161</width>
-          <height>31</height>
+          <width>137</width>
+          <height>21</height>
          </rect>
         </property>
         <layout class="QGridLayout" name="gridLayout_8">
@@ -1136,41 +1125,46 @@
           <widget class="QLabel" name="flowLabel_2">
            <property name="font">
             <font>
-             <weight>75</weight>
-             <italic>false</italic>
-             <bold>true</bold>
+             <weight>50</weight>
+             <bold>false</bold>
             </font>
            </property>
            <property name="text">
-            <string>Simulation is OFF</string>
+            <string>Simulation is:</string>
            </property>
           </widget>
          </item>
          <item row="0" column="1">
-          <widget class="KLed" name="kled">
-           <property name="color">
-            <color>
-             <red>255</red>
-             <green>0</green>
-             <blue>0</blue>
-            </color>
+          <widget class="QLabel" name="label_59">
+           <property name="font">
+            <font>
+             <weight>75</weight>
+             <bold>true</bold>
+            </font>
+           </property>
+           <property name="autoFillBackground">
+            <bool>false</bool>
+           </property>
+           <property name="frameShape">
+            <enum>QFrame::Panel</enum>
+           </property>
+           <property name="frameShadow">
+            <enum>QFrame::Sunken</enum>
+           </property>
+           <property name="text">
+            <string>OFF</string>
            </property>
           </widget>
          </item>
         </layout>
        </widget>
        <zorder>layoutWidget</zorder>
+       <zorder>layoutWidget</zorder>
        <zorder>flowField</zorder>
        <zorder>splitter_2</zorder>
        <zorder>layoutWidget</zorder>
        <zorder>flowLabel</zorder>
-       <zorder>kled</zorder>
-       <zorder>flowLabel_2</zorder>
-       <zorder></zorder>
-       <zorder>label_20</zorder>
-       <zorder>label_21</zorder>
-       <zorder>label_22</zorder>
-       <zorder>label_23</zorder>
+       <zorder>layoutWidget</zorder>
       </widget>
      </widget>
     </item>
@@ -1217,13 +1211,6 @@
    </property>
   </action>
  </widget>
- <customwidgets>
-  <customwidget>
-   <class>KLed</class>
-   <extends>QWidget</extends>
-   <header>kled.h</header>
-  </customwidget>
- </customwidgets>
  <resources/>
  <connections>
   <connection>

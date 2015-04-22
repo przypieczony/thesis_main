@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'GUI.ui'
 #
-# Created: Sun Apr 19 22:22:47 2015
+# Created: Wed Apr 22 13:44:54 2015
 #      by: PyQt4 UI code generator 4.10.4
 #
 # WARNING! All changes made in this file will be lost!
@@ -39,7 +39,7 @@ class Ui_MainWindow(QtGui.QMainWindow):
     def __init__(self, *args, **kwargs):
         super(Ui_MainWindow, self).__init__(*args, **kwargs)
         self.template_vars = {}
-        self.message_counter = -1
+        self.message_counter = 0
         self.sniff_thread = None
         self.scenario = []
         self.ip_addresses = []
@@ -296,24 +296,24 @@ class Ui_MainWindow(QtGui.QMainWindow):
         font.setItalic(True)
         self.label_19.setFont(font)
         self.label_19.setObjectName(_fromUtf8("label_19"))
-        self.widget = QtGui.QWidget(self.tab)
-        self.widget.setGeometry(QtCore.QRect(450, 390, 189, 62))
-        self.widget.setObjectName(_fromUtf8("widget"))
-        self.gridLayout_7 = QtGui.QGridLayout(self.widget)
+        self.layoutWidget5 = QtGui.QWidget(self.tab)
+        self.layoutWidget5.setGeometry(QtCore.QRect(450, 390, 189, 62))
+        self.layoutWidget5.setObjectName(_fromUtf8("layoutWidget5"))
+        self.gridLayout_7 = QtGui.QGridLayout(self.layoutWidget5)
         self.gridLayout_7.setMargin(0)
         self.gridLayout_7.setObjectName(_fromUtf8("gridLayout_7"))
-        self.addCaseButton = QtGui.QPushButton(self.widget)
+        self.addCaseButton = QtGui.QPushButton(self.layoutWidget5)
         self.addCaseButton.setEnabled(False)
         self.addCaseButton.setObjectName(_fromUtf8("addCaseButton"))
         self.gridLayout_7.addWidget(self.addCaseButton, 0, 0, 1, 1)
-        self.removeCaseButton = QtGui.QPushButton(self.widget)
+        self.removeCaseButton = QtGui.QPushButton(self.layoutWidget5)
         self.removeCaseButton.setObjectName(_fromUtf8("removeCaseButton"))
         self.gridLayout_7.addWidget(self.removeCaseButton, 1, 0, 1, 1)
         self.tabWidget.addTab(self.tab, _fromUtf8(""))
         self.Simulation = QtGui.QWidget()
         self.Simulation.setObjectName(_fromUtf8("Simulation"))
         self.flowField = QtGui.QTextEdit(self.Simulation)
-        self.flowField.setGeometry(QtCore.QRect(10, 120, 811, 151))
+        self.flowField.setGeometry(QtCore.QRect(30, 130, 771, 171))
         font = QtGui.QFont()
         font.setFamily(_fromUtf8("Courier New"))
         font.setPointSize(10)
@@ -323,7 +323,7 @@ class Ui_MainWindow(QtGui.QMainWindow):
         self.flowField.setReadOnly(True)
         self.flowField.setObjectName(_fromUtf8("flowField"))
         self.splitter_2 = QtGui.QSplitter(self.Simulation)
-        self.splitter_2.setGeometry(QtCore.QRect(20, 280, 381, 241))
+        self.splitter_2.setGeometry(QtCore.QRect(10, 320, 381, 231))
         self.splitter_2.setOrientation(QtCore.Qt.Vertical)
         self.splitter_2.setObjectName(_fromUtf8("splitter_2"))
         self.labelCurrentMessage = QtGui.QLabel(self.splitter_2)
@@ -338,51 +338,33 @@ class Ui_MainWindow(QtGui.QMainWindow):
         self.currentMessageField.setFont(font)
         self.currentMessageField.setReadOnly(True)
         self.currentMessageField.setObjectName(_fromUtf8("currentMessageField"))
-        self.layoutWidget5 = QtGui.QWidget(self.Simulation)
-        self.layoutWidget5.setGeometry(QtCore.QRect(680, 380, 131, 151))
-        self.layoutWidget5.setObjectName(_fromUtf8("layoutWidget5"))
-        self.gridLayout_5 = QtGui.QGridLayout(self.layoutWidget5)
+        self.layoutWidget6 = QtGui.QWidget(self.Simulation)
+        self.layoutWidget6.setGeometry(QtCore.QRect(680, 380, 131, 151))
+        self.layoutWidget6.setObjectName(_fromUtf8("layoutWidget6"))
+        self.gridLayout_5 = QtGui.QGridLayout(self.layoutWidget6)
         self.gridLayout_5.setMargin(0)
         self.gridLayout_5.setObjectName(_fromUtf8("gridLayout_5"))
-        self.previousButton = QtGui.QPushButton(self.layoutWidget5)
+        self.previousButton = QtGui.QPushButton(self.layoutWidget6)
         self.previousButton.setEnabled(False)
         self.previousButton.setObjectName(_fromUtf8("previousButton"))
         self.gridLayout_5.addWidget(self.previousButton, 0, 0, 1, 1)
-        self.nextButton = QtGui.QPushButton(self.layoutWidget5)
+        self.nextButton = QtGui.QPushButton(self.layoutWidget6)
         self.nextButton.setEnabled(False)
         self.nextButton.setObjectName(_fromUtf8("nextButton"))
         self.gridLayout_5.addWidget(self.nextButton, 1, 0, 1, 1)
-        self.simulateButton = QtGui.QPushButton(self.layoutWidget5)
+        self.simulateButton = QtGui.QPushButton(self.layoutWidget6)
         self.simulateButton.setObjectName(_fromUtf8("simulateButton"))
         self.gridLayout_5.addWidget(self.simulateButton, 2, 0, 1, 1)
-        self.clearSimulationButton = QtGui.QPushButton(self.layoutWidget5)
+        self.clearSimulationButton = QtGui.QPushButton(self.layoutWidget6)
         self.clearSimulationButton.setObjectName(_fromUtf8("clearSimulationButton"))
         self.gridLayout_5.addWidget(self.clearSimulationButton, 3, 0, 1, 1)
-        self.layoutWidget6 = QtGui.QWidget(self.Simulation)
-        self.layoutWidget6.setGeometry(QtCore.QRect(0, 10, 821, 105))
-        self.layoutWidget6.setObjectName(_fromUtf8("layoutWidget6"))
-        self.gridLayout_6 = QtGui.QGridLayout(self.layoutWidget6)
+        self.layoutWidget7 = QtGui.QWidget(self.Simulation)
+        self.layoutWidget7.setGeometry(QtCore.QRect(10, 10, 801, 52))
+        self.layoutWidget7.setObjectName(_fromUtf8("layoutWidget7"))
+        self.gridLayout_6 = QtGui.QGridLayout(self.layoutWidget7)
         self.gridLayout_6.setMargin(0)
         self.gridLayout_6.setObjectName(_fromUtf8("gridLayout_6"))
-        spacerItem = QtGui.QSpacerItem(40, 20, QtGui.QSizePolicy.Expanding, QtGui.QSizePolicy.Minimum)
-        self.gridLayout_6.addItem(spacerItem, 0, 3, 1, 1)
-        self.destHW = QtGui.QLineEdit(self.layoutWidget6)
-        self.destHW.setEnabled(True)
-        font = QtGui.QFont()
-        font.setPointSize(9)
-        font.setBold(True)
-        font.setWeight(75)
-        self.destHW.setFont(font)
-        self.destHW.setStatusTip(_fromUtf8(""))
-        self.destHW.setInputMethodHints(QtCore.Qt.ImhNone)
-        self.destHW.setInputMask(_fromUtf8(""))
-        self.destHW.setText(_fromUtf8(""))
-        self.destHW.setFrame(True)
-        self.destHW.setReadOnly(False)
-        self.destHW.setPlaceholderText(_fromUtf8(""))
-        self.destHW.setObjectName(_fromUtf8("destHW"))
-        self.gridLayout_6.addWidget(self.destHW, 0, 6, 1, 1)
-        self.sourceHW = QtGui.QLineEdit(self.layoutWidget6)
+        self.sourceHW = QtGui.QLineEdit(self.layoutWidget7)
         self.sourceHW.setEnabled(True)
         font = QtGui.QFont()
         font.setPointSize(9)
@@ -397,10 +379,28 @@ class Ui_MainWindow(QtGui.QMainWindow):
         self.sourceHW.setReadOnly(False)
         self.sourceHW.setPlaceholderText(_fromUtf8(""))
         self.sourceHW.setObjectName(_fromUtf8("sourceHW"))
-        self.gridLayout_6.addWidget(self.sourceHW, 0, 0, 1, 1)
+        self.gridLayout_6.addWidget(self.sourceHW, 1, 0, 1, 1)
+        spacerItem = QtGui.QSpacerItem(40, 20, QtGui.QSizePolicy.Expanding, QtGui.QSizePolicy.Minimum)
+        self.gridLayout_6.addItem(spacerItem, 1, 1, 1, 1)
         spacerItem1 = QtGui.QSpacerItem(40, 20, QtGui.QSizePolicy.Expanding, QtGui.QSizePolicy.Minimum)
-        self.gridLayout_6.addItem(spacerItem1, 0, 1, 1, 1)
-        self.proxyOneHW = QtGui.QLineEdit(self.layoutWidget6)
+        self.gridLayout_6.addItem(spacerItem1, 1, 3, 1, 1)
+        self.destHW = QtGui.QLineEdit(self.layoutWidget7)
+        self.destHW.setEnabled(True)
+        font = QtGui.QFont()
+        font.setPointSize(9)
+        font.setBold(True)
+        font.setWeight(75)
+        self.destHW.setFont(font)
+        self.destHW.setStatusTip(_fromUtf8(""))
+        self.destHW.setInputMethodHints(QtCore.Qt.ImhNone)
+        self.destHW.setInputMask(_fromUtf8(""))
+        self.destHW.setText(_fromUtf8(""))
+        self.destHW.setFrame(True)
+        self.destHW.setReadOnly(False)
+        self.destHW.setPlaceholderText(_fromUtf8(""))
+        self.destHW.setObjectName(_fromUtf8("destHW"))
+        self.gridLayout_6.addWidget(self.destHW, 1, 6, 1, 1)
+        self.proxyOneHW = QtGui.QLineEdit(self.layoutWidget7)
         self.proxyOneHW.setEnabled(True)
         font = QtGui.QFont()
         font.setPointSize(9)
@@ -415,8 +415,8 @@ class Ui_MainWindow(QtGui.QMainWindow):
         self.proxyOneHW.setReadOnly(False)
         self.proxyOneHW.setPlaceholderText(_fromUtf8(""))
         self.proxyOneHW.setObjectName(_fromUtf8("proxyOneHW"))
-        self.gridLayout_6.addWidget(self.proxyOneHW, 0, 2, 1, 1)
-        self.proxyTwoHW = QtGui.QLineEdit(self.layoutWidget6)
+        self.gridLayout_6.addWidget(self.proxyOneHW, 1, 2, 1, 1)
+        self.proxyTwoHW = QtGui.QLineEdit(self.layoutWidget7)
         self.proxyTwoHW.setEnabled(True)
         font = QtGui.QFont()
         font.setPointSize(9)
@@ -431,18 +431,40 @@ class Ui_MainWindow(QtGui.QMainWindow):
         self.proxyTwoHW.setReadOnly(False)
         self.proxyTwoHW.setPlaceholderText(_fromUtf8(""))
         self.proxyTwoHW.setObjectName(_fromUtf8("proxyTwoHW"))
-        self.gridLayout_6.addWidget(self.proxyTwoHW, 0, 4, 1, 1)
+        self.gridLayout_6.addWidget(self.proxyTwoHW, 1, 4, 1, 1)
         spacerItem2 = QtGui.QSpacerItem(40, 20, QtGui.QSizePolicy.Expanding, QtGui.QSizePolicy.Minimum)
-        self.gridLayout_6.addItem(spacerItem2, 0, 5, 1, 1)
-        self.horizontalLayout_3 = QtGui.QHBoxLayout()
+        self.gridLayout_6.addItem(spacerItem2, 1, 5, 1, 1)
+        self.label_21 = QtGui.QLabel(self.layoutWidget7)
+        self.label_21.setObjectName(_fromUtf8("label_21"))
+        self.gridLayout_6.addWidget(self.label_21, 0, 0, 1, 1)
+        self.label_20 = QtGui.QLabel(self.layoutWidget7)
+        self.label_20.setObjectName(_fromUtf8("label_20"))
+        self.gridLayout_6.addWidget(self.label_20, 0, 2, 1, 1)
+        self.label_23 = QtGui.QLabel(self.layoutWidget7)
+        self.label_23.setObjectName(_fromUtf8("label_23"))
+        self.gridLayout_6.addWidget(self.label_23, 0, 4, 1, 1)
+        self.label_22 = QtGui.QLabel(self.layoutWidget7)
+        self.label_22.setObjectName(_fromUtf8("label_22"))
+        self.gridLayout_6.addWidget(self.label_22, 0, 6, 1, 1)
+        self.flowLabel = QtGui.QLabel(self.Simulation)
+        self.flowLabel.setGeometry(QtCore.QRect(350, 310, 112, 17))
+        font = QtGui.QFont()
+        font.setItalic(True)
+        self.flowLabel.setFont(font)
+        self.flowLabel.setObjectName(_fromUtf8("flowLabel"))
+        self.widget = QtGui.QWidget(self.Simulation)
+        self.widget.setGeometry(QtCore.QRect(50, 70, 731, 50))
+        self.widget.setObjectName(_fromUtf8("widget"))
+        self.horizontalLayout_3 = QtGui.QHBoxLayout(self.widget)
+        self.horizontalLayout_3.setMargin(0)
         self.horizontalLayout_3.setObjectName(_fromUtf8("horizontalLayout_3"))
-        self.phone = QtGui.QLabel(self.layoutWidget6)
+        self.phone = QtGui.QLabel(self.widget)
         self.phone.setText(_fromUtf8(""))
-        self.phone.setPixmap(QtGui.QPixmap(_fromUtf8("img/phone.jpg")))
+        self.phone.setPixmap(QtGui.QPixmap(_fromUtf8("img/Phone.png")))
         self.phone.setScaledContents(True)
         self.phone.setObjectName(_fromUtf8("phone"))
         self.horizontalLayout_3.addWidget(self.phone)
-        self.line_2 = QtGui.QFrame(self.layoutWidget6)
+        self.line_2 = QtGui.QFrame(self.widget)
         sizePolicy = QtGui.QSizePolicy(QtGui.QSizePolicy.Expanding, QtGui.QSizePolicy.Fixed)
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
@@ -452,13 +474,13 @@ class Ui_MainWindow(QtGui.QMainWindow):
         self.line_2.setFrameShadow(QtGui.QFrame.Sunken)
         self.line_2.setObjectName(_fromUtf8("line_2"))
         self.horizontalLayout_3.addWidget(self.line_2)
-        self.server = QtGui.QLabel(self.layoutWidget6)
+        self.server = QtGui.QLabel(self.widget)
         self.server.setText(_fromUtf8(""))
-        self.server.setPixmap(QtGui.QPixmap(_fromUtf8("img/sip proxy server.jpg")))
+        self.server.setPixmap(QtGui.QPixmap(_fromUtf8("img/Computer.png")))
         self.server.setScaledContents(True)
         self.server.setObjectName(_fromUtf8("server"))
         self.horizontalLayout_3.addWidget(self.server)
-        self.line = QtGui.QFrame(self.layoutWidget6)
+        self.line = QtGui.QFrame(self.widget)
         sizePolicy = QtGui.QSizePolicy(QtGui.QSizePolicy.Expanding, QtGui.QSizePolicy.Fixed)
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
@@ -468,13 +490,13 @@ class Ui_MainWindow(QtGui.QMainWindow):
         self.line.setFrameShadow(QtGui.QFrame.Sunken)
         self.line.setObjectName(_fromUtf8("line"))
         self.horizontalLayout_3.addWidget(self.line)
-        self.server_2 = QtGui.QLabel(self.layoutWidget6)
+        self.server_2 = QtGui.QLabel(self.widget)
         self.server_2.setText(_fromUtf8(""))
-        self.server_2.setPixmap(QtGui.QPixmap(_fromUtf8("img/sip proxy server.jpg")))
+        self.server_2.setPixmap(QtGui.QPixmap(_fromUtf8("img/Computer.png")))
         self.server_2.setScaledContents(True)
         self.server_2.setObjectName(_fromUtf8("server_2"))
         self.horizontalLayout_3.addWidget(self.server_2)
-        self.line_3 = QtGui.QFrame(self.layoutWidget6)
+        self.line_3 = QtGui.QFrame(self.widget)
         sizePolicy = QtGui.QSizePolicy(QtGui.QSizePolicy.Expanding, QtGui.QSizePolicy.Fixed)
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
@@ -484,19 +506,35 @@ class Ui_MainWindow(QtGui.QMainWindow):
         self.line_3.setFrameShadow(QtGui.QFrame.Sunken)
         self.line_3.setObjectName(_fromUtf8("line_3"))
         self.horizontalLayout_3.addWidget(self.line_3)
-        self.phone_2 = QtGui.QLabel(self.layoutWidget6)
+        self.phone_2 = QtGui.QLabel(self.widget)
         self.phone_2.setText(_fromUtf8(""))
-        self.phone_2.setPixmap(QtGui.QPixmap(_fromUtf8("img/phone.jpg")))
+        self.phone_2.setPixmap(QtGui.QPixmap(_fromUtf8("img/Phone.png")))
         self.phone_2.setScaledContents(True)
         self.phone_2.setObjectName(_fromUtf8("phone_2"))
         self.horizontalLayout_3.addWidget(self.phone_2)
-        self.gridLayout_6.addLayout(self.horizontalLayout_3, 1, 0, 1, 7)
-        self.flowLabel = QtGui.QLabel(self.Simulation)
-        self.flowLabel.setGeometry(QtCore.QRect(348, 280, 112, 17))
+        self.widget1 = QtGui.QWidget(self.Simulation)
+        self.widget1.setGeometry(QtCore.QRect(470, 500, 137, 21))
+        self.widget1.setObjectName(_fromUtf8("widget1"))
+        self.gridLayout_8 = QtGui.QGridLayout(self.widget1)
+        self.gridLayout_8.setMargin(0)
+        self.gridLayout_8.setObjectName(_fromUtf8("gridLayout_8"))
+        self.flowLabel_2 = QtGui.QLabel(self.widget1)
         font = QtGui.QFont()
-        font.setItalic(True)
-        self.flowLabel.setFont(font)
-        self.flowLabel.setObjectName(_fromUtf8("flowLabel"))
+        font.setBold(False)
+        font.setWeight(50)
+        self.flowLabel_2.setFont(font)
+        self.flowLabel_2.setObjectName(_fromUtf8("flowLabel_2"))
+        self.gridLayout_8.addWidget(self.flowLabel_2, 0, 0, 1, 1)
+        self.label_59 = QtGui.QLabel(self.widget1)
+        font = QtGui.QFont()
+        font.setBold(True)
+        font.setWeight(75)
+        self.label_59.setFont(font)
+        self.label_59.setAutoFillBackground(False)
+        self.label_59.setFrameShape(QtGui.QFrame.Panel)
+        self.label_59.setFrameShadow(QtGui.QFrame.Sunken)
+        self.label_59.setObjectName(_fromUtf8("label_59"))
+        self.gridLayout_8.addWidget(self.label_59, 0, 1, 1, 1)
         self.tabWidget.addTab(self.Simulation, _fromUtf8(""))
         self.gridLayout.addWidget(self.tabWidget, 0, 0, 1, 1)
         self.setCentralWidget(self.centralwidget)
@@ -647,19 +685,25 @@ class Ui_MainWindow(QtGui.QMainWindow):
         self.label_19.setText(_translate("MainWindow", "Scenario stack", None))
         self.addCaseButton.setText(_translate("MainWindow", "Add template to scenario", None))
         self.removeCaseButton.setText(_translate("MainWindow", "Remove last template", None))
-        self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab), _translate("MainWindow", "Create Scenario", None))
+        self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab), _translate("MainWindow", "Create/Load Scenario", None))
         self.labelCurrentMessage.setText(_translate("MainWindow", "Current message", None))
         self.previousButton.setText(_translate("MainWindow", "Previous", None))
         self.nextButton.setText(_translate("MainWindow", "Next", None))
         self.simulateButton.setText(_translate("MainWindow", "Simulate", None))
         self.clearSimulationButton.setText(_translate("MainWindow", "Clear", None))
+        self.label_21.setText(_translate("MainWindow", "Source address", None))
+        self.label_20.setText(_translate("MainWindow", "Proxy 1 address", None))
+        self.label_23.setText(_translate("MainWindow", "Proxy 2 address", None))
+        self.label_22.setText(_translate("MainWindow", "Destination address", None))
         self.flowLabel.setText(_translate("MainWindow", "Connection flow", None))
+        self.flowLabel_2.setText(_translate("MainWindow", "Simulation is:", None))
+        self.label_59.setText(_translate("MainWindow", "OFF", None))
         self.tabWidget.setTabText(self.tabWidget.indexOf(self.Simulation), _translate("MainWindow", "Simulation", None))
         self.menuFile.setTitle(_translate("MainWindow", "File", None))
         self.menuEdit.setTitle(_translate("MainWindow", "Edit", None))
         self.menuExit.setTitle(_translate("MainWindow", "Exit", None))
         self.actionAdd_template.setText(_translate("MainWindow", "Add template", None))
-        self.actionAdd_scenario.setText(_translate("MainWindow", "Add scenario", None))
+        self.actionAdd_scenario.setText(_translate("MainWindow", "Load scenario", None))
 
         self.acceptButton.clicked.connect(self.getParameters)
         self.simulateButton.clicked.connect(self.loadTemplate)
@@ -720,16 +764,16 @@ class Ui_MainWindow(QtGui.QMainWindow):
         "source_port": self.sourcePort,
         "dest_ip": self.destAddress,
         "dest_port": self.destPort,
-        "proxy_one_address": self.proxyOneAddress,
+        "proxy_one_ip": self.proxyOneAddress,
         "proxy_one_port": self.proxyOnePort,
-        "proxy_two_address": self.proxyTwoAddress,
+        "proxy_two_ip": self.proxyTwoAddress,
         "proxy_two_port": self.proxyTwoPort,
         "user": "kamszy", #To replace by value inputed by user
         "callid": ''.join(random.choice(string.ascii_lowercase + string.digits) for x in range(6)),
         "seq": 0,
-        "cseq":0, #temp var
-        "from": self.senderName,
-        "to": self.receiverName,
+        #"cseq":0, #temp var
+        "sender": self.senderName,
+        "receiver": self.receiverName,
         "body": "to jest tresc" #temp var
         }
 
@@ -743,12 +787,12 @@ class Ui_MainWindow(QtGui.QMainWindow):
     def loadParameters(self):
         """ """
         try:
-            self.ip_addresses = (self.template_vars["source_ip"], self.template_vars["proxy_one_address"], \
-                self.template_vars["proxy_two_address"], self.template_vars["dest_ip"])
+            self.ip_addresses = (self.template_vars["source_ip"], self.template_vars["proxy_one_ip"], \
+                self.template_vars["proxy_two_ip"], self.template_vars["dest_ip"])
             self.ports = (str(self.template_vars["source_port"]), str(self.template_vars["proxy_one_port"]), \
                 str(self.template_vars["proxy_two_port"]), str(self.template_vars["dest_port"]))
         except Exception, e:
-            PopupDialog("Some of the paramters are missing in template: {}".format(e), "Whopsie..")
+            PopupDialog("Some of the paramters are missing in template: {}".format(e), "Whopsie..", "warning")
             raise Exception, e
         self.sourceAddresBox.clear()
         self.destAddressBox.clear()
@@ -765,20 +809,34 @@ class Ui_MainWindow(QtGui.QMainWindow):
         self.proxyTwoHW.setText(self.ip_addresses[2])
         self.destHW.setText(self.ip_addresses[3])
 
+    def checkTemplates(self):
+        for case in self.scenario:
+            with open(case["path"]) as template_file:
+                template = template_file.read()
+            #Check mandatory fields
+            try:
+                match = re.search('(^Via: ).*', template, re.MULTILINE).group(1)
+            except AttributeError, e:
+                PopupDialog("Some of the mandatory parameters are missing \
+                    in template file: {}".format(case["path"]), "Whopsie..", "warning")
+                raise AttributeError, e
+
     def printSample(self):
         """Method to print text into text box"""
 
-        parameters_info = """Source Address %(source_ip)s:%(source_port)s
-Proxy one Address: %(proxy_one_address)s:%(proxy_one_port)s
-Proxy two address: %(proxy_two_address)s:%(proxy_two_port)s
+        parameters_info = """Parameters seems to be valid!
+
+Source Address %(source_ip)s:%(source_port)s
+Proxy one Address: %(proxy_one_ip)s:%(proxy_one_port)s
+Proxy two address: %(proxy_two_ip)s:%(proxy_two_port)s
 Destiantion address: %(dest_ip)s:%(dest_port)s
-Sender: %(from)s
-Receiver: %(to)s
+Sender: %(sender)s
+Receiver: %(receiver)s
         """
         try:
             parameters_info = parameters_info % self.template_vars #replaces %(<variable>)s by template_vars
         except Exception, e:
-            PopupDialog("Some paramters are missing in template: {}".format(e), "Whopsie..")
+            PopupDialog("Some paramters are missing in template: {}".format(e), "Whopsie..", "warning")
             raise Exception, e
         self.statusbar.showMessage("OK: All good, parameters Saved")
         return parameters_info
@@ -793,8 +851,11 @@ Receiver: %(to)s
                     clean_template = template_file.read()
             except Exception, e:
                 self.statusbar.showMessage('ERROR: Cannot open file {}, {}'.format(template_path, e))
+            try:
+                template["message"] = clean_template % self.template_vars #replaces %(<variable>)s by template_vars
+            except KeyError, e:
+                PopupDialog("Some of the paramters are missing in template: {}".format(e), "Whopsie..", "warning")
 
-            template["message"] = clean_template % self.template_vars #replaces %(<variable>)s by template_vars
 
             self.scenario.pop(i)
             i+=1
@@ -813,7 +874,7 @@ Receiver: %(to)s
 
     def next(self):
         """ """
-        if self.message_counter < len(self.scenario)-1:
+        if self.message_counter < len(self.scenario):
             self.currentMessageField.clear()
             self.message_counter += 1
             req, request = self.generateRequest(self.scenario[self.message_counter])
@@ -824,14 +885,23 @@ Receiver: %(to)s
     def generateRequest(self, request):
         """Generates request message"""
 
-        self.template_vars["seq"] = self.message_counter
+        #self.template_vars["seq"] = self.message_counter
         try:
             req = Request(request["message"])
-        except SipUnpackError, e:
-            self.statusbar.showMessage("ERROR: malformed SIP Request. {}".format(e))
+        except SipUnpackError, req_error:
+            #Maybe it's a response
+            try:
+                req = Response(request["message"])
+            except SipUnpackError, resp_error:
+                PopupDialog("ERROR: malformed SIP Request. Caused most likely by:\n{} \
+                    or:\n{}".format(req_error, resp_error), "Whopsie..", "warning")
         
         req.headers["content-length"] = len(req.body)
-        req.headers["cseq"] = "%d %s" % (self.message_counter, req.method)
+        #To remove req.method/status?
+        if type(req) is Request:
+            req.headers["cseq"] = "%d %s" % (self.message_counter, req.method)
+        else:
+            req.headers["cseq"] = "%d %s" % (self.message_counter, req.status)            
     
         return req, request
 
@@ -842,13 +912,15 @@ Receiver: %(to)s
             self.sending_sock.sendto(str(sip_req),(request["dest_ip"], int(request["dest_port"])))
         except Exception, e:
             self.statusbar.showMessage('ERROR: Cannot send packet to {}:{}. {}'.format(request["dest_ip"], request["dest_port"], e))
-        try:
-            self.currentMessageField.insertPlainText("sent %s from: \"%s\" to: \"%s:%s\" cseq=%s" \
-            "len=%s\n" % (sip_req.method, request["source_ip"], request['dest_ip'], \
-            request["dest_port"], sip_req.headers['cseq'].split()[0], len(str(sip_req))))
-        except AttributeError:
-            pass
+        # try:
+        #     self.currentMessageField.insertPlainText("sent Request %s from: \"%s\" to: \"%s:%s\" cseq=%s" \
+        #     "len=%s\n" % (sip_req.method, request["source_ip"], request['dest_ip'], \
+        #     request["dest_port"], sip_req.headers['cseq'].split()[0], len(str(sip_req))))
+        # except AttributeError:
+        #     pass
 
+
+        #self.currentMessageField.insertPlainText("\n=== Full Request sent ===\n")
         self.currentMessageField.insertPlainText("%s\n" % sip_req)
 
     def open_sock(self, ip, port):
@@ -871,7 +943,7 @@ Receiver: %(to)s
     def reset(self):
         self.nextButton.setEnabled(False)
         self.previousButton.setEnabled(False)
-        self.message_counter = -1
+        self.message_counter = 0
         try:
             killTransmission()
         except NameError:
@@ -880,16 +952,25 @@ Receiver: %(to)s
         self.send("END TRANSMISSION", {'source_ip': '127.0.0.1', 'source_port': '6666', \
         'dest_port': '6666', 'dest_ip': '127.0.0.1'})
 
+        self.simulationIndicator(self.label_59, off=True)
         self.statusbar.showMessage("OK: Cleared")
 
     def startSniff(self):
+        """ """
         if self.scenario:
-            self.nextButton.setEnabled(True)
-            self.previousButton.setEnabled(True)
-            self.sniff_thread = Sniff(self.ip_addresses, self.flowField)
-            self.sniff_thread.start()
+            if not self.sniff_thread:
+                self.simulationIndicator(self.label_59)
+                self.nextButton.setEnabled(True)
+                self.previousButton.setEnabled(True)
+                try:
+                    self.sniff_thread = Sniff(self.ip_addresses, self.flowField)
+                    self.sniff_thread.start()
+                except Exception, e:
+                     PopupDialog(e, "Whopsie..", "warning")
+            else:
+                PopupDialog("Simulation is already ongoing, STOP it first", "Whopsie..")
         else:
-            PopupDialog("There are no messages to send, please load a scenario", "Whopsie..")
+            PopupDialog("There are no messages to send, please load a scenario first", "Whopsie..", "warning")
 
     def addTemplateToScenario(self):
         """ """
@@ -930,12 +1011,13 @@ Receiver: %(to)s
             self.template_vars = self.scenario.pop(0) #removes first dict in list with startup parameters
         except Exception, e:
             PopupDialog("Something went wrong during scenario importing, propably file is " \
-                "corrupted or you didn't choose any file.", "Whopsie.." )
+                "corrupted or you didn't choose any file.", "Whopsie..", "warning" )
             return
+        self.checkTemplates()
         self.loadParameters()
         self.scenarioField.clear()
         self.scenarioField.insertPlainText(self.formatedScenario())
-        PopupDialog("Scenario \"{0}\" loaded properly. Go to the {0} tab now.".format(os.path.basename(filename)), "Success :)" )
+        PopupDialog("Scenario \"{0}\" loaded properly. Go to the \"{0}\" tab now.".format(os.path.basename(filename)), "Success :)" )
         self.tabWidget.setTabText(self.tabWidget.indexOf(self.Simulation), _translate("MainWindow", os.path.basename(filename), None))
 
     def formatedScenario(self):
@@ -945,6 +1027,23 @@ Receiver: %(to)s
             formated += "{:-^80}\n".format("")
         return formated
 
+    def simulationIndicator(self, label, off=False):
+        """ """
+        label.setAutoFillBackground(True)
+        if off:
+            label.setText("OFF")
+            color = QtGui.QColor(204, 0, 0)
+        else:
+            label.setText("ON")
+            color  = QtGui.QColor(0, 204, 0)
+        alpha  = 140
+        values = "{r}, {g}, {b}, {a}".format(r = color.red(),
+                                             g = color.green(),
+                                             b = color.blue(),
+                                             a = alpha
+                                             )
+        label.setStyleSheet("QLabel { background-color: rgba("+values+"); }")
+        label.show()
 
 class IO(QtGui.QFileDialog):
     """ """
@@ -954,7 +1053,7 @@ class IO(QtGui.QFileDialog):
 
     def loadFile(self):
         """ """
-        filename = self.getOpenFileName(self, 'Open File', '.')
+        filename = self.getOpenFileName(self, 'Open File', './templates')
         if self.show_path:
             self.show_path.setText(filename)
         with open(str(filename)) as fname:
@@ -1006,14 +1105,18 @@ class Scenario(IO):
 
 class PopupDialog(QtGui.QMessageBox):
 
-    def __init__(self, message, title=""):
+    def __init__(self, message, title="", event="info"):
         QtGui.QMessageBox.__init__(self)
         self.title = title
         self.message = message
+        self.event = event
         self.show()
 
     def show(self):
-        dialog = QtGui.QMessageBox.information(self, self.title, self.message, buttons = QtGui.QMessageBox.Ok)
+        if self.event == "info":
+            dialog = QtGui.QMessageBox.information(self, self.title, self.message, buttons = QtGui.QMessageBox.Ok)
+        else:
+            dialog = QtGui.QMessageBox.warning(self, self.title, self.message, buttons = QtGui.QMessageBox.Ok)
 
 
 class Sniff(threading.Thread):
@@ -1064,7 +1167,7 @@ def parse_body(f, headers):
         n = int(headers['content-length'])
         body = f.read(n)
         if len(body) != n:
-            raise SipNeedData('short body (missing %d bytes)' % (n - len(body)))
+            headers['content-length'] = len(body)
     elif 'content-type' in headers:
         body = f.read()
     else:
@@ -1144,6 +1247,32 @@ class Request(Message):
     def __str__(self):
         return '%s %s %s/%s\r\n' % (self.method, self.uri, self.__proto,
                                     self.version) + Message.__str__(self)
+
+
+class Response(Message):
+    """SIP response."""
+    __hdr_defaults__ = {
+        'version':'2.0',
+        'status':'200',
+        'reason':'OK',
+        'headers':{ 'to':'', 'from':'', 'call-id':'', 'cseq':'', 'contact':'' }
+        }
+    __proto = 'SIP'
+
+    def unpack(self, buf):
+        f = cStringIO.StringIO(buf)
+        line = f.readline()
+        l = line.strip().split(None, 2)
+        if len(l) < 2 or not l[0].startswith(self.__proto) or not l[1].isdigit():
+            raise SipUnpackError('invalid response: %r' % line)
+        self.version = l[0][len(self.__proto)+1:]
+        self.status = l[1]
+        self.reason = l[2]
+        Message.unpack(self, f.read())
+
+    def __str__(self):
+        return '%s/%s %s %s\r\n' % (self.__proto, self.version, self.status,
+                                    self.reason) + Message.__str__(self)
 
 if __name__ == "__main__":
     app = QtGui.QApplication(sys.argv)

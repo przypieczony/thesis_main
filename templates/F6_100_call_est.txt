@@ -1,0 +1,7 @@
+SIP/2.0 100 Trying
+Via: SIP/2.0/TCP %(source_ip)s:%(source_port)s;branch=z9hG4bK74bf9;received=%(source_ip)s
+From: %(sender)s <sip:%(sender)s@%(source_ip)s:%(source_port)s>;tag=9fxced76sl
+To: %(receiver)s <sip:%(receiver)s@%(dest_ip)s:%(dest_port)s>
+Call-ID: 3848276298220188511@atlanta.example.com
+CSeq: 2 INVITE
+Content-Length: 0

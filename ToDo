@@ -1,6 +1,8 @@
 ToDo:
-- adjust variable names and conventions
-- fit messages legnth in flowfield
-- ??Why it doesn't work outsie simulation??
+- adjust variable names and conventions according to PEP8
 - decrement max forwards per one by each hop
 - add via address per each hop
+- investigate why after clear and continue adding templates to scenario, old templates are preserved(self.scenario is not cleared)
+- Add/remove/enchance input addresses ports check
+- Check what can be done with Cseq
+- Adjust Message number in flowfield, each should be +1

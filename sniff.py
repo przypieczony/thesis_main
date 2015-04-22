@@ -30,30 +30,28 @@ class transmission():
 
     def printGraph(self, source_ip, destination_ip, cseq):
         """Return formatted SIP message flow and message"""
-        distance = 25
         for ip in self.ip_list:
             if ip not in self.ips:
                 self.ips.append(ip)
-                graph = "{}{}{}{}\n".format(self.ip_list[0].ljust(distance), self.ip_list[1].ljust(distance), self.ip_list[2].ljust(15), self.ip_list[3].rjust(24))
         request=str(cseq.group(1).strip() + ' ' + cseq.group(2).strip())
 
         if source_ip == self.ips[0]:
             delimeter_first_pos = 0
         elif source_ip == self.ips[1]:
-            delimeter_first_pos = 29
+            delimeter_first_pos = 33
         elif source_ip == self.ips[2]:
-            delimeter_first_pos = 58
+            delimeter_first_pos = 65
         elif source_ip == self.ips[3]:
-            delimeter_first_pos = 87
+            delimeter_first_pos = 94
 
         if destination_ip == self.ips[0]:
             delimeter_second_pos = 0
         elif destination_ip == self.ips[1]:
-            delimeter_second_pos = 29
+            delimeter_second_pos = 33
         elif destination_ip == self.ips[2]:
-            delimeter_second_pos = 58
+            delimeter_second_pos = 65
         elif destination_ip == self.ips[3]:
-            delimeter_second_pos = 87
+            delimeter_second_pos = 94
 
         source_ip_id=self.ips.index(source_ip)
         destination_ip_id=self.ips.index(destination_ip)
@@ -87,8 +85,6 @@ def sniff(transmission_protocol, ip_list):
     try: #open a socket
         global sniff_socket
         sniff_socket = socket.socket(socket.AF_INET, socket.SOCK_RAW, transmission_protocols[transmission_protocol])
-
-        #sniff_socket.settimeout(3)
     except socket.error, msg:
         print 'Socket could not be created. Error code: ' + str(msg[0]) + ' Message ' + msg[1]
         sys.exit()
@@ -152,16 +148,13 @@ def sniff(transmission_protocol, ip_list):
             'tcp_header_lenght': str(tcp_header_lenght),
             'data': str(data)
         }
-        
         if protocol.group(1).strip() == 'SIP':
-            #print sip_transmission.package[sip_transmission.package_number]['data']
-            #sip_transmission.analyse(packet)
             return sip_transmission.analyse(packet)
         else:
-            print 'protocol not reckognized' + str(protocol.group())
+            error = 'Protocol is not recognized, probably Via header is missing in template'
+        raise Exception, error
 
 def _getData(socket):
-    global packet
     packet = None
     while not packet:
         socket.setblocking(0)
@@ -169,7 +162,6 @@ def _getData(socket):
             packet = socket.recvfrom(66746)
         except Exception:
             pass
-    print packet
     return packet
 
 def killTransmission():
