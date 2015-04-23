@@ -816,14 +816,12 @@ class Ui_MainWindow(QtGui.QMainWindow):
 
     def checkTemplates(self):
         for case in self.scenario:
-            with open(case["path"]) as template_file:
-                template = template_file.read()
             #Check mandatory fields
             try:
-                match = re.search('(^Via: ).*', template, re.MULTILINE).group(1)
+                match = re.search('(^Via: ).*', case["template"], re.MULTILINE).group(1)
             except AttributeError, e:
                 PopupDialog("Some of the mandatory parameters are missing \
-                    in template file: {}".format(case["path"]), "Whopsie..", "warning")
+                    in template file: {}".format(os.path.basename(case["path"])), "Whopsie..", "warning")
                 raise AttributeError, e
 
     def printSample(self):
@@ -853,12 +851,7 @@ Receiver: %(receiver)s
         i=0
         for case in self.scenario:
             try:
-                with open(case["path"], 'r') as template_file:
-                    template = template_file.read()
-            except Exception, e:
-                PopupDialog('ERROR: Cannot open file {}, {}'.format(case["path"], e), "Whopsie..", "warning")
-            try:
-                case["message"] = template % self.template_vars #replaces %(<variable>)s by template_vars
+                case["message"] = case["template"] % self.template_vars #replaces %(<variable>)s by template_vars
             except KeyError, e:
                 PopupDialog("Some of the paramters are missing in template: {}".format(e), "Whopsie..", "warning")
 
@@ -867,6 +860,7 @@ Receiver: %(receiver)s
             i+=1
             self.scenario.insert(0, case)
         self.scenario.reverse()
+        print self.scenario
 
     def previous(self):
         """ """
@@ -977,12 +971,15 @@ Receiver: %(receiver)s
     def addTemplateToScenario(self):
         """ """
         template_path = str(self.templatePathField.text())
+        with open(template_path) as template_file:
+            template = template_file.read()
         self.scenario.append(
             {"source_ip": str(self.sourceAddresBox.currentText()), \
             "source_port": str(self.sourcePortBox.currentText()), \
             "dest_ip": str(self.destAddressBox.currentText()), \
             "dest_port": str(self.destPortBox.currentText()), \
-            "path": template_path}
+            "path": template_path, \
+            "template": template}
             )
         self.scenarioField.clear()
         self.scenarioField.insertPlainText(self.formatedScenario())
@@ -993,10 +990,10 @@ Receiver: %(receiver)s
         self.scenarioField.clear()
         self.scenarioField.insertPlainText(self.formatedScenario())
 
-    def getTemplate(self):
+    def getTemplate(self, show_path=None):
         """ """
         template = IO(show_path=self.templatePathField)
-        template_data, filename = template.loadFile()
+        template_content, template_path = template.loadFile()
 
     def createScenario(self):
         """ """
