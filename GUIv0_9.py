@@ -867,7 +867,6 @@ Receiver: %(receiver)s
         if self.message_counter > 0:
             self.currentMessageField.clear()
             self.message_counter -= 1
-            print "message counter (previos): ",self.message_counter
             req, request = self.generateRequest(self.scenario[self.message_counter])
             self.send(req, request)
         else:

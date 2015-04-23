@@ -37,7 +37,6 @@ class transmission():
         for method in methods:
             method_line = self.package[self.package_number]['data'].split('\n')[0]
             sip_method = re.search(method, method_line)
-            print method_line
             if sip_method:
                 sip_method = sip_method.group()
                 break
