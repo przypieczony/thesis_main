@@ -39,12 +39,14 @@ class Ui_MainWindow(QtGui.QMainWindow):
     def __init__(self, *args, **kwargs):
         super(Ui_MainWindow, self).__init__(*args, **kwargs)
         self.template_vars = {}
-        self.message_counter = 0
+        self.message_counter = -1
         self.sniff_thread = None
         self.scenario = []
         self.ip_addresses = []
         self.ports = []
         self.setupUi()
+        self.last_cseq = None
+        self.cseq_nr = 0
 
     def setupUi(self):
         self.setObjectName(_fromUtf8("MainWindow"))
@@ -771,7 +773,6 @@ class Ui_MainWindow(QtGui.QMainWindow):
         "user": "kamszy", #To replace by value inputed by user
         "callid": ''.join(random.choice(string.ascii_lowercase + string.digits) for x in range(6)),
         "seq": 0,
-        #"cseq":0, #temp var
         "sender": self.senderName,
         "receiver": self.receiverName,
         "body": "to jest tresc" #temp var
@@ -785,7 +786,7 @@ class Ui_MainWindow(QtGui.QMainWindow):
                 random.randint(1,255), random.randint(1,255))
 
     def loadParameters(self):
-        """ """
+        """Separates ip addresses and ports onto two lists (source it from template_vars)."""
         try:
             self.ip_addresses = (self.template_vars["source_ip"], self.template_vars["proxy_one_ip"], \
                 self.template_vars["proxy_two_ip"], self.template_vars["dest_ip"])
@@ -794,6 +795,10 @@ class Ui_MainWindow(QtGui.QMainWindow):
         except Exception, e:
             PopupDialog("Some of the paramters are missing in template: {}".format(e), "Whopsie..", "warning")
             raise Exception, e
+        self.prepareFieldsToSimulation()
+
+    def prepareFieldsToSimulation(self):
+        """Clears and adds ips and ports in proper fields"""
         self.sourceAddresBox.clear()
         self.destAddressBox.clear()
         self.sourcePortBox.clear()
@@ -843,23 +848,24 @@ Receiver: %(receiver)s
 
 
     def loadTemplate(self):
-        """Gets file path to template file, renders it and returns string"""
+        """Renders given template file, add it to case under "message" key as string
+        and insert it to scenario"""
         i=0
-        for template in self.scenario:
+        for case in self.scenario:
             try:
-                with open(template["path"], 'r') as template_file:
-                    clean_template = template_file.read()
+                with open(case["path"], 'r') as template_file:
+                    template = template_file.read()
             except Exception, e:
-                self.statusbar.showMessage('ERROR: Cannot open file {}, {}'.format(template_path, e))
+                PopupDialog('ERROR: Cannot open file {}, {}'.format(case["path"], e), "Whopsie..", "warning")
             try:
-                template["message"] = clean_template % self.template_vars #replaces %(<variable>)s by template_vars
+                case["message"] = template % self.template_vars #replaces %(<variable>)s by template_vars
             except KeyError, e:
                 PopupDialog("Some of the paramters are missing in template: {}".format(e), "Whopsie..", "warning")
 
 
             self.scenario.pop(i)
             i+=1
-            self.scenario.insert(0, template)
+            self.scenario.insert(0, case)
         self.scenario.reverse()
 
     def previous(self):
@@ -867,6 +873,7 @@ Receiver: %(receiver)s
         if self.message_counter > 0:
             self.currentMessageField.clear()
             self.message_counter -= 1
+            print "message counter (previos): ",self.message_counter
             req, request = self.generateRequest(self.scenario[self.message_counter])
             self.send(req, request)
         else:
@@ -874,7 +881,7 @@ Receiver: %(receiver)s
 
     def next(self):
         """ """
-        if self.message_counter < len(self.scenario):
+        if self.message_counter < len(self.scenario)-1:
             self.currentMessageField.clear()
             self.message_counter += 1
             req, request = self.generateRequest(self.scenario[self.message_counter])
@@ -884,8 +891,6 @@ Receiver: %(receiver)s
 
     def generateRequest(self, request):
         """Generates request message"""
-
-        #self.template_vars["seq"] = self.message_counter
         try:
             req = Request(request["message"])
         except SipUnpackError, req_error:
@@ -893,16 +898,21 @@ Receiver: %(receiver)s
             try:
                 req = Response(request["message"])
             except SipUnpackError, resp_error:
-                PopupDialog("ERROR: malformed SIP Request. Caused most likely by:\n{} \
+                PopupDialog("ERROR: malformed SIP Request. Caused, most likely by:\n{} \
                     or:\n{}".format(req_error, resp_error), "Whopsie..", "warning")
         
         req.headers["content-length"] = len(req.body)
-        #To remove req.method/status?
+        #To remove req.method/status and cseq number?
         if type(req) is Request:
-            req.headers["cseq"] = "%d %s" % (self.message_counter, req.method)
+            self.cseq_nr+=1
+            req.headers["cseq"] = "%d %s" % (self.cseq_nr, req.method)
+            self.last_cseq = req.headers["cseq"]
+        elif type(req) is Response: 
+            req.headers["cseq"] = self.last_cseq
         else:
-            req.headers["cseq"] = "%d %s" % (self.message_counter, req.status)            
-    
+            raise SipError
+            PopupDialog("ERROR: not known SIP type message: Type of message is neither Request nor Response")
+        #To remove req.method/status and cseq number?
         return req, request
 
     def send(self, sip_req, request):
@@ -912,15 +922,6 @@ Receiver: %(receiver)s
             self.sending_sock.sendto(str(sip_req),(request["dest_ip"], int(request["dest_port"])))
         except Exception, e:
             self.statusbar.showMessage('ERROR: Cannot send packet to {}:{}. {}'.format(request["dest_ip"], request["dest_port"], e))
-        # try:
-        #     self.currentMessageField.insertPlainText("sent Request %s from: \"%s\" to: \"%s:%s\" cseq=%s" \
-        #     "len=%s\n" % (sip_req.method, request["source_ip"], request['dest_ip'], \
-        #     request["dest_port"], sip_req.headers['cseq'].split()[0], len(str(sip_req))))
-        # except AttributeError:
-        #     pass
-
-
-        #self.currentMessageField.insertPlainText("\n=== Full Request sent ===\n")
         self.currentMessageField.insertPlainText("%s\n" % sip_req)
 
     def open_sock(self, ip, port):
@@ -943,30 +944,31 @@ Receiver: %(receiver)s
     def reset(self):
         self.nextButton.setEnabled(False)
         self.previousButton.setEnabled(False)
-        self.message_counter = 0
+        self.message_counter = -1
         try:
             killTransmission()
         except NameError:
             return
         self.sniff_thread.stop()
+        self.sniff_thread = None
         self.send("END TRANSMISSION", {'source_ip': '127.0.0.1', 'source_port': '6666', \
         'dest_port': '6666', 'dest_ip': '127.0.0.1'})
 
-        self.simulationIndicator(self.label_59, off=True)
+        self.turnOnOff(self.label_59, off=True)
         self.statusbar.showMessage("OK: Cleared")
 
     def startSniff(self):
         """ """
         if self.scenario:
             if not self.sniff_thread:
-                self.simulationIndicator(self.label_59)
+                self.turnOnOff(self.label_59, off=False)
                 self.nextButton.setEnabled(True)
                 self.previousButton.setEnabled(True)
                 try:
                     self.sniff_thread = Sniff(self.ip_addresses, self.flowField)
                     self.sniff_thread.start()
                 except Exception, e:
-                     PopupDialog(e, "Whopsie..", "warning")
+                     PopupDialog(str(e), "Whopsie..", "warning")
             else:
                 PopupDialog("Simulation is already ongoing, STOP it first", "Whopsie..")
         else:
@@ -1027,7 +1029,7 @@ Receiver: %(receiver)s
             formated += "{:-^80}\n".format("")
         return formated
 
-    def simulationIndicator(self, label, off=False):
+    def turnOnOff(self, label, off):
         """ """
         label.setAutoFillBackground(True)
         if off:
@@ -1234,7 +1236,7 @@ class Request(Message):
 
     def unpack(self, buf):
         f = cStringIO.StringIO(buf)
-        line = f.readline()
+        line = f.readline() #read first line of template
         l = line.strip().split()
         if len(l) != 3 or l[0] not in self.__methods or \
             not l[2].startswith(self.__proto):

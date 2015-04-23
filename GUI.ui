@@ -588,9 +588,9 @@
        <widget class="QWidget" name="layoutWidget">
         <property name="geometry">
          <rect>
-          <x>690</x>
+          <x>683</x>
           <y>410</y>
-          <width>124</width>
+          <width>131</width>
           <height>121</height>
          </rect>
         </property>
@@ -729,23 +729,13 @@
         <property name="geometry">
          <rect>
           <x>680</x>
-          <y>380</y>
+          <y>410</y>
           <width>131</width>
-          <height>151</height>
+          <height>121</height>
          </rect>
         </property>
         <layout class="QGridLayout" name="gridLayout_5">
          <item row="0" column="0">
-          <widget class="QPushButton" name="previousButton">
-           <property name="enabled">
-            <bool>false</bool>
-           </property>
-           <property name="text">
-            <string>Previous</string>
-           </property>
-          </widget>
-         </item>
-         <item row="1" column="0">
           <widget class="QPushButton" name="nextButton">
            <property name="enabled">
             <bool>false</bool>
@@ -755,14 +745,14 @@
            </property>
           </widget>
          </item>
-         <item row="2" column="0">
+         <item row="1" column="0">
           <widget class="QPushButton" name="simulateButton">
            <property name="text">
             <string>Simulate</string>
            </property>
           </widget>
          </item>
-         <item row="3" column="0">
+         <item row="2" column="0">
           <widget class="QPushButton" name="clearSimulationButton">
            <property name="text">
             <string>Stop</string>

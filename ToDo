@@ -5,4 +5,6 @@ ToDo:
 - investigate why after clear and continue adding templates to scenario, old templates are preserved(self.scenario is not cleared)
 - Add/remove/enchance input addresses ports check
 - Check what can be done with Cseq
-- Adjust Message number in flowfield, each should be +1
+
+- Make window freeze
+- Remove previous button functionality

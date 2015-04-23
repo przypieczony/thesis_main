@@ -8,7 +8,7 @@ import threading
 
 class transmission():
     def __init__(self, ip_list):
-        self.package_number=-1
+        self.package_number=0
         self.first_in_transmission=0
         self.ips=[]
         self.ip_list = ip_list
@@ -16,24 +16,43 @@ class transmission():
         self.graph=''
 
     def analyse(self, packet):
-        self.package_number+=1
         self.package.append(packet)
         graph=''
-        cseq=re.search(r'^CSeq: ([0-9]*) (.*)', self.package[self.package_number]['data'], re.MULTILINE)
         via_ip = self.package[self.package_number]['Via']
         source_ip=self.package[self.package_number]['source_ip']
         source_port=self.package[self.package_number]['source_port']
         destination_ip=self.package[self.package_number]['destination_ip']
         destination_port=self.package[self.package_number]['destination_port']
-        if cseq:
-            return self.printGraph(source_ip, destination_ip, cseq)
+        sip_method = self.findSipMethod(packet)
+        if sip_method:
+            return self.printGraph(source_ip, destination_ip, sip_method)
 
-    def printGraph(self, source_ip, destination_ip, cseq):
-        """Return formatted SIP message flow and message"""
+    def findSipMethod(self, packet):
+        """ """
+        methods = (
+        'ACK', 'BYE', 'CANCEL', 'INFO', 'INVITE', 'MESSAGE', 'NOTIFY',
+        'OPTIONS', 'PRACK', 'PUBLISH', 'REFER', 'REGISTER', 'SUBSCRIBE',
+        'UPDATE', re.compile('[1-6][0-9][0-9] ')
+        )
+        for method in methods:
+            method_line = self.package[self.package_number]['data'].split('\n')[0]
+            sip_method = re.search(method, method_line)
+            print method_line
+            if sip_method:
+                sip_method = sip_method.group()
+                break
+        else:
+            sip_method = re.search(r'^CSeq: [0-9]* (.*)', \
+            self.package[self.package_number]['data'], re.MULTILINE) #terrible hack, sorry about that
+            sip_method = sip_method.group(1)
+        return sip_method
+
+    def printGraph(self, source_ip, destination_ip, sip_method):
+        """Return formatted SIP graph flow and message"""
         for ip in self.ip_list:
             if ip not in self.ips:
                 self.ips.append(ip)
-        request=str(cseq.group(1).strip() + ' ' + cseq.group(2).strip())
+        request=str(str(self.package_number) + ' ' + sip_method.strip())
 
         if source_ip == self.ips[0]:
             delimeter_first_pos = 0
@@ -71,6 +90,7 @@ class transmission():
         message_length=abs(delimeter_second_pos - delimeter_first_pos)-2 #to set message range
         graph = "{}{}{}{}\n".format(" "*(left_indention), delimeter_first, request.center(message_length, "-"), delimeter_second)
         message=str(self.package_number).center(8,'-')+'\n'+str(self.package[self.package_number]['data'])
+        self.package_number+=1
         return {'graph':graph, 'message': message}
             
 def sniff(transmission_protocol, ip_list):
@@ -123,7 +143,7 @@ def sniff(transmission_protocol, ip_list):
     thl = tcp_header[4] #temporary variable for getting tcp_header_lenght
     tcp_header_lenght = thl >> 4
 
-    header_size = ip_header_length + tcp_header_lenght * 4 #get data from whole packet
+    header_size = ip_header_length + tcp_header_lenght #get data from whole packet
     data_size = len(packet) - header_size
     data = packet[header_size:]
 

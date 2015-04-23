@@ -11,9 +11,9 @@ Content-Type: application/sdp
 Content-Length: 124
 
 v=0
-o=%(sender)s 2890844526 2890844526 IN IP4 (source_ip)s:%(source_port)s
+o=%(sender)s 2890844526 2890844526 IN IP4 %(source_ip)s:%(source_port)s
 s=-
-c=IN IP4 (source_ip)s
+c=IN IP4 %(source_ip)s
 t=0 0
 m=audio 49172 RTP/AVP 0
 a=rtpmap:0 PCMU/8000
