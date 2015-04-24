@@ -1,10 +1,5 @@
 ToDo:
 - adjust variable names and conventions according to PEP8
-- add via address per each hop
-- investigate why after clear and continue adding templates to scenario, old templates are preserved(self.scenario is not cleared)
-- Add/remove/enchance input addresses ports check
-- Check what can be done with Cseq (remove?)
 - Make window freeze
+- work on security input? (pairing sometimes don't work)
 - Remove previous button functionality
-- Always print all separators in flowField
-- Investigate why via field is added only once in currentMessage field

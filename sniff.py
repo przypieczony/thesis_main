@@ -105,17 +105,15 @@ def sniff(transmission_protocol, ip_list):
         global sniff_socket
         sniff_socket = socket.socket(socket.AF_INET, socket.SOCK_RAW, transmission_protocols[transmission_protocol])
     except socket.error, msg:
-        print 'Socket could not be created. Error code: ' + str(msg[0]) + ' Message ' + msg[1]
+        raise Exception, 'Socket could not be created. Error code: ' + str(msg[0]) + ' Message ' + msg[1]
         sys.exit()
-    print "before receive"
     packet = _getData(sniff_socket) #get a packet from socket
-    print "after receive"
     packet = packet[0]
     ip_header_packed = packet[0:20] #first 20 characters = ip header
     try:
         ip_header = unpack('!BBHHHBBH4s4s', ip_header_packed) #unpack ip header
     except:
-        print 'unpacking error'
+        raise Exception, 'Unpacking error'
         return None
 
     version_ihl = ip_header[0] #get ip version and header length
@@ -132,7 +130,7 @@ def sniff(transmission_protocol, ip_list):
     try:
         tcp_header = unpack('!HHLLBBHHH', tcp_header_packed) #unpack it
     except:
-        print 'unpacking error'
+        raise Exception, 'Unpacking error'
         return None
     
     source_port = tcp_header[0]

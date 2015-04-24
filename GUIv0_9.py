@@ -724,33 +724,20 @@ class Ui_MainWindow(QtGui.QMainWindow):
 
     def getParameters(self):
         """This function captures input parameters and shows message template"""
- 
-        self.sourceAddress = str(self.sourceAddressField.text())
-        self.destAddress = str(self.destAddresField.text())
-        self.proxyOneAddress = str(self.proxyOneAddresField.text())
-        self.proxyTwoAddress = str(self.proxyTwoAddresField.text())
-        self.proxyOnePort = str(self.proxyOnePortField.text())
-        self.proxyTwoPort = str(self.proxyTwoPortField.text())
-        self.senderName = str(self.senderField.text())
-        self.receiverName = str(self.receiverField.text())
-
-        if self.sourceAddress != self.destAddress:
-            try:
-                socket.inet_aton(self.sourceAddress)
-                socket.inet_aton(self.destAddress)
-            except socket.error:
-                self.statusbar.showMessage('WARNING: Wrong ip address')
-        else:
-            self.statusbar.showMessage('WARNING: ip addresses are the same')
         try:
-            self.sourcePort = int(self.sourcePortField.text())
-            self.destPort = int(self.destPortField.text())
+            self.sourceAddress = str(self.sourceAddressField.text())
+            self.destAddress = str(self.destAddresField.text())
+            self.proxyOneAddress = str(self.proxyOneAddresField.text())
+            self.proxyTwoAddress = str(self.proxyTwoAddresField.text())
+            self.proxyOnePort = str(self.proxyOnePortField.text())
+            self.proxyTwoPort = str(self.proxyTwoPortField.text())
+            self.senderName = str(self.senderField.text())
+            self.receiverName = str(self.receiverField.text())
+            self.sourcePort = str(self.sourcePortField.text())
+            self.destPort = str(self.destPortField.text())
         except ValueError:
-            self.statusbar.showMessage('WARNING: Empty port number, choose between 1024-65535')
-        if (self.sourcePort < 1024 or self.sourcePort > 65535) or \
-            (self.destPort < 1024 or self.destPort > 65535):
-            self.statusbar.showMessage('WARNING: Wrong port number, choose between 1024-65535')
- 
+            pass
+
         if self.simulateRadioButton.isChecked():
             self.sourceAddress = self.randomLoopback()
             self.proxyOneAddress = self.randomLoopback()
@@ -761,6 +748,7 @@ class Ui_MainWindow(QtGui.QMainWindow):
             self.proxyOnePort = random.randint(1024, 65535)
             self.proxyTwoPort = random.randint(1024, 65535)
 
+ 
         self.template_vars = {
         "source_ip": self.sourceAddress,
         "source_port": self.sourcePort,
@@ -770,12 +758,9 @@ class Ui_MainWindow(QtGui.QMainWindow):
         "proxy_one_port": self.proxyOnePort,
         "proxy_two_ip": self.proxyTwoAddress,
         "proxy_two_port": self.proxyTwoPort,
-        "user": "kamszy", #To replace by value inputed by user
         "callid": ''.join(random.choice(string.ascii_lowercase + string.digits) for x in range(6)),
-        "seq": 0,
         "sender": self.senderName,
         "receiver": self.receiverName,
-        "body": "to jest tresc" #temp var
         }
 
         self.loadParameters()
@@ -790,12 +775,65 @@ class Ui_MainWindow(QtGui.QMainWindow):
         try:
             self.ip_addresses = (self.template_vars["source_ip"], self.template_vars["proxy_one_ip"], \
                 self.template_vars["proxy_two_ip"], self.template_vars["dest_ip"])
+
             self.ports = (str(self.template_vars["source_port"]), str(self.template_vars["proxy_one_port"]), \
                 str(self.template_vars["proxy_two_port"]), str(self.template_vars["dest_port"]))
+
         except Exception, e:
             PopupDialog("Some of the paramters are missing in template: {}".format(e), "Whopsie..", "warning")
             raise Exception, e
+
+        try:
+            self.checkIps()
+        except WrongIp, e:
+            return
+        try:
+            self.checkPorts()
+        except WrongPort, e:
+            return
+
         self.prepareFieldsToSimulation()
+
+    def checkIps(self):
+        """ """
+        ips = self.ip_addresses
+        ips = list(ips)
+        pattern = re.compile("[0-9][0-9]?[0-9]?\.[0-9][0-9]?[0-9]?\.[0-9][0-9]?[0-9]?\.[0-9][0-9]?[0-9]?")
+        for ip in ips:
+            ip = ips.pop(0)
+            if ip: #if ip exists
+                if pattern.match(ip): #if ip is an ip number
+                    for ip_ in ips:
+                        try:
+                            assert (ip != ip_) #check if any pair of them are the same
+                        except AssertionError:
+                            PopupDialog("Some IPs are the same, please correct that", "Whopsie..", "warning")
+                            raise WrongIp
+                else:
+                    PopupDialog('WARNING: Wrong IP address', "Whopsie..", 'warning')
+                    raise WrongIp
+            else: #if ip does not exists
+                try:
+                    assert (self.ports[self.ip_addresses.index(ip)] == ip) #Check if port for that ip also does not exist
+                except AssertionError:
+                    PopupDialog("WARNING: Some pair: port and IP, are incomplete. \
+                        If you want exclude some hardware, be sure that both, port and IP, are empty", "Whopsie..", 'warning')
+                    raise WrongIp
+
+    def checkPorts(self):
+        """ """
+        for port in self.ports:
+            try:
+                if not (1024 <= int(port) <= 65535):
+                    PopupDialog('WARNING: Wrong source port number, choose between 1024-65535', "Whopsie..", 'warning')
+                    raise WrongPort
+            except ValueError: #port does not exists
+                try:
+                    assert (self.ip_addresses[self.ports.index(port)] == port) #Check if ip for that port also does not exist
+                except AssertionError:
+                    PopupDialog('WARNING: Some pair, port and IP are incomplete. \
+                        If you want exclude some hardware, be sure that both, port and IP, are empty', "Whopsie..", 'warning')
+                    raise WrongPort
 
     def prepareFieldsToSimulation(self):
         """Clears and adds ips and ports in proper fields"""
@@ -860,7 +898,6 @@ Receiver: %(receiver)s
             i+=1
             self.scenario.insert(0, case)
         self.scenario.reverse()
-        print self.scenario
 
     def previous(self):
         """ """
@@ -877,45 +914,34 @@ Receiver: %(receiver)s
         if self.message_counter < len(self.scenario)-1:
             self.currentMessageField.clear()
             self.message_counter += 1
-            req, request = self.generateRequest(self.scenario[self.message_counter])
-            self.send(req, request)
+            case = self.generateRequest(self.scenario[self.message_counter])
+            self.send(case)
         else:
             self.statusbar.showMessage('WARNING: There is no more messages to send')
 
-    def generateRequest(self, request):
+    def generateRequest(self, case):
         """Generates request message"""
         try:
-            req = Request(request["message"])
+            req = Request(case["message"]) #This is just to check if template is fine
         except SipUnpackError, req_error:
             #Maybe it's a response
             try:
-                req = Response(request["message"])
+                req = Response(case["message"]) #This is just to check if template is fine
             except SipUnpackError, resp_error:
                 PopupDialog("ERROR: malformed SIP Request. Caused, most likely by:\n{} \
                     or:\n{}".format(req_error, resp_error), "Whopsie..", "warning")
         
         req.headers["content-length"] = len(req.body)
-        #To remove req.method/status and cseq number?
-        if type(req) is Request:
-            self.cseq_nr+=1
-            req.headers["cseq"] = "%d %s" % (self.cseq_nr, req.method)
-            self.last_cseq = req.headers["cseq"]
-        elif type(req) is Response: 
-            req.headers["cseq"] = self.last_cseq
-        else:
-            raise SipError
-            PopupDialog("ERROR: not known SIP type message: Type of message is neither Request nor Response")
-        #To remove req.method/status and cseq number?
-        return req, request
+        return case
 
-    def send(self, sip_req, request):
+    def send(self, case):
         """ """
         try:
-            self.sending_sock = self.open_sock(request["source_ip"], int(request["source_port"]))
-            self.sending_sock.sendto(str(sip_req),(request["dest_ip"], int(request["dest_port"])))
+            self.sending_sock = self.open_sock(case["source_ip"], int(case["source_port"]))
+            self.sending_sock.sendto(case["message"],(case["dest_ip"], int(case["dest_port"])))
         except Exception, e:
-            self.statusbar.showMessage('ERROR: Cannot send packet to {}:{}. {}'.format(request["dest_ip"], request["dest_port"], e))
-        self.currentMessageField.insertPlainText("%s\n" % sip_req)
+            PopupDialog('Cannot send packet to {}:{}. {}'.format(case["dest_ip"], case["dest_port"], e), 'Whopsie..', 'warning')
+        self.currentMessageField.insertPlainText("%s\n" % case["message"])
 
     def open_sock(self, ip, port):
         try:
@@ -944,7 +970,7 @@ Receiver: %(receiver)s
             return
         self.sniff_thread.stop()
         self.sniff_thread = None
-        self.send("END TRANSMISSION", {'source_ip': '127.0.0.1', 'source_port': '6666', \
+        self.send({'message':'END TRANSMISSION', 'source_ip': '127.0.0.1', 'source_port': '6666', \
         'dest_port': '6666', 'dest_ip': '127.0.0.1'})
 
         self.turnOnOff(self.label_59, off=True)
@@ -1194,7 +1220,7 @@ class Message:
     
     def unpack(self, buf):
         f = cStringIO.StringIO(buf)
-        # Parse headers
+        # Parse header
         self.headers = parse_headers(f)
         # Parse body
         self.body = parse_body(f, self.headers)
@@ -1210,6 +1236,8 @@ class Message:
     def __str__(self):
         return '%s\r\n%s' % (self.pack_hdr(), self.body)
 
+class WrongIp(Exception): pass
+class WrongPort(Exception): pass
 class SipError(Exception): pass
 class SipUnpackError(SipError): pass
 class SipNeedData(SipUnpackError): pass
@@ -1221,7 +1249,7 @@ class Request(Message):
         'method':'INVITE',
         'uri':'sip:user@example.com',
         'version':'2.0',
-        'headers':{ 'to':'', 'from':'', 'call-id':'', 'cseq':'', 'contact':'' }
+        'headers':{ 'to':'', 'from':'', 'call-id':'', 'cseq':'', 'contact':'', 'Via':'' }
         }
     __methods = dict.fromkeys((
         'ACK', 'BYE', 'CANCEL', 'INFO', 'INVITE', 'MESSAGE', 'NOTIFY',
