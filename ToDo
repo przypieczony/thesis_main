@@ -1,5 +1,6 @@
 ToDo:
 - adjust variable names and conventions according to PEP8
-- Make window freeze
 - work on security input? (pairing sometimes don't work)
-- Remove previous button functionality
+- Hide SIP image under field
+- Clear descriptionField after clicking nextButton
+- Something is wrong with flowField..

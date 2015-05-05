@@ -9,8 +9,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>850</width>
-    <height>635</height>
+    <width>950</width>
+    <height>680</height>
    </rect>
   </property>
   <property name="sizePolicy">
@@ -21,14 +21,14 @@
   </property>
   <property name="minimumSize">
    <size>
-    <width>850</width>
-    <height>635</height>
+    <width>950</width>
+    <height>680</height>
    </size>
   </property>
   <property name="maximumSize">
    <size>
-    <width>850</width>
-    <height>635</height>
+    <width>950</width>
+    <height>680</height>
    </size>
   </property>
   <property name="windowTitle">
@@ -67,8 +67,8 @@
         </property>
         <property name="geometry">
          <rect>
-          <x>690</x>
-          <y>10</y>
+          <x>800</x>
+          <y>20</y>
           <width>116</width>
           <height>22</height>
          </rect>
@@ -312,10 +312,10 @@
        <widget class="QWidget" name="layoutWidget">
         <property name="geometry">
          <rect>
-          <x>590</x>
-          <y>470</y>
+          <x>700</x>
+          <y>520</y>
           <width>211</width>
-          <height>29</height>
+          <height>31</height>
          </rect>
         </property>
         <layout class="QHBoxLayout" name="horizontalLayout">
@@ -338,10 +338,10 @@
        <widget class="QSplitter" name="splitter">
         <property name="geometry">
          <rect>
-          <x>320</x>
-          <y>50</y>
-          <width>441</width>
-          <height>291</height>
+          <x>280</x>
+          <y>40</y>
+          <width>411</width>
+          <height>251</height>
          </rect>
         </property>
         <property name="orientation">
@@ -372,8 +372,8 @@
        <widget class="QWidget" name="layoutWidget">
         <property name="geometry">
          <rect>
-          <x>260</x>
-          <y>360</y>
+          <x>250</x>
+          <y>400</y>
           <width>221</width>
           <height>108</height>
          </rect>
@@ -427,6 +427,26 @@
          </item>
         </layout>
        </widget>
+       <widget class="QLabel" name="label_45">
+        <property name="geometry">
+         <rect>
+          <x>580</x>
+          <y>220</y>
+          <width>321</width>
+          <height>291</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string/>
+        </property>
+        <property name="pixmap">
+         <pixmap>img/icon.png</pixmap>
+        </property>
+        <property name="scaledContents">
+         <bool>true</bool>
+        </property>
+       </widget>
+       <zorder>label_45</zorder>
        <zorder>layoutWidget</zorder>
        <zorder>splitter</zorder>
        <zorder>simulateRadioButton</zorder>
@@ -442,8 +462,8 @@
          <rect>
           <x>30</x>
           <y>310</y>
-          <width>401</width>
-          <height>221</height>
+          <width>471</width>
+          <height>241</height>
          </rect>
         </property>
         <property name="frameShape">
@@ -455,10 +475,10 @@
         <widget class="QWidget" name="layoutWidget">
          <property name="geometry">
           <rect>
-           <x>10</x>
+           <x>20</x>
            <y>10</y>
-           <width>381</width>
-           <height>171</height>
+           <width>421</width>
+           <height>181</height>
           </rect>
          </property>
          <layout class="QGridLayout" name="gridLayout_3">
@@ -549,8 +569,8 @@
         <widget class="QLabel" name="label_15">
          <property name="geometry">
           <rect>
-           <x>10</x>
-           <y>190</y>
+           <x>20</x>
+           <y>200</y>
            <width>240</width>
            <height>19</height>
           </rect>
@@ -566,30 +586,11 @@
          </property>
         </widget>
        </widget>
-       <widget class="QTextEdit" name="scenarioField">
-        <property name="geometry">
-         <rect>
-          <x>30</x>
-          <y>30</y>
-          <width>771</width>
-          <height>251</height>
-         </rect>
-        </property>
-        <property name="font">
-         <font>
-          <family>Courier New</family>
-          <pointsize>10</pointsize>
-         </font>
-        </property>
-        <property name="readOnly">
-         <bool>true</bool>
-        </property>
-       </widget>
        <widget class="QWidget" name="layoutWidget">
         <property name="geometry">
          <rect>
-          <x>683</x>
-          <y>410</y>
+          <x>780</x>
+          <y>440</y>
           <width>131</width>
           <height>121</height>
          </rect>
@@ -618,29 +619,11 @@
          </item>
         </layout>
        </widget>
-       <widget class="QLabel" name="label_19">
-        <property name="geometry">
-         <rect>
-          <x>340</x>
-          <y>280</y>
-          <width>240</width>
-          <height>19</height>
-         </rect>
-        </property>
-        <property name="font">
-         <font>
-          <italic>true</italic>
-         </font>
-        </property>
-        <property name="text">
-         <string>Scenario stack</string>
-        </property>
-       </widget>
        <widget class="QWidget" name="layoutWidget">
         <property name="geometry">
          <rect>
-          <x>450</x>
-          <y>390</y>
+          <x>530</x>
+          <y>400</y>
           <width>189</width>
           <height>62</height>
          </rect>
@@ -665,38 +648,72 @@
          </item>
         </layout>
        </widget>
+       <widget class="QWidget" name="">
+        <property name="geometry">
+         <rect>
+          <x>30</x>
+          <y>10</y>
+          <width>873</width>
+          <height>276</height>
+         </rect>
+        </property>
+        <layout class="QGridLayout" name="gridLayout_17">
+         <item row="0" column="0">
+          <widget class="QLabel" name="label_19">
+           <property name="font">
+            <font>
+             <italic>true</italic>
+            </font>
+           </property>
+           <property name="text">
+            <string>Scenario stack</string>
+           </property>
+          </widget>
+         </item>
+         <item row="1" column="0">
+          <widget class="QTextEdit" name="scenarioField">
+           <property name="sizePolicy">
+            <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+             <horstretch>0</horstretch>
+             <verstretch>0</verstretch>
+            </sizepolicy>
+           </property>
+           <property name="minimumSize">
+            <size>
+             <width>871</width>
+             <height>251</height>
+            </size>
+           </property>
+           <property name="maximumSize">
+            <size>
+             <width>871</width>
+             <height>251</height>
+            </size>
+           </property>
+           <property name="font">
+            <font>
+             <family>Courier New</family>
+             <pointsize>10</pointsize>
+            </font>
+           </property>
+           <property name="readOnly">
+            <bool>true</bool>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </widget>
       </widget>
       <widget class="QWidget" name="Simulation">
        <attribute name="title">
         <string>Simulation</string>
        </attribute>
-       <widget class="QTextEdit" name="flowField">
-        <property name="geometry">
-         <rect>
-          <x>30</x>
-          <y>130</y>
-          <width>771</width>
-          <height>171</height>
-         </rect>
-        </property>
-        <property name="font">
-         <font>
-          <family>Courier New</family>
-          <pointsize>10</pointsize>
-          <weight>50</weight>
-          <bold>false</bold>
-         </font>
-        </property>
-        <property name="readOnly">
-         <bool>true</bool>
-        </property>
-       </widget>
        <widget class="QSplitter" name="splitter_2">
         <property name="geometry">
          <rect>
           <x>10</x>
-          <y>300</y>
-          <width>491</width>
+          <y>330</y>
+          <width>411</width>
           <height>231</height>
          </rect>
         </property>
@@ -728,8 +745,8 @@
        <widget class="QWidget" name="layoutWidget">
         <property name="geometry">
          <rect>
-          <x>680</x>
-          <y>410</y>
+          <x>780</x>
+          <y>440</y>
           <width>131</width>
           <height>121</height>
          </rect>
@@ -764,145 +781,14 @@
        <widget class="QWidget" name="layoutWidget">
         <property name="geometry">
          <rect>
-          <x>10</x>
+          <x>0</x>
           <y>10</y>
-          <width>801</width>
-          <height>52</height>
+          <width>931</width>
+          <height>53</height>
          </rect>
         </property>
         <layout class="QGridLayout" name="gridLayout_6">
-         <item row="1" column="0">
-          <widget class="QLineEdit" name="sourceHW">
-           <property name="enabled">
-            <bool>true</bool>
-           </property>
-           <property name="font">
-            <font>
-             <pointsize>9</pointsize>
-             <weight>75</weight>
-             <bold>true</bold>
-            </font>
-           </property>
-           <property name="statusTip">
-            <string/>
-           </property>
-           <property name="inputMethodHints">
-            <set>Qt::ImhNone</set>
-           </property>
-           <property name="inputMask">
-            <string/>
-           </property>
-           <property name="text">
-            <string/>
-           </property>
-           <property name="frame">
-            <bool>true</bool>
-           </property>
-           <property name="readOnly">
-            <bool>true</bool>
-           </property>
-           <property name="placeholderText">
-            <string/>
-           </property>
-          </widget>
-         </item>
-         <item row="1" column="1">
-          <spacer name="horizontalSpacer">
-           <property name="orientation">
-            <enum>Qt::Horizontal</enum>
-           </property>
-           <property name="sizeHint" stdset="0">
-            <size>
-             <width>40</width>
-             <height>20</height>
-            </size>
-           </property>
-          </spacer>
-         </item>
-         <item row="1" column="3">
-          <spacer name="horizontalSpacer_2">
-           <property name="orientation">
-            <enum>Qt::Horizontal</enum>
-           </property>
-           <property name="sizeHint" stdset="0">
-            <size>
-             <width>40</width>
-             <height>20</height>
-            </size>
-           </property>
-          </spacer>
-         </item>
-         <item row="1" column="6">
-          <widget class="QLineEdit" name="destHW">
-           <property name="enabled">
-            <bool>true</bool>
-           </property>
-           <property name="font">
-            <font>
-             <pointsize>9</pointsize>
-             <weight>75</weight>
-             <bold>true</bold>
-            </font>
-           </property>
-           <property name="statusTip">
-            <string/>
-           </property>
-           <property name="inputMethodHints">
-            <set>Qt::ImhNone</set>
-           </property>
-           <property name="inputMask">
-            <string/>
-           </property>
-           <property name="text">
-            <string/>
-           </property>
-           <property name="frame">
-            <bool>true</bool>
-           </property>
-           <property name="readOnly">
-            <bool>true</bool>
-           </property>
-           <property name="placeholderText">
-            <string/>
-           </property>
-          </widget>
-         </item>
-         <item row="1" column="2">
-          <widget class="QLineEdit" name="proxyOneHW">
-           <property name="enabled">
-            <bool>true</bool>
-           </property>
-           <property name="font">
-            <font>
-             <pointsize>9</pointsize>
-             <weight>75</weight>
-             <bold>true</bold>
-            </font>
-           </property>
-           <property name="statusTip">
-            <string/>
-           </property>
-           <property name="inputMethodHints">
-            <set>Qt::ImhNone</set>
-           </property>
-           <property name="inputMask">
-            <string/>
-           </property>
-           <property name="text">
-            <string/>
-           </property>
-           <property name="frame">
-            <bool>true</bool>
-           </property>
-           <property name="readOnly">
-            <bool>true</bool>
-           </property>
-           <property name="placeholderText">
-            <string/>
-           </property>
-          </widget>
-         </item>
-         <item row="1" column="4">
+         <item row="1" column="5">
           <widget class="QLineEdit" name="proxyTwoHW">
            <property name="enabled">
             <bool>true</bool>
@@ -937,7 +823,166 @@
            </property>
           </widget>
          </item>
-         <item row="1" column="5">
+         <item row="1" column="1">
+          <widget class="QLineEdit" name="sourceHW">
+           <property name="enabled">
+            <bool>true</bool>
+           </property>
+           <property name="font">
+            <font>
+             <pointsize>9</pointsize>
+             <weight>75</weight>
+             <bold>true</bold>
+            </font>
+           </property>
+           <property name="statusTip">
+            <string/>
+           </property>
+           <property name="inputMethodHints">
+            <set>Qt::ImhNone</set>
+           </property>
+           <property name="inputMask">
+            <string/>
+           </property>
+           <property name="text">
+            <string/>
+           </property>
+           <property name="frame">
+            <bool>true</bool>
+           </property>
+           <property name="readOnly">
+            <bool>true</bool>
+           </property>
+           <property name="placeholderText">
+            <string/>
+           </property>
+          </widget>
+         </item>
+         <item row="1" column="2">
+          <spacer name="horizontalSpacer">
+           <property name="orientation">
+            <enum>Qt::Horizontal</enum>
+           </property>
+           <property name="sizeHint" stdset="0">
+            <size>
+             <width>40</width>
+             <height>20</height>
+            </size>
+           </property>
+          </spacer>
+         </item>
+         <item row="1" column="4">
+          <spacer name="horizontalSpacer_2">
+           <property name="orientation">
+            <enum>Qt::Horizontal</enum>
+           </property>
+           <property name="sizeHint" stdset="0">
+            <size>
+             <width>40</width>
+             <height>20</height>
+            </size>
+           </property>
+          </spacer>
+         </item>
+         <item row="1" column="7">
+          <widget class="QLineEdit" name="destHW">
+           <property name="enabled">
+            <bool>true</bool>
+           </property>
+           <property name="font">
+            <font>
+             <pointsize>9</pointsize>
+             <weight>75</weight>
+             <bold>true</bold>
+            </font>
+           </property>
+           <property name="statusTip">
+            <string/>
+           </property>
+           <property name="inputMethodHints">
+            <set>Qt::ImhNone</set>
+           </property>
+           <property name="inputMask">
+            <string/>
+           </property>
+           <property name="text">
+            <string/>
+           </property>
+           <property name="frame">
+            <bool>true</bool>
+           </property>
+           <property name="readOnly">
+            <bool>true</bool>
+           </property>
+           <property name="placeholderText">
+            <string/>
+           </property>
+          </widget>
+         </item>
+         <item row="1" column="3">
+          <widget class="QLineEdit" name="proxyOneHW">
+           <property name="enabled">
+            <bool>true</bool>
+           </property>
+           <property name="font">
+            <font>
+             <pointsize>9</pointsize>
+             <weight>75</weight>
+             <bold>true</bold>
+            </font>
+           </property>
+           <property name="statusTip">
+            <string/>
+           </property>
+           <property name="inputMethodHints">
+            <set>Qt::ImhNone</set>
+           </property>
+           <property name="inputMask">
+            <string/>
+           </property>
+           <property name="text">
+            <string/>
+           </property>
+           <property name="frame">
+            <bool>true</bool>
+           </property>
+           <property name="readOnly">
+            <bool>true</bool>
+           </property>
+           <property name="placeholderText">
+            <string/>
+           </property>
+          </widget>
+         </item>
+         <item row="0" column="1">
+          <widget class="QLabel" name="label_21">
+           <property name="text">
+            <string>Source address</string>
+           </property>
+          </widget>
+         </item>
+         <item row="0" column="3">
+          <widget class="QLabel" name="label_20">
+           <property name="text">
+            <string>Proxy 1 address</string>
+           </property>
+          </widget>
+         </item>
+         <item row="0" column="5">
+          <widget class="QLabel" name="label_23">
+           <property name="text">
+            <string>Proxy 2 address</string>
+           </property>
+          </widget>
+         </item>
+         <item row="0" column="7">
+          <widget class="QLabel" name="label_22">
+           <property name="text">
+            <string>Destination address</string>
+           </property>
+          </widget>
+         </item>
+         <item row="1" column="6">
           <spacer name="horizontalSpacer_3">
            <property name="orientation">
             <enum>Qt::Horizontal</enum>
@@ -951,63 +996,59 @@
           </spacer>
          </item>
          <item row="0" column="0">
-          <widget class="QLabel" name="label_21">
-           <property name="text">
-            <string>Source address</string>
+          <spacer name="horizontalSpacer_12">
+           <property name="orientation">
+            <enum>Qt::Horizontal</enum>
            </property>
-          </widget>
+           <property name="sizeHint" stdset="0">
+            <size>
+             <width>40</width>
+             <height>20</height>
+            </size>
+           </property>
+          </spacer>
          </item>
-         <item row="0" column="2">
-          <widget class="QLabel" name="label_20">
-           <property name="text">
-            <string>Proxy 1 address</string>
+         <item row="0" column="8">
+          <spacer name="horizontalSpacer_13">
+           <property name="orientation">
+            <enum>Qt::Horizontal</enum>
            </property>
-          </widget>
-         </item>
-         <item row="0" column="4">
-          <widget class="QLabel" name="label_23">
-           <property name="text">
-            <string>Proxy 2 address</string>
+           <property name="sizeHint" stdset="0">
+            <size>
+             <width>40</width>
+             <height>20</height>
+            </size>
            </property>
-          </widget>
-         </item>
-         <item row="0" column="6">
-          <widget class="QLabel" name="label_22">
-           <property name="text">
-            <string>Destination address</string>
-           </property>
-          </widget>
+          </spacer>
          </item>
         </layout>
-       </widget>
-       <widget class="QLabel" name="flowLabel">
-        <property name="geometry">
-         <rect>
-          <x>390</x>
-          <y>300</y>
-          <width>112</width>
-          <height>17</height>
-         </rect>
-        </property>
-        <property name="font">
-         <font>
-          <italic>true</italic>
-         </font>
-        </property>
-        <property name="text">
-         <string>Connection flow</string>
-        </property>
        </widget>
        <widget class="QWidget" name="layoutWidget">
         <property name="geometry">
          <rect>
-          <x>50</x>
+          <x>0</x>
           <y>70</y>
-          <width>731</width>
+          <width>931</width>
           <height>50</height>
          </rect>
         </property>
         <layout class="QHBoxLayout" name="horizontalLayout_3">
+         <item>
+          <spacer name="horizontalSpacer_5">
+           <property name="orientation">
+            <enum>Qt::Horizontal</enum>
+           </property>
+           <property name="sizeType">
+            <enum>QSizePolicy::Fixed</enum>
+           </property>
+           <property name="sizeHint" stdset="0">
+            <size>
+             <width>100</width>
+             <height>20</height>
+            </size>
+           </property>
+          </spacer>
+         </item>
          <item>
           <widget class="QLabel" name="phone">
            <property name="text">
@@ -1099,13 +1140,29 @@
            </property>
           </widget>
          </item>
+         <item>
+          <spacer name="horizontalSpacer_4">
+           <property name="orientation">
+            <enum>Qt::Horizontal</enum>
+           </property>
+           <property name="sizeType">
+            <enum>QSizePolicy::Fixed</enum>
+           </property>
+           <property name="sizeHint" stdset="0">
+            <size>
+             <width>100</width>
+             <height>20</height>
+            </size>
+           </property>
+          </spacer>
+         </item>
         </layout>
        </widget>
        <widget class="QWidget" name="layoutWidget">
         <property name="geometry">
          <rect>
-          <x>520</x>
-          <y>490</y>
+          <x>780</x>
+          <y>380</y>
           <width>137</width>
           <height>21</height>
          </rect>
@@ -1148,6 +1205,117 @@
          </item>
         </layout>
        </widget>
+       <widget class="QSplitter" name="splitter_5">
+        <property name="geometry">
+         <rect>
+          <x>440</x>
+          <y>330</y>
+          <width>321</width>
+          <height>231</height>
+         </rect>
+        </property>
+        <property name="orientation">
+         <enum>Qt::Vertical</enum>
+        </property>
+        <widget class="QLabel" name="labelCurrentMessage_3">
+         <property name="font">
+          <font>
+           <italic>true</italic>
+          </font>
+         </property>
+         <property name="text">
+          <string>Description</string>
+         </property>
+        </widget>
+        <widget class="QTextEdit" name="descriptionField">
+         <property name="font">
+          <font>
+           <family>Courier New</family>
+           <pointsize>10</pointsize>
+           <weight>75</weight>
+           <bold>true</bold>
+          </font>
+         </property>
+         <property name="readOnly">
+          <bool>true</bool>
+         </property>
+        </widget>
+       </widget>
+       <widget class="QWidget" name="">
+        <property name="geometry">
+         <rect>
+          <x>80</x>
+          <y>120</y>
+          <width>773</width>
+          <height>196</height>
+         </rect>
+        </property>
+        <layout class="QGridLayout" name="gridLayout_16">
+         <item row="0" column="0">
+          <widget class="QLabel" name="flowLabel">
+           <property name="sizePolicy">
+            <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+             <horstretch>0</horstretch>
+             <verstretch>0</verstretch>
+            </sizepolicy>
+           </property>
+           <property name="minimumSize">
+            <size>
+             <width>112</width>
+             <height>17</height>
+            </size>
+           </property>
+           <property name="maximumSize">
+            <size>
+             <width>112</width>
+             <height>17</height>
+            </size>
+           </property>
+           <property name="font">
+            <font>
+             <italic>true</italic>
+            </font>
+           </property>
+           <property name="text">
+            <string>Connection flow</string>
+           </property>
+          </widget>
+         </item>
+         <item row="1" column="0">
+          <widget class="QTextEdit" name="flowField">
+           <property name="sizePolicy">
+            <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+             <horstretch>0</horstretch>
+             <verstretch>0</verstretch>
+            </sizepolicy>
+           </property>
+           <property name="minimumSize">
+            <size>
+             <width>771</width>
+             <height>171</height>
+            </size>
+           </property>
+           <property name="maximumSize">
+            <size>
+             <width>771</width>
+             <height>171</height>
+            </size>
+           </property>
+           <property name="font">
+            <font>
+             <family>Courier New</family>
+             <pointsize>10</pointsize>
+             <weight>50</weight>
+             <bold>false</bold>
+            </font>
+           </property>
+           <property name="readOnly">
+            <bool>true</bool>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </widget>
        <zorder>layoutWidget</zorder>
        <zorder>layoutWidget</zorder>
        <zorder>flowField</zorder>
@@ -1155,6 +1323,7 @@
        <zorder>layoutWidget</zorder>
        <zorder>flowLabel</zorder>
        <zorder>layoutWidget</zorder>
+       <zorder>splitter_5</zorder>
       </widget>
      </widget>
     </item>
@@ -1165,7 +1334,7 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>850</width>
+     <width>950</width>
      <height>25</height>
     </rect>
    </property>
@@ -1206,12 +1375,28 @@
   <connection>
    <sender>clearButton</sender>
    <signal>clicked()</signal>
+   <receiver>destAddresField</receiver>
+   <slot>clear()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>771</x>
+     <y>613</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>216</x>
+     <y>244</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>clearButton</sender>
+   <signal>clicked()</signal>
    <receiver>sourceAddressField</receiver>
    <slot>clear()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>675</x>
-     <y>562</y>
+     <x>797</x>
+     <y>613</y>
     </hint>
     <hint type="destinationlabel">
      <x>211</x>
@@ -1226,8 +1411,8 @@
    <slot>clear()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>646</x>
-     <y>562</y>
+     <x>768</x>
+     <y>613</y>
     </hint>
     <hint type="destinationlabel">
      <x>215</x>
@@ -1238,48 +1423,16 @@
   <connection>
    <sender>clearButton</sender>
    <signal>clicked()</signal>
-   <receiver>destAddresField</receiver>
-   <slot>clear()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>649</x>
-     <y>562</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>216</x>
-     <y>244</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>clearButton</sender>
-   <signal>clicked()</signal>
    <receiver>destPortField</receiver>
    <slot>clear()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>625</x>
-     <y>562</y>
+     <x>747</x>
+     <y>613</y>
     </hint>
     <hint type="destinationlabel">
      <x>204</x>
      <y>303</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>clearButton</sender>
-   <signal>clicked()</signal>
-   <receiver>sipTemplate</receiver>
-   <slot>clear()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>605</x>
-     <y>562</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>449</x>
-     <y>391</y>
     </hint>
    </hints>
   </connection>
@@ -1290,12 +1443,28 @@
    <slot>clear()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>732</x>
-     <y>474</y>
+     <x>844</x>
+     <y>616</y>
     </hint>
     <hint type="destinationlabel">
-     <x>130</x>
-     <y>374</y>
+     <x>141</x>
+     <y>493</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>clearButton</sender>
+   <signal>clicked()</signal>
+   <receiver>sipTemplate</receiver>
+   <slot>clear()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>727</x>
+     <y>613</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>420</x>
+     <y>355</y>
     </hint>
    </hints>
   </connection>
@@ -1306,8 +1475,8 @@
    <slot>clear()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>732</x>
-     <y>474</y>
+     <x>844</x>
+     <y>616</y>
     </hint>
     <hint type="destinationlabel">
      <x>460</x>
@@ -1322,8 +1491,8 @@
    <slot>clear()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>692</x>
-     <y>549</y>
+     <x>813</x>
+     <y>613</y>
     </hint>
     <hint type="destinationlabel">
      <x>209</x>
@@ -1338,8 +1507,8 @@
    <slot>clear()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>611</x>
-     <y>546</y>
+     <x>733</x>
+     <y>613</y>
     </hint>
     <hint type="destinationlabel">
      <x>214</x>
@@ -1354,8 +1523,8 @@
    <slot>clear()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>616</x>
-     <y>541</y>
+     <x>738</x>
+     <y>613</y>
     </hint>
     <hint type="destinationlabel">
      <x>205</x>
@@ -1370,8 +1539,8 @@
    <slot>clear()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>607</x>
-     <y>550</y>
+     <x>729</x>
+     <y>613</y>
     </hint>
     <hint type="destinationlabel">
      <x>203</x>
@@ -1386,12 +1555,12 @@
    <slot>clear()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>627</x>
-     <y>545</y>
+     <x>749</x>
+     <y>613</y>
     </hint>
     <hint type="destinationlabel">
-     <x>490</x>
-     <y>475</y>
+     <x>460</x>
+     <y>535</y>
     </hint>
    </hints>
   </connection>
@@ -1402,12 +1571,12 @@
    <slot>clear()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>631</x>
-     <y>552</y>
+     <x>753</x>
+     <y>613</y>
     </hint>
     <hint type="destinationlabel">
-     <x>473</x>
-     <y>520</y>
+     <x>455</x>
+     <y>591</y>
     </hint>
    </hints>
   </connection>
@@ -1418,8 +1587,8 @@
    <slot>clear()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>761</x>
-     <y>474</y>
+     <x>873</x>
+     <y>616</y>
     </hint>
     <hint type="destinationlabel">
      <x>110</x>
@@ -1434,12 +1603,12 @@
    <slot>clear()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>781</x>
-     <y>474</y>
+     <x>893</x>
+     <y>616</y>
     </hint>
     <hint type="destinationlabel">
-     <x>110</x>
-     <y>104</y>
+     <x>403</x>
+     <y>126</y>
     </hint>
    </hints>
   </connection>
@@ -1450,12 +1619,12 @@
    <slot>clear()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>742</x>
-     <y>474</y>
+     <x>854</x>
+     <y>616</y>
     </hint>
     <hint type="destinationlabel">
-     <x>110</x>
-     <y>104</y>
+     <x>617</x>
+     <y>126</y>
     </hint>
    </hints>
   </connection>
@@ -1466,12 +1635,12 @@
    <slot>clear()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>732</x>
-     <y>474</y>
+     <x>844</x>
+     <y>616</y>
     </hint>
     <hint type="destinationlabel">
-     <x>110</x>
-     <y>104</y>
+     <x>830</x>
+     <y>126</y>
     </hint>
    </hints>
   </connection>
@@ -1482,8 +1651,8 @@
    <slot>clear()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>713</x>
-     <y>580</y>
+     <x>822</x>
+     <y>616</y>
     </hint>
     <hint type="destinationlabel">
      <x>283</x>
@@ -1498,12 +1667,28 @@
    <slot>clear()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>736</x>
-     <y>570</y>
+     <x>845</x>
+     <y>616</y>
     </hint>
     <hint type="destinationlabel">
      <x>517</x>
      <y>231</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>clearSimulationButton</sender>
+   <signal>clicked()</signal>
+   <receiver>descriptionField</receiver>
+   <slot>clear()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>903</x>
+     <y>607</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>762</x>
+     <y>594</y>
     </hint>
    </hints>
   </connection>

@@ -47,10 +47,13 @@ class Ui_MainWindow(QtGui.QMainWindow):
         self.setupUi()
         self.last_cseq = None
         self.cseq_nr = 0
+        self.description_pattern = re.compile("<description>(.*)</description>", re.DOTALL | re.IGNORECASE)
+        self.template_content = ""
+        self.template_path = ""
 
     def setupUi(self):
         self.setObjectName(_fromUtf8("MainWindow"))
-        self.resize(850, 635)
+        self.resize(950, 680)
         self.centralwidget = QtGui.QWidget()
         self.centralwidget.setObjectName(_fromUtf8("centralwidget"))
         self.gridLayout = QtGui.QGridLayout(self.centralwidget)
@@ -634,7 +637,6 @@ class Ui_MainWindow(QtGui.QMainWindow):
             self.receiverField.setEnabled(True)
 
 
-
     def retranslateUi(self):
         self.setWindowTitle(_translate("MainWindow", "MainWindow", None))
         self.setStatusTip(_translate("MainWindow", "Ready", None))
@@ -853,6 +855,7 @@ class Ui_MainWindow(QtGui.QMainWindow):
         self.destHW.setText(self.ip_addresses[3])
 
     def checkTemplates(self):
+        """ """
         for case in self.scenario:
             #Check mandatory fields
             try:
@@ -889,10 +892,10 @@ Receiver: %(receiver)s
         i=0
         for case in self.scenario:
             try:
+                case["description"] = case["description"] % self.template_vars
                 case["message"] = case["template"] % self.template_vars #replaces %(<variable>)s by template_vars
             except KeyError, e:
                 PopupDialog("Some of the paramters are missing in template: {}".format(e), "Whopsie..", "warning")
-
 
             self.scenario.pop(i)
             i+=1
@@ -916,6 +919,7 @@ Receiver: %(receiver)s
             self.message_counter += 1
             case = self.generateRequest(self.scenario[self.message_counter])
             self.send(case)
+            print case["description"]
         else:
             self.statusbar.showMessage('WARNING: There is no more messages to send')
 
@@ -995,19 +999,32 @@ Receiver: %(receiver)s
 
     def addTemplateToScenario(self):
         """ """
-        template_path = str(self.templatePathField.text())
-        with open(template_path) as template_file:
-            template = template_file.read()
+        description, template = self.popDescriptionFromTemplate()
         self.scenario.append(
             {"source_ip": str(self.sourceAddresBox.currentText()), \
             "source_port": str(self.sourcePortBox.currentText()), \
             "dest_ip": str(self.destAddressBox.currentText()), \
             "dest_port": str(self.destPortBox.currentText()), \
-            "path": template_path, \
-            "template": template}
+            "path": self.template_path, \
+            "template": template, \
+            "description": description}
             )
         self.scenarioField.clear()
         self.scenarioField.insertPlainText(self.formatedScenario())
+
+    def popDescriptionFromTemplate(self):
+        """Pulls out description from template file and removes it
+        return: str description, str template"""
+        description = self.description_pattern.search(self.template_content)
+        if not description:
+            error = "Cannot find description, in: {} \nCheck if it's properly formated:\n " \
+             "\"<description>Here should be a description</description>\"".format(self.template_path)
+            PopupDialog(error, "Whopsie..", "warning")
+            raise Exception, error
+        description = description.group(1).strip()
+        description = re.sub('\s+', ' ', description)
+        template = re.sub(self.description_pattern, '', self.template_content).strip()
+        return description, template
 
     def removeTemplateFromScenario(self):
         """ """
@@ -1018,7 +1035,7 @@ Receiver: %(receiver)s
     def getTemplate(self, show_path=None):
         """ """
         template = IO(show_path=self.templatePathField)
-        template_content, template_path = template.loadFile()
+        self.template_content, self.template_path = template.loadFile()
 
     def createScenario(self):
         """ """
