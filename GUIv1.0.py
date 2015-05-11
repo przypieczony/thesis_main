@@ -657,6 +657,7 @@ class Ui_MainWindow(QtGui.QMainWindow):
         QtCore.QObject.connect(self.clearCreateScenarioButton, QtCore.SIGNAL(_fromUtf8("clicked()")), self.templatePathField.clear)
         QtCore.QObject.connect(self.clearCreateScenarioButton, QtCore.SIGNAL(_fromUtf8("clicked()")), self.sipTemplate.clear)
         QtCore.QObject.connect(self.clearCreateScenarioButton, QtCore.SIGNAL(_fromUtf8("clicked()")), self.scenarioField.clear)
+        QtCore.QObject.connect(self.loadScenarioButton, QtCore.SIGNAL(_fromUtf8("clicked()")), self.descriptionField.clear)
         QtCore.QObject.connect(self.clearSimulationButton, QtCore.SIGNAL(_fromUtf8("clicked()")), self.descriptionField.clear)
         self.simulateRadioButton.toggled.connect(self.simulateRadioClicked)
         self.templatePathField.textChanged.connect(self.enableAddCaseButton)
@@ -851,6 +852,8 @@ class Ui_MainWindow(QtGui.QMainWindow):
             PopupDialog("Some of the paramters are missing in template: {}".format(e), "Whopsie..", "warning")
             raise Exception, e
 
+
+
         try:
             self.checkIps()
         except WrongIp, e:
@@ -858,6 +861,10 @@ class Ui_MainWindow(QtGui.QMainWindow):
         try:
             self.checkPorts()
         except WrongPort, e:
+            return
+        try:
+            self.checkSenderReceiver()
+        except WrongSenderReceiver, e:
             return
 
         self.prepareFieldsToSimulation()
@@ -867,7 +874,7 @@ class Ui_MainWindow(QtGui.QMainWindow):
         ips = self.ip_addresses
         ips = list(ips)
         pattern = re.compile("[0-9][0-9]?[0-9]?\.[0-9][0-9]?[0-9]?\.[0-9][0-9]?[0-9]?\.[0-9][0-9]?[0-9]?")
-        for ip in ips:
+        for ip in ips[:]:
             ip = ips.pop(0)
             if ip: #if ip exists
                 if pattern.match(ip): #if ip is an ip number
@@ -884,13 +891,13 @@ class Ui_MainWindow(QtGui.QMainWindow):
                 try:
                     assert (self.ports[self.ip_addresses.index(ip)] == ip) #Check if port for that ip also does not exist
                 except AssertionError:
-                    PopupDialog("WARNING: Some pair: port and IP, are incomplete. \
-                        If you want exclude some hardware, be sure that both, port and IP, are empty", "Whopsie..", 'warning')
+                    PopupDialog("""WARNING: Some pair: "port and IP", are incomplete.
+If you want exclude some hardware, be sure that both, port and IP, are empty""", "Whopsie..", 'warning')
                     raise WrongIp
 
     def checkPorts(self):
         """ """
-        for port in self.ports:
+        for port in self.ports[:]:
             try:
                 if not (1024 <= int(port) <= 65535):
                     PopupDialog('WARNING: Wrong source port number, choose between 1024-65535', "Whopsie..", 'warning')
@@ -899,9 +906,25 @@ class Ui_MainWindow(QtGui.QMainWindow):
                 try:
                     assert (self.ip_addresses[self.ports.index(port)] == port) #Check if ip for that port also does not exist
                 except AssertionError:
-                    PopupDialog('WARNING: Some pair, port and IP are incomplete. \
-                        If you want exclude some hardware, be sure that both, port and IP, are empty', "Whopsie..", 'warning')
+                    PopupDialog("""WARNING: Some pair: "port and IP" are incomplete.
+If you want exclude some hardware, be sure that both, port and IP, are empty""", "Whopsie..", 'warning')
                     raise WrongPort
+
+    def checkSenderReceiver(self):
+        """ """
+        legendary_phrases = ["huj", "dupa", "kurwa", "cycki"]
+        if not self.template_vars['sender']:
+            PopupDialog('WARNING: Sender field is empty', "Whopsie..", 'warning')
+            raise WrongSenderReceiver
+        if not  self.template_vars['receiver']:
+            PopupDialog('WARNING: Receiver field is empty', "Whopsie..", 'warning')
+            raise WrongSenderReceiver
+        elif self.template_vars['sender'] in legendary_phrases:
+            PopupDialog('Sam jestes {}, popraw to chociaz na cos bardziej kreatywnego ;)'.format(self.template_vars['sender']))
+            raise WrongSenderReceiver
+        elif self.template_vars['receiver'] in legendary_phrases:
+            PopupDialog('Sam jestes {}, popraw to chociaz na cos bardziej kreatywnego ;)'.format(self.template_vars['receiver']))
+            raise WrongSenderReceiver
 
     def prepareFieldsToSimulation(self):
         """Clears and adds ips and ports in proper fields"""
@@ -972,6 +995,7 @@ Receiver: %(receiver)s
         """ """
         if self.message_counter < len(self.scenario)-1:
             self.currentMessageField.clear()
+            self.descriptionField.clear()
             self.message_counter += 1
             case = self.generateRequest(self.scenario[self.message_counter])
             self.send(case)
@@ -1077,6 +1101,7 @@ Receiver: %(receiver)s
             raise Exception, error
         description = description.group(1).strip()
         description = re.sub('\s+', ' ', description)
+        description = unicode(description, "utf-8")
         template = re.sub(self.description_pattern, '', self.template_content).strip()
         return description, template
 
@@ -1309,6 +1334,7 @@ class Message:
 
 class WrongIp(Exception): pass
 class WrongPort(Exception): pass
+class WrongSenderReceiver(Exception): pass
 class SipError(Exception): pass
 class SipUnpackError(SipError): pass
 class SipNeedData(SipUnpackError): pass

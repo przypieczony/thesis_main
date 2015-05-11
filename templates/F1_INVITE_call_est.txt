@@ -19,8 +19,5 @@ m=audio 49172 RTP/AVP 0
 a=rtpmap:0 PCMU/8000
 
 <Description>
-   Proxy 1 inserts a Record-Route header into the INVITE message to
-   ensure that it is present in all subsequent message exchanges.  Proxy
-   2 also inserts itself into the Record-Route header.  The ACK (F15)
-   and BYE (F18) both have a Route header.
+Pierwsza linia zawiera nazwę metody SIP (INVITE). Chrząszcz niesię dużę spodnie
 </Description>
