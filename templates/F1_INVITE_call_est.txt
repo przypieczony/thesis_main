@@ -19,5 +19,15 @@ m=audio 49172 RTP/AVP 0
 a=rtpmap:0 PCMU/8000
 
 <Description>
-Pierwsza linia zawiera nazwę metody SIP (INVITE). Chrząszcz niesię dużę spodnie
-</Description>
+Pierwsza linia zawiera nazwę metody SIP (INVITE). Kolejne wiersze zawierają pola nagłówkowe, które są opisane poniżej:
+Via - zawiera adres (%(source_ip)s:%(source_port)s), na który %(sender)s spodziewa się otrzymać odpowiedź na to żądanie. Zawarty jest również parametr branch, który pozwala na identyfikacje transakcji.
+Max forwards - Służy do ograniczenia liczby skoków żądania, które może przeprowadzać na drodze do miejsca przeznaczenia. Składa się z liczby całkowitej, która jest pomniejszana o jeden przy każdym przeskoku.
+Route - Określa trasę wiadomości.
+From - zawiera także wyświetlaną nazwę (%(sender)s) oraz SIP URI lub SIPS (<sip:%(sender)s@%(source_ip)s:%(source_port)s>), które wskazują, zleceniodawcę żądania. To pole nagłówka posiada również parametr tag zawierający losowy tekst, który został dodany do URI przez softphone. Jest on używany do celów identyfikacyjnych.
+To - Zawiera wyświetlaną nazwę (%(receiver)s) oraz SIP URI lub SIPS (<sip:%(receiver)s@%(dest_ip)s:%(dest_port)s>) do którego żądanie zostało skierowane.
+Call-ID - Identyfikuje jednoznacznie sesję lub wiadomości rejestracyjne. Generowany losowo w sposób zapewniający globalną unikalność
+Cseq - Numer CSeq jest zwiększany dla każdego nowego żądania podczas dialogu i jest nim kolejna liczba całkowita.
+Contact: Zawiera SIP URI lub SIPS, który reprezentuje bezpośrednią drogę do skontaktowania się z %(sender)s, zwykle składające się z nazwy użytkownika lub adresu IP. Podczas gdy pole nagłówka Via mówi gdzie wysłać odpowiedź, pole kontaktowe nagłówek mówi, gdzie wysłać przyszłe żądania
+Content-Type - Typ treści ciała wiadomości.
+Content-Length - Długość wiadomości w bajtach
+</Description> 

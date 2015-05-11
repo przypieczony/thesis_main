@@ -1,6 +1,7 @@
 ToDo:
 - adjust variable names and conventions according to PEP8
 - work on security input? (pairing sometimes don't work)
-- Hide SIP image under field
-- Clear descriptionField after clicking nextButton
-- Something is wrong with flowField..
+- Hide SIP image under field or delete it..
+- Replace Proxy 2 address/port field with destination one
+- Add information about pairs in first tab
+- Something is wrong with flowField.. ??
