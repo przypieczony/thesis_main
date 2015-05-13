@@ -7,19 +7,19 @@
 #
 # WARNING! All changes made in this file will be lost!
 
-from PyQt4 import QtCore, QtGui
 import socket
 import random
 import sys
 import os
 import string
-import cStringIO
 import time
 import threading
-from sniff import *
 import pickle
+import cStringIO
 
+from PyQt4 import QtCore, QtGui
 
+from sniff import *
 
 try:
     _fromUtf8 = QtCore.QString.fromUtf8
@@ -816,6 +816,8 @@ class Ui_MainWindow(QtGui.QMainWindow):
             self.destPort = random.randint(1024, 65535)
             self.proxyOnePort = random.randint(1024, 65535)
             self.proxyTwoPort = random.randint(1024, 65535)
+            self.senderName = "Alice"
+            self.receiverName = "Bob"
 
  
         self.template_vars = {
@@ -1100,7 +1102,7 @@ Receiver: %(receiver)s
             PopupDialog(error, "Whopsie..", "warning")
             raise Exception, error
         description = description.group(1).strip()
-        description = re.sub('\s+', ' ', description)
+        #description = re.sub('\s+', ' ', description)
         description = unicode(description, "utf-8")
         template = re.sub(self.description_pattern, '', self.template_content).strip()
         return description, template

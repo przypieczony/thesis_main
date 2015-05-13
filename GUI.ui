@@ -36,7 +36,7 @@
   </property>
   <property name="windowIcon">
    <iconset>
-    <normaloff>img/icon.png</normaloff>img/icon.png</iconset>
+    <normaloff>../.designer/backup/img/icon.png</normaloff>../.designer/backup/img/icon.png</iconset>
   </property>
   <property name="statusTip">
    <string>Ready</string>
@@ -51,8 +51,14 @@
         <bold>false</bold>
        </font>
       </property>
+      <property name="toolTip">
+       <string>Disable this if you want use real hardware</string>
+      </property>
+      <property name="statusTip">
+       <string/>
+      </property>
       <property name="currentIndex">
-       <number>0</number>
+       <number>2</number>
       </property>
       <property name="movable">
        <bool>false</bool>
@@ -61,31 +67,6 @@
        <attribute name="title">
         <string>Input data</string>
        </attribute>
-       <widget class="QRadioButton" name="simulateRadioButton">
-        <property name="enabled">
-         <bool>true</bool>
-        </property>
-        <property name="geometry">
-         <rect>
-          <x>800</x>
-          <y>20</y>
-          <width>116</width>
-          <height>22</height>
-         </rect>
-        </property>
-        <property name="statusTip">
-         <string/>
-        </property>
-        <property name="text">
-         <string>Simulation</string>
-        </property>
-        <property name="checkable">
-         <bool>true</bool>
-        </property>
-        <property name="checked">
-         <bool>false</bool>
-        </property>
-       </widget>
        <widget class="QWidget" name="layoutWidget">
         <property name="geometry">
          <rect>
@@ -115,7 +96,7 @@
             <set>Qt::ImhPreferNumbers</set>
            </property>
            <property name="text">
-            <string>192.168.100.1</string>
+            <string/>
            </property>
            <property name="frame">
             <bool>true</bool>
@@ -133,58 +114,6 @@
           </widget>
          </item>
          <item>
-          <widget class="QLineEdit" name="sourcePortField">
-           <property name="statusTip">
-            <string/>
-           </property>
-           <property name="inputMethodHints">
-            <set>Qt::ImhPreferNumbers</set>
-           </property>
-           <property name="inputMask">
-            <string/>
-           </property>
-           <property name="text">
-            <string>5060</string>
-           </property>
-           <property name="placeholderText">
-            <string>e.g. 5060</string>
-           </property>
-          </widget>
-         </item>
-         <item>
-          <widget class="QLabel" name="label_3">
-           <property name="text">
-            <string>Enter destiantion address:</string>
-           </property>
-          </widget>
-         </item>
-         <item>
-          <widget class="QLineEdit" name="destAddresField">
-           <property name="statusTip">
-            <string/>
-           </property>
-           <property name="inputMethodHints">
-            <set>Qt::ImhPreferNumbers</set>
-           </property>
-           <property name="inputMask">
-            <string/>
-           </property>
-           <property name="text">
-            <string>192.168.100.2</string>
-           </property>
-           <property name="placeholderText">
-            <string>e. g.192.168.100.2</string>
-           </property>
-          </widget>
-         </item>
-         <item>
-          <widget class="QLabel" name="label_4">
-           <property name="text">
-            <string>Enter destination port:</string>
-           </property>
-          </widget>
-         </item>
-         <item>
           <widget class="QLineEdit" name="destPortField">
            <property name="statusTip">
             <string/>
@@ -196,7 +125,7 @@
             <string/>
            </property>
            <property name="text">
-            <string>5060</string>
+            <string/>
            </property>
            <property name="placeholderText">
             <string>e.g. 5060</string>
@@ -222,7 +151,7 @@
             <string/>
            </property>
            <property name="text">
-            <string>192.168.100.3</string>
+            <string/>
            </property>
            <property name="placeholderText">
             <string>e. g.192.168.100.3</string>
@@ -248,7 +177,7 @@
             <string/>
            </property>
            <property name="text">
-            <string>5060</string>
+            <string/>
            </property>
            <property name="placeholderText">
             <string>e.g. 5060</string>
@@ -274,7 +203,7 @@
             <string/>
            </property>
            <property name="text">
-            <string>192.168.100.4</string>
+            <string/>
            </property>
            <property name="placeholderText">
             <string>e. g.192.168.100.4</string>
@@ -300,7 +229,59 @@
             <string/>
            </property>
            <property name="text">
-            <string>5060</string>
+            <string/>
+           </property>
+           <property name="placeholderText">
+            <string>e.g. 5060</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QLabel" name="label_3">
+           <property name="text">
+            <string>Enter destiantion address:</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QLineEdit" name="destAddresField">
+           <property name="statusTip">
+            <string/>
+           </property>
+           <property name="inputMethodHints">
+            <set>Qt::ImhPreferNumbers</set>
+           </property>
+           <property name="inputMask">
+            <string/>
+           </property>
+           <property name="text">
+            <string/>
+           </property>
+           <property name="placeholderText">
+            <string>e. g.192.168.100.2</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QLabel" name="label_4">
+           <property name="text">
+            <string>Enter destination port:</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QLineEdit" name="sourcePortField">
+           <property name="statusTip">
+            <string/>
+           </property>
+           <property name="inputMethodHints">
+            <set>Qt::ImhPreferNumbers</set>
+           </property>
+           <property name="inputMask">
+            <string/>
+           </property>
+           <property name="text">
+            <string/>
            </property>
            <property name="placeholderText">
             <string>e.g. 5060</string>
@@ -395,7 +376,7 @@
             <string/>
            </property>
            <property name="text">
-            <string>kamszy</string>
+            <string/>
            </property>
            <property name="placeholderText">
             <string>Enter sender name</string>
@@ -411,7 +392,7 @@
             <string/>
            </property>
            <property name="text">
-            <string>revszy</string>
+            <string/>
            </property>
            <property name="placeholderText">
             <string>Enter receiver name</string>
@@ -427,31 +408,104 @@
          </item>
         </layout>
        </widget>
-       <widget class="QLabel" name="label_45">
+       <widget class="QLabel" name="label_18">
         <property name="geometry">
          <rect>
-          <x>580</x>
-          <y>220</y>
-          <width>321</width>
-          <height>291</height>
+          <x>30</x>
+          <y>520</y>
+          <width>271</width>
+          <height>51</height>
          </rect>
         </property>
+        <property name="font">
+         <font>
+          <weight>75</weight>
+          <bold>true</bold>
+         </font>
+        </property>
+        <property name="lineWidth">
+         <number>2</number>
+        </property>
         <property name="text">
-         <string/>
+         <string>If you don't need any of the hardware leave blank fields (IP and port!)</string>
         </property>
-        <property name="pixmap">
-         <pixmap>img/icon.png</pixmap>
-        </property>
-        <property name="scaledContents">
+        <property name="wordWrap">
          <bool>true</bool>
         </property>
        </widget>
-       <zorder>label_45</zorder>
+       <widget class="QFrame" name="frame_2">
+        <property name="geometry">
+         <rect>
+          <x>710</x>
+          <y>130</y>
+          <width>181</width>
+          <height>101</height>
+         </rect>
+        </property>
+        <property name="frameShape">
+         <enum>QFrame::StyledPanel</enum>
+        </property>
+        <property name="frameShadow">
+         <enum>QFrame::Raised</enum>
+        </property>
+        <widget class="QWidget" name="">
+         <property name="geometry">
+          <rect>
+           <x>20</x>
+           <y>20</y>
+           <width>154</width>
+           <height>61</height>
+          </rect>
+         </property>
+         <layout class="QGridLayout" name="gridLayout_20">
+          <item row="0" column="0">
+           <widget class="QRadioButton" name="simulateRadioButton">
+            <property name="enabled">
+             <bool>true</bool>
+            </property>
+            <property name="statusTip">
+             <string/>
+            </property>
+            <property name="text">
+             <string>Simulation</string>
+            </property>
+            <property name="checkable">
+             <bool>true</bool>
+            </property>
+            <property name="checked">
+             <bool>false</bool>
+            </property>
+           </widget>
+          </item>
+          <item row="1" column="0">
+           <widget class="QLabel" name="label_24">
+            <property name="font">
+             <font>
+              <pointsize>10</pointsize>
+              <italic>true</italic>
+              <strikeout>false</strikeout>
+             </font>
+            </property>
+            <property name="text">
+             <string>Enable this to fill all fields automatically</string>
+            </property>
+            <property name="wordWrap">
+             <bool>true</bool>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </widget>
+        <zorder>label_24</zorder>
+        <zorder>simulateRadioButton</zorder>
+        <zorder>tabWidget_2</zorder>
+       </widget>
        <zorder>layoutWidget</zorder>
        <zorder>splitter</zorder>
-       <zorder>simulateRadioButton</zorder>
        <zorder>layoutWidget</zorder>
        <zorder>layoutWidget</zorder>
+       <zorder>label_18</zorder>
+       <zorder>frame_2</zorder>
       </widget>
       <widget class="QWidget" name="tab">
        <attribute name="title">
@@ -648,7 +702,7 @@
          </item>
         </layout>
        </widget>
-       <widget class="QWidget" name="">
+       <widget class="QWidget" name="layoutWidget">
         <property name="geometry">
          <rect>
           <x>30</x>
@@ -714,7 +768,7 @@
           <x>10</x>
           <y>330</y>
           <width>411</width>
-          <height>231</height>
+          <height>251</height>
          </rect>
         </property>
         <property name="orientation">
@@ -1055,7 +1109,7 @@
             <string/>
            </property>
            <property name="pixmap">
-            <pixmap>img/Phone.png</pixmap>
+            <pixmap>../.designer/backup/img/Phone.png</pixmap>
            </property>
            <property name="scaledContents">
             <bool>true</bool>
@@ -1081,7 +1135,7 @@
             <string/>
            </property>
            <property name="pixmap">
-            <pixmap>img/Computer.png</pixmap>
+            <pixmap>../.designer/backup/img/Computer.png</pixmap>
            </property>
            <property name="scaledContents">
             <bool>true</bool>
@@ -1107,7 +1161,7 @@
             <string/>
            </property>
            <property name="pixmap">
-            <pixmap>img/Computer.png</pixmap>
+            <pixmap>../.designer/backup/img/Computer.png</pixmap>
            </property>
            <property name="scaledContents">
             <bool>true</bool>
@@ -1133,7 +1187,7 @@
             <string/>
            </property>
            <property name="pixmap">
-            <pixmap>img/Phone.png</pixmap>
+            <pixmap>../.designer/backup/img/Phone.png</pixmap>
            </property>
            <property name="scaledContents">
             <bool>true</bool>
@@ -1211,7 +1265,7 @@
           <x>440</x>
           <y>330</y>
           <width>321</width>
-          <height>231</height>
+          <height>251</height>
          </rect>
         </property>
         <property name="orientation">
@@ -1230,10 +1284,10 @@
         <widget class="QTextEdit" name="descriptionField">
          <property name="font">
           <font>
-           <family>Courier New</family>
+           <family>Arial</family>
            <pointsize>10</pointsize>
-           <weight>75</weight>
-           <bold>true</bold>
+           <weight>50</weight>
+           <bold>false</bold>
           </font>
          </property>
          <property name="readOnly">
@@ -1241,7 +1295,7 @@
          </property>
         </widget>
        </widget>
-       <widget class="QWidget" name="">
+       <widget class="QWidget" name="layoutWidget">
         <property name="geometry">
          <rect>
           <x>80</x>
@@ -1318,45 +1372,15 @@
        </widget>
        <zorder>layoutWidget</zorder>
        <zorder>layoutWidget</zorder>
-       <zorder>flowField</zorder>
+       <zorder>layoutWidget</zorder>
        <zorder>splitter_2</zorder>
        <zorder>layoutWidget</zorder>
-       <zorder>flowLabel</zorder>
        <zorder>layoutWidget</zorder>
        <zorder>splitter_5</zorder>
       </widget>
      </widget>
     </item>
    </layout>
-  </widget>
-  <widget class="QMenuBar" name="menubar">
-   <property name="geometry">
-    <rect>
-     <x>0</x>
-     <y>0</y>
-     <width>950</width>
-     <height>25</height>
-    </rect>
-   </property>
-   <widget class="QMenu" name="menuFile">
-    <property name="title">
-     <string>File</string>
-    </property>
-    <addaction name="actionAdd_scenario"/>
-   </widget>
-   <widget class="QMenu" name="menuEdit">
-    <property name="title">
-     <string>Edit</string>
-    </property>
-   </widget>
-   <widget class="QMenu" name="menuExit">
-    <property name="title">
-     <string>Exit</string>
-    </property>
-   </widget>
-   <addaction name="menuFile"/>
-   <addaction name="menuEdit"/>
-   <addaction name="menuExit"/>
   </widget>
   <widget class="QStatusBar" name="statusbar"/>
   <action name="actionAdd_template">
@@ -1379,12 +1403,12 @@
    <slot>clear()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>771</x>
-     <y>613</y>
+     <x>783</x>
+     <y>588</y>
     </hint>
     <hint type="destinationlabel">
-     <x>216</x>
-     <y>244</y>
+     <x>220</x>
+     <y>232</y>
     </hint>
    </hints>
   </connection>
@@ -1395,44 +1419,12 @@
    <slot>clear()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>797</x>
-     <y>613</y>
+     <x>809</x>
+     <y>588</y>
     </hint>
     <hint type="destinationlabel">
-     <x>211</x>
-     <y>138</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>clearButton</sender>
-   <signal>clicked()</signal>
-   <receiver>sourcePortField</receiver>
-   <slot>clear()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>768</x>
-     <y>613</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>215</x>
-     <y>191</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>clearButton</sender>
-   <signal>clicked()</signal>
-   <receiver>destPortField</receiver>
-   <slot>clear()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>747</x>
-     <y>613</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>204</x>
-     <y>303</y>
+     <x>220</x>
+     <y>120</y>
     </hint>
    </hints>
   </connection>
@@ -1443,8 +1435,8 @@
    <slot>clear()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>844</x>
-     <y>616</y>
+     <x>856</x>
+     <y>591</y>
     </hint>
     <hint type="destinationlabel">
      <x>141</x>
@@ -1459,12 +1451,12 @@
    <slot>clear()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>727</x>
-     <y>613</y>
+     <x>739</x>
+     <y>588</y>
     </hint>
     <hint type="destinationlabel">
-     <x>420</x>
-     <y>355</y>
+     <x>431</x>
+     <y>330</y>
     </hint>
    </hints>
   </connection>
@@ -1475,8 +1467,8 @@
    <slot>clear()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>844</x>
-     <y>616</y>
+     <x>856</x>
+     <y>591</y>
     </hint>
     <hint type="destinationlabel">
      <x>460</x>
@@ -1492,11 +1484,11 @@
    <hints>
     <hint type="sourcelabel">
      <x>813</x>
-     <y>613</y>
+     <y>588</y>
     </hint>
     <hint type="destinationlabel">
-     <x>209</x>
-     <y>354</y>
+     <x>220</x>
+     <y>344</y>
     </hint>
    </hints>
   </connection>
@@ -1507,12 +1499,12 @@
    <slot>clear()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>733</x>
-     <y>613</y>
+     <x>745</x>
+     <y>588</y>
     </hint>
     <hint type="destinationlabel">
-     <x>214</x>
-     <y>415</y>
+     <x>220</x>
+     <y>400</y>
     </hint>
    </hints>
   </connection>
@@ -1523,12 +1515,12 @@
    <slot>clear()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>738</x>
-     <y>613</y>
+     <x>750</x>
+     <y>588</y>
     </hint>
     <hint type="destinationlabel">
-     <x>205</x>
-     <y>467</y>
+     <x>217</x>
+     <y>456</y>
     </hint>
    </hints>
   </connection>
@@ -1539,12 +1531,12 @@
    <slot>clear()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>729</x>
-     <y>613</y>
+     <x>741</x>
+     <y>588</y>
     </hint>
     <hint type="destinationlabel">
-     <x>203</x>
-     <y>522</y>
+     <x>215</x>
+     <y>512</y>
     </hint>
    </hints>
   </connection>
@@ -1555,12 +1547,12 @@
    <slot>clear()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>749</x>
-     <y>613</y>
+     <x>761</x>
+     <y>588</y>
     </hint>
     <hint type="destinationlabel">
-     <x>460</x>
-     <y>535</y>
+     <x>472</x>
+     <y>490</y>
     </hint>
    </hints>
   </connection>
@@ -1571,12 +1563,12 @@
    <slot>clear()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>753</x>
-     <y>613</y>
+     <x>765</x>
+     <y>588</y>
     </hint>
     <hint type="destinationlabel">
-     <x>455</x>
-     <y>591</y>
+     <x>467</x>
+     <y>546</y>
     </hint>
    </hints>
   </connection>
@@ -1587,12 +1579,12 @@
    <slot>clear()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>873</x>
-     <y>616</y>
+     <x>885</x>
+     <y>591</y>
     </hint>
     <hint type="destinationlabel">
-     <x>110</x>
-     <y>104</y>
+     <x>200</x>
+     <y>101</y>
     </hint>
    </hints>
   </connection>
@@ -1603,12 +1595,12 @@
    <slot>clear()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>893</x>
-     <y>616</y>
+     <x>905</x>
+     <y>591</y>
     </hint>
     <hint type="destinationlabel">
-     <x>403</x>
-     <y>126</y>
+     <x>431</x>
+     <y>101</y>
     </hint>
    </hints>
   </connection>
@@ -1619,12 +1611,12 @@
    <slot>clear()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>854</x>
-     <y>616</y>
+     <x>866</x>
+     <y>591</y>
     </hint>
     <hint type="destinationlabel">
-     <x>617</x>
-     <y>126</y>
+     <x>645</x>
+     <y>101</y>
     </hint>
    </hints>
   </connection>
@@ -1635,12 +1627,12 @@
    <slot>clear()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>844</x>
-     <y>616</y>
+     <x>856</x>
+     <y>591</y>
     </hint>
     <hint type="destinationlabel">
-     <x>830</x>
-     <y>126</y>
+     <x>862</x>
+     <y>101</y>
     </hint>
    </hints>
   </connection>
@@ -1651,12 +1643,12 @@
    <slot>clear()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>822</x>
-     <y>616</y>
+     <x>834</x>
+     <y>591</y>
     </hint>
     <hint type="destinationlabel">
-     <x>283</x>
-     <y>542</y>
+     <x>295</x>
+     <y>539</y>
     </hint>
    </hints>
   </connection>
@@ -1667,8 +1659,8 @@
    <slot>clear()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>845</x>
-     <y>616</y>
+     <x>857</x>
+     <y>591</y>
     </hint>
     <hint type="destinationlabel">
      <x>517</x>
@@ -1683,12 +1675,44 @@
    <slot>clear()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>903</x>
-     <y>607</y>
+     <x>915</x>
+     <y>591</y>
     </hint>
     <hint type="destinationlabel">
      <x>762</x>
      <y>594</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>clearButton</sender>
+   <signal>clicked()</signal>
+   <receiver>sourcePortField</receiver>
+   <slot>clear()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>780</x>
+     <y>588</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>220</x>
+     <y>176</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>clearButton</sender>
+   <signal>clicked()</signal>
+   <receiver>destPortField</receiver>
+   <slot>clear()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>759</x>
+     <y>588</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>216</x>
+     <y>288</y>
     </hint>
    </hints>
   </connection>
