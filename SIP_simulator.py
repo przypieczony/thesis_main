@@ -1,11 +1,9 @@
 # -*- coding: utf-8 -*-
 
-# Form implementation generated from reading ui file 'GUI.ui'
-#
-# Created: Wed May 13 22:29:50 2015
-#      by: PyQt4 UI code generator 4.10.4
-#
-# WARNING! All changes made in this file will be lost!
+#Author Kamil Szymanski
+#Date of last modification 2015-05
+#SIP simulator is an educational tool for users who want
+#to explore SIP protocol.
 
 import socket
 import random
@@ -36,6 +34,7 @@ except AttributeError:
         return QtGui.QApplication.translate(context, text, disambig)
 
 class Ui_MainWindow(QtGui.QMainWindow):
+    """PyQT class"""
     def __init__(self, *args, **kwargs):
         super(Ui_MainWindow, self).__init__(*args, **kwargs)
         self.template_vars = {}
@@ -685,7 +684,8 @@ class Ui_MainWindow(QtGui.QMainWindow):
         QtCore.QMetaObject.connectSlotsByName(self)
 
     def closeEvent(self, event):
-        
+        """This function is called due to press "x"
+        Popup widnow is showed up and scenario simulation is stoped"""
         result = QtGui.QMessageBox.question(self,
                       "Confirm Exit...",
                       "Are you sure you want to exit ?",
@@ -787,6 +787,7 @@ class Ui_MainWindow(QtGui.QMainWindow):
         self.actionAdd_template.setText(_translate("MainWindow", "Add template", None))
         self.actionAdd_scenario.setText(_translate("MainWindow", "Load scenario", None))
 
+        #Binded functions to buttons starts here
         self.acceptButton.clicked.connect(self.getParameters)
         self.simulateButton.clicked.connect(self.loadTemplate)
         self.simulateButton.clicked.connect(self.loadParameters)
@@ -799,6 +800,7 @@ class Ui_MainWindow(QtGui.QMainWindow):
         self.CreateScenarioButton.clicked.connect(self.createScenario)
         self.loadScenarioButton.clicked.connect(self.loadScenario)
         self.loadScenarioButton.clicked.connect(self.reset)
+        #Binded functions to buttons stops here
 
 
     def getParameters(self):
@@ -877,6 +879,7 @@ class Ui_MainWindow(QtGui.QMainWindow):
             self.checkSenderReceiver()
         except WrongSenderReceiver, e:
             return
+        #Checks are stops here
 
         self.prepareFieldsToSimulation()
 
@@ -955,11 +958,15 @@ If you want exclude some hardware, be sure that both, port and IP, are empty""",
         self.destHW.setText(self.ip_addresses[3])
 
     def checkTemplates(self):
-        """During loading scenario checks parameters are not missing"""
+        """During loading scenario checks parameters if not missing"""
         for case in self.scenario:
             #Check mandatory fields
             try:
-                match = re.search('(^Via: ).*', case["template"], re.MULTILINE).group(1)
+                re.search('(^Via: ).*', case["template"], re.MULTILINE).group(1)
+                re.search('(^To: ).*', case["template"], re.MULTILINE).group(1)
+                re.search('(^From: ).*', case["template"], re.MULTILINE).group(1)
+                re.search('(^Cseq: ).*', case["template"], re.MULTILINE).group(1)
+                re.search('(^Call-ID: ).*', case["template"], re.MULTILINE).group(1)
             except AttributeError, e:
                 PopupDialog("Some of the mandatory parameters are missing \
                     in template file: {}".format(os.path.basename(case["path"])), "Whopsie..", "warning")
