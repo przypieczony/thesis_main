@@ -998,11 +998,13 @@ Receiver: %(receiver)s
         i=0
         for case in self.scenario:
             try:
-                case["description"] = case["description"] % self.template_vars
                 case["message"] = case["template"] % self.template_vars #replaces %(<variable>)s by template_vars
             except KeyError, e:
                 PopupDialog("Some of the paramters are missing in template: {}".format(e), "Whopsie..", "warning")
-
+            try:
+                case["description"] = case["description"] % self.template_vars
+            except KeyError:
+                pass #description is not mandatory field
             self.scenario.pop(i)
             i+=1
             self.scenario.insert(0, case)
@@ -1016,7 +1018,10 @@ Receiver: %(receiver)s
             self.message_counter += 1
             case = self.generateRequest(self.scenario[self.message_counter])
             self.send(case)
-            self.descriptionField.insertPlainText(case["description"])
+            try:
+                self.descriptionField.insertPlainText(case["description"])
+            except:
+                pass # description field is not mandatory
         else:
             self.statusbar.showMessage('WARNING: There is no more messages to send')
 
@@ -1113,14 +1118,11 @@ Receiver: %(receiver)s
         """Pulls description out from template file and removes it
         return: str description, str template"""
         description = self.description_pattern.search(self.template_content)
-        if not description:
-            error = "Cannot find description, in: {} \nCheck if it's properly formated:\n " \
-             "\"<description>Here should be a description</description>\"".format(self.template_path)
-            PopupDialog(error, "Whopsie..", "warning")
-            raise Exception, error
-        description = description.group(1).strip()
-        #description = re.sub('\s+', ' ', description)
-        description = unicode(description, "utf-8")
+        if description:
+            description = description.group(1).strip()
+            description = unicode(description, "utf-8")
+        else:
+            description = "" #description is not mandatory field
         template = re.sub(self.description_pattern, '', self.template_content).strip()
         return description, template
 

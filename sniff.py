@@ -173,7 +173,7 @@ def sniff(transmission_protocol, ip_list):
 
 def _getData(socket):
     packet = None
-    scoket.bind(('0.0.0.0', 0))
+    socket.bind(('0.0.0.0', 0))
     while not packet:
         socket.setblocking(0)
         try:
