@@ -9,3 +9,7 @@ Call-ID: 3848276298220188511@atlanta.example.com
 Contact: <sip:%(receiver)s@%(dest_ip)s:%(dest_port)s>;transport=tcp>
 CSeq: 2 INVITE
 Content-Length: 0
+
+<Description>
+Użytkownik docelowy %(receiver)s otrzymał żądanie INVITE o czym informuje użytkownika inicjalizującego 180 (Ringing)
+</Description>

@@ -18,3 +18,7 @@ c=IN IP4 %(source_ip)s
 t=0 0
 m=audio 49172 RTP/AVP 0
 a=rtpmap:0 PCMU/8000
+
+<Description>
+%(sender)s odpowiada na żądanie autoryzacji przesyłająć ponownie wiadomość INVITE, które zawiera zaszyfrowane pole response wymaganym wcześniej algorytmem
+</Description>

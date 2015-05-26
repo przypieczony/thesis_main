@@ -17,3 +17,7 @@ c=IN IP4 %(dest_ip)s
 t=0 0
 m=audio 3456 RTP/AVP 0
 a=rtpmap:0 PCMU/8000
+
+<Description>
+Przekazanie odpowiedzi do poprzedniego urządzenia (Proxy 1). Wraz z przesyłaniem wiadomości w przeciwnym kierunku, należy zwrócić uwagę na znikające pola Via.
+</Description>

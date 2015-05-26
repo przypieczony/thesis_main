@@ -5,3 +5,7 @@ To: %(receiver)s <sip:%(receiver)s@%(dest_ip)s:%(dest_port)s>
 Call-ID: 3848276298220188511@atlanta.example.com
 CSeq: 2 INVITE
 Content-Length: 0
+
+<Description>
+Proxy 1 przesyła odpowiedź 100 (Trying) do %(sender)s w celu dostarczenia informacji o dalszej propagacji żądania.
+</Description>

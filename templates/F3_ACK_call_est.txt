@@ -6,3 +6,7 @@ To: %(receiver)s <sip:%(receiver)s@%(dest_ip)s:%(dest_port)s>;tag=3flal12sf
 Call-ID: 3848276298220188511@atlanta.example.com
 CSeq: 1 ACK
 Content-Length: 0
+
+<Description>
+ACK potwierdza, że użytkownik %(sender)s otrzymał odpowiedź na żądanie INVITE
+</Description>

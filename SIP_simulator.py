@@ -866,7 +866,7 @@ class Ui_MainWindow(QtGui.QMainWindow):
             PopupDialog("Some of the paramters are missing in template: {}".format(e), "Whopsie..", "warning")
             raise Exception, e
 
-        #Checks are starts here
+        #Checks starts here
         try:
             self.checkIps()
         except WrongIp, e:
@@ -879,7 +879,7 @@ class Ui_MainWindow(QtGui.QMainWindow):
             self.checkSenderReceiver()
         except WrongSenderReceiver, e:
             return
-        #Checks are stops here
+        #Checks stops here
 
         self.prepareFieldsToSimulation()
 
@@ -962,11 +962,11 @@ If you want exclude some hardware, be sure that both, port and IP, are empty""",
         for case in self.scenario:
             #Check mandatory fields
             try:
-                re.search('(^Via: ).*', case["template"], re.MULTILINE).group(1)
-                re.search('(^To: ).*', case["template"], re.MULTILINE).group(1)
-                re.search('(^From: ).*', case["template"], re.MULTILINE).group(1)
-                re.search('(^Cseq: ).*', case["template"], re.MULTILINE).group(1)
-                re.search('(^Call-ID: ).*', case["template"], re.MULTILINE).group(1)
+                re.search('(^Via: ).*', case["template"], re.MULTILINE | re.IGNORECASE).group(1)
+                re.search('(^To: ).*', case["template"], re.MULTILINE | re.IGNORECASE).group(1)
+                re.search('(^From: ).*', case["template"], re.MULTILINE | re.IGNORECASE).group(1)
+                re.search('(^Cseq: ).*', case["template"], re.MULTILINE | re.IGNORECASE).group(1)
+                re.search('(^Call-ID: ).*', case["template"], re.MULTILINE | re.IGNORECASE).group(1)
             except AttributeError, e:
                 PopupDialog("Some of the mandatory parameters are missing \
                     in template file: {}".format(os.path.basename(case["path"])), "Whopsie..", "warning")

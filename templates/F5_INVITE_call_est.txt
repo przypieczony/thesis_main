@@ -17,4 +17,8 @@ s=-
 c=IN IP4 %(source_ip)s
 t=0 0
 m=audio 49172 RTP/AVP 0
-a=rtpmap:0 PCMU/8000
+a=rtpmap:0 PCMU/
+
+<Description>
+Proxy 1 akceptuje dane uwierzytelniające oraz przesyła żądanie INVITE do Proxy 2. %(sender)s oczekuje na odebranie informacji z sieci przez port %(source_port)s 
+</Description>
