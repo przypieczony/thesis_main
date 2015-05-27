@@ -1,0 +1,12 @@
+SIP/2.0 100 Trying
+Via: SIP/2.0/TCP %(proxy_one_ip)s:%(proxy_one_port)s;branch=z9hG4bK2d4790.1
+Via: SIP/2.0/TCP %(source_ip)s:%(source_port)s;branch=z9hG4bK74bf9
+From: %(sender)s <sip:%(sender)s@%(source_ip)s:%(source_port)s>;tag=9fxced76sl
+To: Bob <sip:%(receiver)s@%(dest_ip)s:%(dest_port)s>
+Call-ID: 2xTb9vxSit55XU7p8@atlanta.example.com
+CSeq: 1 INVITE
+Content-Length: 0
+
+<Description>
+Proxy 2 przesyła odpowiedź 100 (Trying) do Proxy 2 w celu dostarczenia informacji o dalszej propagacji żądania.
+</Description>

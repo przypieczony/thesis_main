@@ -1,0 +1,13 @@
+SIP/2.0  486 Busy Here
+Via: SIP/2.0/TCP %(proxy_two_ip)s:%(proxy_two_port)s;branch=z9hG4bK721e4.1
+Via: SIP/2.0/TCP %(proxy_one_ip)s:%(proxy_one_port)s;branch=z9hG4bK2d4790.1
+Via: SIP/2.0/TCP %(source_ip)s:%(source_port)s;branch=z9hG4bK74bf9
+From: %(sender)s <sip:%(sender)s@%(source_ip)s:%(source_port)s>;tag=9fxced76sl
+To: Bob <sip:%(receiver)s@%(dest_ip)s:%(dest_port)s>
+Call-ID: 2xTb9vxSit55XU7p8@atlanta.example.com
+CSeq: 1 INVITE
+Content-Length: 0
+
+<Description>
+Zostaje wygenerowana wiadomość 486 (Busy Here), co oznacza, że użytkownik %(receiver)s prowadzi w danym momencie inną rozmowę.
+</Description>

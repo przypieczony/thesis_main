@@ -1,7 +1,0 @@
-https://tools.ietf.org/html/rfc3665
-2.1.  Successful New Registration
-3.2.  Session Establishment Through Two Proxies
-3.8.  Unsuccessful No Answer
-3.9.  Unsuccessful Busy
-http://www.in2eps.com/fo-sip/tk-fo-sip-ex3261.html
-Tylko opisy pelnych bloczkow, czyli ogolnych informacji co sie w nich dzieje. Nie pojedyncze naglowki.

@@ -1,0 +1,12 @@
+SIP/2.0 401 Unauthorized
+Via: SIP/2.0/TLS %(source_ip)s:%(source_port)s;;branch=z9hG4bKnashd92
+From: %(sender)s <sips:%(sender)s@%(source_ip)s:%(source_port)s>;tag=ja743ks76zlflH
+To: %(sender)s <sips:%(sender)s@%(source_ip)s:%(source_port)s>;tag=37GkEhwl6
+Call-ID: 1j9FpLxk3uxtm8tn@biloxi.example.com
+CSeq: 2 REGISTER
+WWW-Authenticate: Digest realm="atlanta.example.com", qop="auth",nonce="84f1c1ae6cbe5ua9c8e88dfa3ecm3459", opaque="", stale=FALSE, algorithm=MD5
+Content-Length: 0
+
+<Description>
+Serwer rejestrujący %(proxy_one_ip)s:%(proxy_one_port)s stwierdza, że pole response zawiera niepoprawny ciąg, zwraca więc odpowiedź 401 (Unauthorized) odrzucając tym żądanie REGISTER. 
+</Description>

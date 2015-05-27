@@ -1,0 +1,14 @@
+REGISTER sips:%(proxy_one_ip)s:%(proxy_one_port)s SIP/2.0
+Via: SIP/2.0/TLS %(source_ip)s:%(source_port)s;branch=z9hG4bKnashd92
+Max-Forwards: 70
+From: %(sender)s <sips:%(sender)s@%(source_ip)s:%(source_port)s>;tag=a73kszlfl
+To: %(sender)s <sips:%(sender)s@%(source_ip)s:%(source_port)s>
+Call-ID: 1j9FpLxk3uxtm8tn@biloxi.example.com
+CSeq: 2 REGISTER
+Contact: <sips:%(sender)s@%(source_ip)s:%(source_port)s>
+Authorization: Digest username="%(sender)s", realm="atlanta.example.com" nonce="ea9c8e88df84f1cec4341ae6cbe5a359", opaque="",uri="sips:%(proxy_one_ip)s:%(proxy_one_port)s",response="61f8470ceb87d7ebf508220214ed438b"
+Content-Length: 0
+
+<Description>
+Użytkownik %(sender)s wprowadza swoją nazwę użytkownika oraz hasło. Po czym klient użytkownika %(sender)s szyfruje podane dane za pomocą MD5 oraz podanej frazy szyfrującej. Na potrzeby tego scenariusza, załóżmy, że dane użytkownika nie są poprawne. Informacja ta jest zawarta w nagłówku Authorization w polu response. Tak stworzona wiadomość REGISTER jest wysyłana do %(proxy_one_ip)s:%(proxy_one_port)s
+</Description>

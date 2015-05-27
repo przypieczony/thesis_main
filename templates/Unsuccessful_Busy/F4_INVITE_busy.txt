@@ -1,0 +1,18 @@
+INVITE sip:%(receiver)s@%(dest_ip)s:%(dest_port)s SIP/2.0
+Via: SIP/2.0/TCP %(proxy_two_ip)s:%(proxy_two_port)s;branch=z9hG4bK721e4.1
+Via: SIP/2.0/TCP %(proxy_one_ip)s:%(proxy_one_port)s;branch=z9hG4bK2d4790.1
+Via: SIP/2.0/TCP %(source_ip)s:%(source_port)s;branch=z9hG4bK74bf9
+Max-Forwards: 70
+Route: <sip:%(source_ip)s:%(source_port)s;lr>
+From: %(sender)s <sip:%(sender)s@atlanta.example.com>;tag=9fxced76sl
+To: Bob <sip:%(receiver)s@%(dest_ip)s:%(dest_port)s>
+Call-ID: 2xTb9vxSit55XU7p8@atlanta.example.com
+CSeq: 1 INVITE
+Contact: <sip:%(sender)s@%(source_ip)s:%(source_port)s;transport=tcp>
+Proxy-Authorization: Digest username="%(sender)s", realm="atlanta.example.com", nonce="dc3a5ab2530aa93112cf5904ba7d88fa", opaque="", uri="sip:%(receiver)s@%(dest_ip)s:%(dest_port)s", response="702138b27d869ac8741e10ec643d55be"
+Content-Type: application/sdp
+Content-Length: 151
+
+<Description>
+Następuje dodanie kolejnego nagłówku Via wraz z adresem przeskoku oraz przesłanie wiadomości do użytkownika %(receiver)s.
+</Description>
